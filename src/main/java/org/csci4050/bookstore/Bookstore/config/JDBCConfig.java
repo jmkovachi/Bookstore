@@ -1,14 +1,10 @@
 package org.csci4050.bookstore.Bookstore.config;
 
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import com.mysql.cj.jdbc.MysqlDataSource;
+import org.csci4050.bookstore.Bookstore.constants.EnvConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.amazonaws.services.rds.auth.GetIamAuthTokenRequest;
-import com.amazonaws.services.rds.auth.RdsIamAuthTokenGenerator;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -21,7 +17,6 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Properties;
 
 /**
  * More information on authenticating with RDS can be found in this tutorial:
@@ -32,12 +27,15 @@ import java.util.Properties;
 @Configuration
 public class JDBCConfig {
 
-    private static final String RDS_INSTANCE_HOSTNAME = "bookstoredb2.c3xzdcecjoac.us-east-2.rds.amazonaws.com";
-    private static final int RDS_INSTANCE_PORT = 3306;
-    private static final String REGION_NAME = "us-east-2";
+    private static final String RDS_INSTANCE_HOSTNAME = getHostName();
+    private static final String JDBC_URL = getJDBCURL();
+
+    // modify this variable to switch back and forth from dev to prod DB
+    private static final String RUN_ENV = EnvConstants.DEV;
+
     private static final String DB_USER = "group6";
     private static final String DB_PASSWORD = "groupNumber6";
-    private static final String JDBC_URL = "jdbc:mysql://" + RDS_INSTANCE_HOSTNAME + ":" + RDS_INSTANCE_PORT + "/bookstoreDB";
+    private static final int RDS_INSTANCE_PORT = 3306;
 
     private static final String SSL_CERTIFICATE = "rds-ca-2015-us-east-2.pem";
 
@@ -76,36 +74,22 @@ public class JDBCConfig {
     }
 
     /**
-     * This method returns a connection to the db instance authenticated using IAM Database Authentication
-     * @return
+     * This method returns a mysql datasource
+     * @return data source
      * @throws Exception
      */
-    private static DataSource getDataSource() throws Exception {
-        setSslProperties();
-        MysqlDataSource dataSource = new MysqlDataSource();
+    private DataSource getDataSource() throws Exception {
+        final MysqlDataSource dataSource = new MysqlDataSource();
+        if (RUN_ENV.equals(EnvConstants.PROD)) {
+            setSslProperties();
+            dataSource.setVerifyServerCertificate(true);
+            dataSource.setUseSSL(true);
+        }
         dataSource.setDatabaseName("bookstoreDB");
         dataSource.setUser(DB_USER);
         dataSource.setPassword(DB_PASSWORD);
         dataSource.setURL(JDBC_URL);
-        dataSource.setVerifyServerCertificate(true);
-        dataSource.setUseSSL(true);
         return dataSource;
-    }
-
-
-
-    /**
-     * This method sets the mysql connection properties with the DB username and password.
-     * It also specifies that SSL verification is required.
-     * @return mysql connection properties
-     */
-    private static Properties setMySqlConnectionProperties() {
-        final Properties mysqlConnectionProperties = new Properties();
-        mysqlConnectionProperties.setProperty("verifyServerCertificate", "true");
-        mysqlConnectionProperties.setProperty("useSSL", "true");
-        mysqlConnectionProperties.setProperty("user", DB_USER);
-        mysqlConnectionProperties.setProperty("password", DB_PASSWORD);
-        return mysqlConnectionProperties;
     }
 
     /**
@@ -159,21 +143,15 @@ public class JDBCConfig {
         return keyStoreFile;
     }
 
-    // As of now, this method is unneeded. It was previously used to generate the connection password.
-    private static String generateAuthToken() {
-        final AWSCredentials credentials = new BasicAWSCredentials("AKIAJ4L7X6MSJGJV5Q6Q", "OVNokyLLdrQQroEqeoj00ijPO2hv2n9CEabfVUy+");
-        final RdsIamAuthTokenGenerator generator = RdsIamAuthTokenGenerator.builder()
-                .credentials(new AWSStaticCredentialsProvider(credentials))
-                .region(REGION_NAME)
-                .build();
+    private static String getHostName() {
+        if (EnvConstants.PROD.equals(RUN_ENV)) {
+            return "bookstoredb2.c3xzdcecjoac.us-east-2.rds.amazonaws.com";
+        } else {
+            return "127.0.0.1";
+        }
+    }
 
-        final String authToken = generator.getAuthToken(
-                GetIamAuthTokenRequest.builder()
-                        .hostname(RDS_INSTANCE_HOSTNAME)
-                        .port(RDS_INSTANCE_PORT)
-                        .userName(DB_USER)
-                        .build());
-
-        return authToken;
+    private static String getJDBCURL() {
+        return "jdbc:mysql://" + RDS_INSTANCE_HOSTNAME + ":" + RDS_INSTANCE_PORT + "/bookstoreDB";
     }
 }
