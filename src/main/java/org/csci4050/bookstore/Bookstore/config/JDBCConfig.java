@@ -22,13 +22,13 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
-@Configuration
 /**
  * More information on authenticating with RDS can be found in this tutorial:
  * https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.Connecting.Java.html
  * Most of the configuration code in this class is taken or modified from the tutorial. IAM authentication, however,
  * is not used here.
  */
+@Configuration
 public class JDBCConfig {
 
     private static final String RDS_INSTANCE_HOSTNAME = "bookstoredb2.c3xzdcecjoac.us-east-2.rds.amazonaws.com";

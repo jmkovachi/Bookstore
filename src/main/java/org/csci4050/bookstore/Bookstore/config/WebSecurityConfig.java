@@ -10,6 +10,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
+/**
+ * Several different resources were used to realize this configuration:
+ * http://www.mkyong.com/spring-security/spring-security-form-login-using-database/
+ * https://howtodoinjava.com/spring5/security5/security-java-config-enablewebsecurity-example/
+ * https://www.boraji.com/spring-security-5-jdbc-based-authentication-example
+ *
+ * @author John Michael Kovachi
+ */
 @EnableWebSecurity
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -25,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("select username, authority "
                         + "from authorities where username=?")
                 .passwordEncoder(new PasswordEncoder() {
-                    // temporary solution here. Use BCrypt when adding user service is added.
+                    // temporary solution here. Use BCrypt when user service is added.
                     @Override
                     public String encode(CharSequence charSequence) {
                         return charSequence.toString();
@@ -40,7 +48,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().hasAnyRole("ADMIN", "USER")
+        http.authorizeRequests()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/cart").hasRole("USER") // example of a pattern that could be used for auth
+                .antMatchers("/**").hasAnyRole("ADMIN", "USER")
                 .and()
                 .httpBasic(); // Authenticate users with HTTP basic authentication
     }
