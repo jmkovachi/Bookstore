@@ -41,4 +41,10 @@ public class ExampleController {
 		return new ModelAndView("views/helloworld", "message", null);
 	}
 
+	@RequestMapping("yo")
+	public ModelAndView yo() {
+		System.out.println("hi");
+		return new ModelAndView("views/helloworld", "yo", null);
+	}
+
 }
