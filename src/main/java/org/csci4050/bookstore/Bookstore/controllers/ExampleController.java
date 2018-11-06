@@ -1,4 +1,4 @@
-package org.csci4050.bookstore.Bookstore.ui.mvc;
+package org.csci4050.bookstore.Bookstore.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
