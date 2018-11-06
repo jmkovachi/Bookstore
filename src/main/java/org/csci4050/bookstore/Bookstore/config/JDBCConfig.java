@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.amazonaws.services.rds.auth.GetIamAuthTokenRequest;
 import com.amazonaws.services.rds.auth.RdsIamAuthTokenGenerator;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.io.File;
@@ -48,6 +49,11 @@ public class JDBCConfig {
 
     @Autowired
     private DataSource dataSource;
+
+    @Bean
+    public JdbcTemplate jdbcTemplate() {
+        return new JdbcTemplate(dataSource);
+    }
 
     @Bean
     public DataSource dataSource() {
