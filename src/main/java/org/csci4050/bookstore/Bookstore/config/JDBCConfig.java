@@ -3,11 +3,14 @@ package org.csci4050.bookstore.Bookstore.config;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.amazonaws.services.rds.auth.GetIamAuthTokenRequest;
 import com.amazonaws.services.rds.auth.RdsIamAuthTokenGenerator;
 
+import javax.sql.DataSource;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -16,7 +19,7 @@ import java.security.KeyStore;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
 
 @Configuration
@@ -43,12 +46,25 @@ public class JDBCConfig {
     private static final String KEY_STORE_FILE_SUFFIX = ".jks";
     private static final String DEFAULT_KEY_STORE_PASSWORD = "changeit";
 
+    @Autowired
+    private DataSource dataSource;
+
+    @Bean
+    public DataSource dataSource() {
+        try {
+            return getDataSource();
+        } catch (final Exception e) {
+            System.out.println(e.toString());
+            return null;
+        }
+    }
+
     @Bean
     public Connection connection() {
         try {
-            return getDBConnection();
-        } catch (final Exception e) {
-            System.out.println(e.toString());
+            return dataSource.getConnection();
+        } catch (final SQLException sqlE) {
+            System.out.println(sqlE.toString());
             return null;
         }
     }
@@ -58,10 +74,19 @@ public class JDBCConfig {
      * @return
      * @throws Exception
      */
-    private static Connection getDBConnection() throws Exception {
+    private static DataSource getDataSource() throws Exception {
         setSslProperties();
-        return DriverManager.getConnection(JDBC_URL, setMySqlConnectionProperties());
+        MysqlDataSource dataSource = new MysqlDataSource();
+        dataSource.setDatabaseName("bookstoreDB");
+        dataSource.setUser(DB_USER);
+        dataSource.setPassword(DB_PASSWORD);
+        dataSource.setURL(JDBC_URL);
+        dataSource.setVerifyServerCertificate(true);
+        dataSource.setUseSSL(true);
+        return dataSource;
     }
+
+
 
     /**
      * This method sets the mysql connection properties with the DB username and password.
