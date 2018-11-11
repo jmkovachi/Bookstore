@@ -27,4 +27,9 @@ public class UserDao {
         final List<User> user = this.jdbcTemplate.query("select * from users where users.username = \"" + username + "\"", new UserMapper());
         return user.stream().findAny();
     }
+
+    public List<User> getUsers() {
+        return this.jdbcTemplate.query("select * from users", new UserMapper());
+    }
+
 }
