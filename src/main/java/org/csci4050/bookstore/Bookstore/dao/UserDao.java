@@ -1,6 +1,6 @@
 package org.csci4050.bookstore.Bookstore.dao;
 
-import org.csci4050.bookstore.Bookstore.mapper.UserMapper;
+import org.csci4050.bookstore.Bookstore.mappers.UserMapper;
 import org.csci4050.bookstore.Bookstore.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

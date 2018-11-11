@@ -2,11 +2,13 @@ package org.csci4050.bookstore.Bookstore.model;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
 
-@Data
 @Builder
+@SuperBuilder
+@Data
 public class Customer extends User {
     private String firstName;
     private String minit;
