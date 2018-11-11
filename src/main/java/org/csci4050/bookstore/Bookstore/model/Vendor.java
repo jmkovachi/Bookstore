@@ -5,8 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class User {
-    private String username;
-    private String password;
-    private String email;
+public class Vendor extends User {
+    private String company;
+    private String address;
 }
