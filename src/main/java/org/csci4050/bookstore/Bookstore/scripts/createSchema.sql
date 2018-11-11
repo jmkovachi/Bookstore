@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `bookstoreDB`.`User`
  `username` varchar(45) NOT NULL ,
  `password` varchar(45) NOT NULL unique ,
  `email`    varchar(45) NOT NULL ,
- `role`     varchar(45) NOT NULL ,
+ `role`     varchar(20) NOT NULL ,
  `image_url` varchar(144),
 PRIMARY KEY (`username`)
 ) COMMENT='Client, Vendor, and Customer tables ''inherit'' from this table';
@@ -110,19 +110,21 @@ ON UPDATE CASCADE
 
 -- ************************************** `bookstoreDB`.`Promotion`
 
-CREATE TABLE IF NOT EXISTS `bookstoreDB`.`Promotion`
+CREATE TABLE `bookstoreDB`.`Promotion`
 (
  `promo_id`    int unsigned NOT NULL AUTO_INCREMENT ,
- `promo_code`  varchar(45) ,
+ `promo_code`  varchar(20) ,
  `percent_off` int NOT NULL ,
-PRIMARY KEY (`promo_id`)
+ `expire_date` date NOT NULL ,
+PRIMARY KEY (`promo_id`),
+KEY `promo_code_index` (`promo_code`)
 );
 
 -- ************************************** `bookstoreDB`.`Book`
 
 CREATE TABLE IF NOT EXISTS `bookstoreDB`.`Book`
 (
- `book_id`         int unsigned NOT NULL AUTO_INCREMENT ,
+ `isbn`         varchar(13) NOT NULL ,
  `title`           varchar(144) NOT NULL ,
  `date_published`  date NOT NULL ,
  `author`          varchar(45) NOT NULL ,
@@ -131,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `bookstoreDB`.`Book`
  `total_inventory` int NOT NULL ,
  `promo_id`        int unsigned ,
  `image_url`	   varchar(144),
-PRIMARY KEY (`book_id`),
+PRIMARY KEY (`isbn`),
 KEY `author` (`author`) USING BTREE,
 KEY `category` (`category`) USING BTREE,
 KEY `promo_id_fk` (`promo_id`),
@@ -196,15 +198,15 @@ ON UPDATE CASCADE
 
 CREATE TABLE IF NOT EXISTS `bookstoreDB`.`Cart`
 (
- `book_id`     int unsigned NOT NULL ,
+ `isbn`     varchar(13) NOT NULL ,
  `c_username`  varchar(45) NOT NULL ,
  `quantity`    int NOT NULL ,
  `final_price` double NOT NULL ,
-PRIMARY KEY (`book_id`, `c_username`),
-KEY `book_id_fk` (`book_id`),
+PRIMARY KEY (`isbn`, `c_username`),
+KEY `isbn_fk` (`isbn`),
 CONSTRAINT `FK_189`
-FOREIGN KEY `book_id_fk` (`book_id`)
-REFERENCES `bookstoreDB`.`Book` (`book_id`)
+FOREIGN KEY `isbn_fk` (`isbn`)
+REFERENCES `bookstoreDB`.`Book` (`isbn`)
 ON DELETE CASCADE
 ON UPDATE CASCADE,
 KEY `client_username_fk` (`c_username`),
@@ -228,6 +230,7 @@ CREATE TABLE IF NOT EXISTS `bookstoreDB`.`Order`
  `total`        double NOT NULL ,
  `payment_type` varchar(10) NOT NULL ,
  `payment_id`   int unsigned ,
+ `address_id`   int unsigned ,
 PRIMARY KEY (`order_id`),
 KEY `c_username_fk` (`c_username`),
 CONSTRAINT `FK_order_cusername_customer` FOREIGN KEY `c_username_fk` (`c_username`) REFERENCES `bookstoreDB`.`Customer` (`c_username`)
@@ -239,6 +242,10 @@ ON DELETE CASCADE
 ON UPDATE CASCADE,
 KEY `vendor_username_fk` (`v_username`),
 CONSTRAINT `FK_164` FOREIGN KEY `vendor_username_fk` (`v_username`) REFERENCES `bookstoreDB`.`Vendor` (`v_username`)
+ON DELETE CASCADE
+ON UPDATE CASCADE,
+KEY `address_id_fk` (`address_id`),
+CONSTRAINT `FK_276` FOREIGN KEY `address_id_fk` (`address_id`) REFERENCES `bookstoreDB`.`ShippingAddress` (`address_id`)
 ON DELETE CASCADE
 ON UPDATE CASCADE
 );
@@ -254,11 +261,11 @@ CREATE TABLE IF NOT EXISTS `bookstoreDB`.`OrderItem`
 (
  `item_id`     int unsigned NOT NULL AUTO_INCREMENT ,
  `order_id`    int unsigned NOT NULL ,
- `book_id`     int unsigned NOT NULL ,
+ `isbn`     varchar(13) NOT NULL ,
  `final_price` double NOT NULL ,
 PRIMARY KEY (`item_id`),
-KEY `book_id_fk` (`book_id`),
-CONSTRAINT `FK_234` FOREIGN KEY `book_id_fk` (`book_id`) REFERENCES `bookstoreDB`.`Book` (`book_id`)
+KEY `isbn_fk` (`isbn`),
+CONSTRAINT `FK_234` FOREIGN KEY `isbn_fk` (`isbn`) REFERENCES `bookstoreDB`.`Book` (`isbn`)
 ON DELETE CASCADE
 ON UPDATE CASCADE,
 KEY `order_id_fk` (`order_id`),
