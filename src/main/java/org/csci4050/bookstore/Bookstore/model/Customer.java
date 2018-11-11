@@ -2,12 +2,10 @@ package org.csci4050.bookstore.Bookstore.model;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
 
 @Builder
-@SuperBuilder
 @Data
 public class Customer extends User {
     private String firstName;
@@ -18,11 +16,11 @@ public class Customer extends User {
     private boolean verified;
     private boolean newsletter;
 
-    public static final String firstNameCol = "first_name";
-    public static final String minitCol = "minit";
-    public static final String lastNameCol = "last_name";
-    public static final String addressCol = "address";
-    public static final String birthDateCol = "birth_date";
-    public static final String verifiedCol = "verified";
-    public static final String newsletterCol = "newsletter";
+    public static final String FIRST_NAME_COL = "first_name";
+    public static final String MINIT_COL = "minit";
+    public static final String LAST_NAME_COL = "last_name";
+    public static final String ADDRESS_COL = "address";
+    public static final String BIRTH_DATE_COL = "birth_date";
+    public static final String VERIFIED_COL = "verified";
+    public static final String NEWSLETTER_COL = "newsletter";
 }

@@ -10,11 +10,12 @@ public class UserMapper implements RowMapper<User> {
 
     @Override
     public User mapRow(final ResultSet rs, final int rownumber) throws SQLException {
-        return User.builder()
-                .username(rs.getString("username"))
-                .password(rs.getString("password"))
-                .email(rs.getString("email"))
-                .build();
+        final User user = new User();
+        user.setUsername(rs.getString(User.USERNAME_COL));
+        user.setPassword(rs.getString(User.PASSWORD_COL));
+        user.setEmail(rs.getString(User.EMAIL_COL));
+        user.setImageUrl(rs.getString(User.IMAGE_URL_COL));
+        return user;
     }
     
     public static User setUserFromResultSet(final User user, final ResultSet rs) throws SQLException {
