@@ -20,4 +20,5 @@ public class Book {
     private Float rating;
     private String summary;
     private Integer pages;
+    private String vUsername;
 }

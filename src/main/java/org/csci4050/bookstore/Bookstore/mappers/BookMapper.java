@@ -23,6 +23,7 @@ public class BookMapper implements RowMapper<Book> {
                 .summary(rs.getString("summary"))
                 .title(rs.getString("title"))
                 .totalInventory(rs.getInt("total_inventory"))
+                .vUsername(rs.getString("v_username"))
                 .build();
     }
 }

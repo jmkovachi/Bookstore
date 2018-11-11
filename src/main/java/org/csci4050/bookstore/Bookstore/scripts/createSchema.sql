@@ -132,6 +132,7 @@ CREATE TABLE IF NOT EXISTS `bookstoreDB`.`Book`
  `rating`          float(1,1) ,
  `summary`         varchar(1000) NOT NULL ,
  `pages`           smallint NOT NULL ,
+ `v_username`      varchar(45) NOT NULL ,
 PRIMARY KEY (`isbn`),
 KEY `author` (`author`) USING BTREE,
 KEY `category` (`category`) USING BTREE,
@@ -140,6 +141,10 @@ CONSTRAINT `FK_172`
 FOREIGN KEY `promo_id_fk` (`promo_id`)
 REFERENCES `bookstoreDB`.`Promotion` (`promo_id`)
 ON DELETE SET NULL
+ON UPDATE CASCADE,
+KEY `vendor_username_fk` (`v_username`),
+CONSTRAINT `FK_164` FOREIGN KEY `vendor_username_fk` (`v_username`) REFERENCES `bookstoreDB`.`Vendor` (`v_username`)
+ON DELETE CASCADE
 ON UPDATE CASCADE
 );
 
@@ -224,7 +229,6 @@ CREATE TABLE IF NOT EXISTS `bookstoreDB`.`Order`
 (
  `order_id`     int unsigned NOT NULL AUTO_INCREMENT ,
  `c_username`   varchar(45) NOT NULL ,
- `v_username`   varchar(45) NOT NULL ,
  `date`         datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,
  `total`        double NOT NULL ,
  `payment_type` varchar(10) NOT NULL ,
@@ -237,10 +241,6 @@ ON DELETE CASCADE
 ON UPDATE CASCADE,
 KEY `payment_id_fk` (`payment_id`),
 CONSTRAINT `FK_243` FOREIGN KEY `payment_id_fk` (`payment_id`) REFERENCES `bookstoreDB`.`PaymentInfo` (`payment_id`)
-ON DELETE CASCADE
-ON UPDATE CASCADE,
-KEY `vendor_username_fk` (`v_username`),
-CONSTRAINT `FK_164` FOREIGN KEY `vendor_username_fk` (`v_username`) REFERENCES `bookstoreDB`.`Vendor` (`v_username`)
 ON DELETE CASCADE
 ON UPDATE CASCADE,
 KEY `address_id_fk` (`address_id`),

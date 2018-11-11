@@ -19,18 +19,18 @@ public class BookDao {
 
     public void createBook(final Book book) {
         final String sql = "insert into book(isbn,title,date_published,author,category,price,total_inventory,promo_id," +
-        "image_url,rating,summary,pages) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+        "image_url,rating,summary,pages,v_username) values(?,?,?,?,?,?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql, book.getIsbn(), book.getTitle(), book.getDatePublished(), book.getAuthor(), book.getCategory(),
                 book.getCategory(), book.getPrice(), book.getTotalInventory(), book.getPromoId(), book.getImageUrl(), book.getRating(),
-                book.getSummary(), book.getPages());
+                book.getSummary(), book.getVUsername(), book.getPages());
     }
 
     public void updateBook(final Book book) {
         final String sql = "update book set title=?,date_published=?,author=?,category=?,price=?,total_inventory=?" +
-                "promo_id=?,image_url=?,rating=?,summary=?,pages=? where isbn=?";
+                "promo_id=?,image_url=?,rating=?,summary=?,pages=?,v_username=? where isbn=?";
         jdbcTemplate.update(sql, book.getTitle(), book.getDatePublished(), book.getAuthor(), book.getCategory(),
                 book.getCategory(), book.getPrice(), book.getTotalInventory(), book.getPromoId(), book.getImageUrl(),
-                book.getRating(), book.getSummary(), book.getPages(), book.getIsbn());
+                book.getRating(), book.getSummary(), book.getPages(), book.getVUsername(), book.getIsbn());
     }
 
     public Optional<Book> getBook(final String isbn) {
