@@ -28,10 +28,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("select username, password, enabled"
+                .usersByUsernameQuery("select username, password, true"
                         + " from users where username=?")
-                .authoritiesByUsernameQuery("select username, authority "
-                        + "from authorities where username=?")
+                .authoritiesByUsernameQuery("select username, role "
+                        + "from users where username=?")
                 .passwordEncoder(new PasswordEncoder() {
                     // temporary solution here. Use BCrypt when user service is added.
                     @Override
