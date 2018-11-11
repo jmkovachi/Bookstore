@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS `bookstoreDB`.`User`
  `password` varchar(45) NOT NULL unique ,
  `email`    varchar(45) NOT NULL ,
  `role`     varchar(45) NOT NULL ,
+ `image_url` varchar(144),
 PRIMARY KEY (`username`)
 ) COMMENT='Client, Vendor, and Customer tables ''inherit'' from this table';
 
@@ -129,6 +130,7 @@ CREATE TABLE IF NOT EXISTS `bookstoreDB`.`Book`
  `price`           double NOT NULL ,
  `total_inventory` int NOT NULL ,
  `promo_id`        int unsigned ,
+ `image_url`	   varchar(144),
 PRIMARY KEY (`book_id`),
 KEY `author` (`author`) USING BTREE,
 KEY `category` (`category`) USING BTREE,
@@ -264,8 +266,4 @@ CONSTRAINT `FK_228` FOREIGN KEY `order_id_fk` (`order_id`) REFERENCES `bookstore
 ON DELETE CASCADE
 ON UPDATE CASCADE
 );
-
-
-
-
 

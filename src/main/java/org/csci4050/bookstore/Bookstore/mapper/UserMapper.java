@@ -13,9 +13,7 @@ public class UserMapper implements RowMapper<User> {
         return User.builder()
                 .username(rs.getString("username"))
                 .password(rs.getString("password"))
-                .address(rs.getString("address"))
                 .email(rs.getString("email"))
-                .birthDate(rs.getDate("birth_date"))
                 .build();
     }
 
