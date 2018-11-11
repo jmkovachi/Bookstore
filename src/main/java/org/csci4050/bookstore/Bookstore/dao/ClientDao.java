@@ -1,9 +1,8 @@
 package org.csci4050.bookstore.Bookstore.dao;
 
 import org.csci4050.bookstore.Bookstore.exceptions.ValidationException;
-import org.csci4050.bookstore.Bookstore.mappers.UserMapper;
+import org.csci4050.bookstore.Bookstore.mappers.ClientMapper;
 import org.csci4050.bookstore.Bookstore.model.Client;
-import org.csci4050.bookstore.Bookstore.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -16,6 +15,7 @@ public class ClientDao extends UserDao {
 
     @Autowired
     public ClientDao(final JdbcTemplate jdbcTemplate) {
+        super(jdbcTemplate);
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -27,16 +27,16 @@ public class ClientDao extends UserDao {
 
     public void updateClient(final Client client) throws ValidationException {
         this.updateUser(client);
-        final String sql = "set client address=?, company=?, name=?, where client_username=?;";
+        final String sql = "update client set address=?, company=?, name=? where client_username=?;";
         jdbcTemplate.update(sql, client.getAddress(), client.getCompany(), client.getName(), client.getUsername());
     }
 
-    public Optional<User> getUser(final String username) {
-        final List<User> user = this.jdbcTemplate.query("select * from user where user.username = ?;", new Object[] {username}, new UserMapper());
-        return user.stream().findAny();
+    public Optional<Client> getClient(final String username) {
+        final List<Client> client = this.jdbcTemplate.query("select * from client,user where client_username=? and username=client_username;", new Object[] {username}, new ClientMapper());
+        return client.stream().findAny();
     }
 
-    public List<User> getUsers() {
-        return this.jdbcTemplate.query("select * from user;", new UserMapper());
+    public List<Client> getClients() {
+        return this.jdbcTemplate.query("select * from client,user where client_username=username;", new ClientMapper());
     }
 }

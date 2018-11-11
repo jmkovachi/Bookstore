@@ -22,18 +22,18 @@ public class CustomerDao extends UserDao {
 
     public void updateCustomer(final Customer customer) throws Exception {
         this.updateUser(customer);
-        final String sql = "set customer first_name=?,address=?,minit=?,last_name=?,birth_date=?,verified=?,newsletter=?"
+        final String sql = "update customer set first_name=?,address=?,minit=?,last_name=?,birth_date=?,verified=?,newsletter=?"
                 + "where c_username=?;";
         jdbcTemplate.update(sql, customer.getFirstName(), customer.getAddress(), customer.getMinit(), customer.getLastName(),
                 customer.getBirthDate(), customer.getVerified(), customer.getNewsletter(), customer.getUsername());
     }
 
     public Optional<Customer> getCustomer(final String username) {
-        final List<Customer> customer = this.jdbcTemplate.query("select * from customer where customer.c_username = ?;", new Object[] {username}, new CustomerMapper());
+        final List<Customer> customer = this.jdbcTemplate.query("select * from customer,user where c_username=? and c_username=username", new Object[] {username}, new CustomerMapper());
         return customer.stream().findAny();
     }
 
     public List<Customer> getCustomers() {
-        return this.jdbcTemplate.query("select * from customer;", new CustomerMapper());
+        return this.jdbcTemplate.query("select * from customer,user where c_username=username", new CustomerMapper());
     }
 }

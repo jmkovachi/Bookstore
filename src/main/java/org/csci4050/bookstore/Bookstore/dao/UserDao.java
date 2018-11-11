@@ -25,7 +25,7 @@ public class UserDao {
     }
 
     public void updateUser(final User user) {
-        final String sql = "set user password=?, email=?, role=?, image_url=? where username=?";
+        final String sql = "update user set password=?, email=?, role=?, image_url=? where username=?";
         jdbcTemplate.update(sql, user.getPassword(), user.getEmail(), user.getRole(), user.getImageUrl(), user.getUsername());
     }
 
