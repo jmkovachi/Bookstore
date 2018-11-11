@@ -5,7 +5,6 @@ import org.csci4050.bookstore.Bookstore.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,9 +17,13 @@ public class UserDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void createUser(final String username, final String password, final String email, final String address, final Date birthDate) {
-        this.jdbcTemplate.update("insert into insert into users(username,password,enabled,email,address,birth_date) " +
-                "values(?,?,true,?,?,?,?);", username, password, email, address, birthDate.toString());
+    public void createUser(final String username, final String password, final String email, final String role) {
+        this.jdbcTemplate.update("insert into users(username,password,email,role) " +
+                "values(?,?,?,?);", username, password, email, role);
+    }
+
+    public void updateUser(final String username, final String password, final String email) {
+
     }
 
     public Optional<User> getUser(final String username) {

@@ -17,4 +17,12 @@ public class Customer extends User {
     private Date birthDate;
     private boolean verified;
     private boolean newsletter;
+
+    public static final String firstNameCol = "first_name";
+    public static final String minitCol = "minit";
+    public static final String lastNameCol = "last_name";
+    public static final String addressCol = "address";
+    public static final String birthDateCol = "birth_date";
+    public static final String verifiedCol = "verified";
+    public static final String newsletterCol = "newsletter";
 }
