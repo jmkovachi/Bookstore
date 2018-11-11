@@ -1,6 +1,6 @@
 package org.csci4050.bookstore.Bookstore.util;
 
-import java.util.List;
+import java.util.Date;
 
 public class SqlUtil {
 
@@ -8,10 +8,7 @@ public class SqlUtil {
         return column + " = \"" + value + "\",";
     }
 
-
-    public static String createSqlUpdateString(final String table, final List<ColumnValue> columnValues) {
-        final StringBuilder sql = new StringBuilder("update " + table + " set ");
-        sql.append(ColumnValue.columnValueString(columnValues));
-        return sql.toString();
+    public static String convertJavaDateToSQL(final Date date) {
+        return new java.sql.Date(date.getTime()).toString();
     }
 }

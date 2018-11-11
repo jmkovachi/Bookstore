@@ -9,6 +9,7 @@ public class User {
     private String username;
     private String password;
     private String email;
+    private String role;
     private String imageUrl;
 
     public static final String USERNAME_COL = "username";

@@ -17,8 +17,6 @@ public class ExampleController {
 	public ModelAndView yo() throws Exception {
 		userDao.createUser("user", "abcd", "gmail.com", "ROLE_ADMIN", "url");
 		System.out.println(userDao.getUser("user").toString());
-		userDao.updateUser("a", "abcde", "yahoo.com");
-		System.out.println(userDao.getUser("a").toString());
 		return new ModelAndView("views/helloworld", "yo", null);
 	}
 

@@ -13,8 +13,8 @@ public class Customer extends User {
     private String lastName;
     private String address;
     private Date birthDate;
-    private boolean verified;
-    private boolean newsletter;
+    private Boolean verified;
+    private Boolean newsletter;
 
     public static final String FIRST_NAME_COL = "first_name";
     public static final String MINIT_COL = "minit";
