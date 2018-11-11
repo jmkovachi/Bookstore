@@ -85,10 +85,6 @@ ON UPDATE CASCADE
 );
 
 
-
-
-
-
 -- ************************************** `bookstoreDB`.`ShippingAddress`
 
 CREATE TABLE IF NOT EXISTS `bookstoreDB`.`ShippingAddress`
@@ -124,7 +120,7 @@ KEY `promo_code_index` (`promo_code`)
 
 CREATE TABLE IF NOT EXISTS `bookstoreDB`.`Book`
 (
- `isbn`         varchar(13) NOT NULL ,
+ `isbn`            char(13) NOT NULL ,
  `title`           varchar(144) NOT NULL ,
  `date_published`  date NOT NULL ,
  `author`          varchar(45) NOT NULL ,
@@ -132,7 +128,10 @@ CREATE TABLE IF NOT EXISTS `bookstoreDB`.`Book`
  `price`           double NOT NULL ,
  `total_inventory` int NOT NULL ,
  `promo_id`        int unsigned ,
- `image_url`	   varchar(144),
+ `image_url`	   varchar(45) ,
+ `rating`          float(1,1) ,
+ `summary`         varchar(1000) NOT NULL ,
+ `pages`           smallint NOT NULL ,
 PRIMARY KEY (`isbn`),
 KEY `author` (`author`) USING BTREE,
 KEY `category` (`category`) USING BTREE,
@@ -198,7 +197,7 @@ ON UPDATE CASCADE
 
 CREATE TABLE IF NOT EXISTS `bookstoreDB`.`Cart`
 (
- `isbn`     varchar(13) NOT NULL ,
+ `isbn`     char(13) NOT NULL ,
  `c_username`  varchar(45) NOT NULL ,
  `quantity`    int NOT NULL ,
  `final_price` double NOT NULL ,
@@ -261,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `bookstoreDB`.`OrderItem`
 (
  `item_id`     int unsigned NOT NULL AUTO_INCREMENT ,
  `order_id`    int unsigned NOT NULL ,
- `isbn`     varchar(13) NOT NULL ,
+ `isbn`        char(13) NOT NULL ,
  `final_price` double NOT NULL ,
 PRIMARY KEY (`item_id`),
 KEY `isbn_fk` (`isbn`),

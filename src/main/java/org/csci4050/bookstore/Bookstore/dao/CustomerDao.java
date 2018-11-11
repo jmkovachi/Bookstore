@@ -1,5 +1,6 @@
 package org.csci4050.bookstore.Bookstore.dao;
 
+import org.csci4050.bookstore.Bookstore.mappers.CustomerMapper;
 import org.csci4050.bookstore.Bookstore.model.Customer;
 import org.csci4050.bookstore.Bookstore.util.ColumnValue;
 import org.csci4050.bookstore.Bookstore.util.SqlUtil;
@@ -9,23 +10,22 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerDao {
+public class CustomerDao extends UserDao {
+
+    private final String tableName = "customer";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    private UserDao userDao;
-
     public void createCustomer(final String username, final String password, final String email, final String firstName, final String address,
                                final String minit, final String lastName, final String birthDate, final short verified, final short newsletter) {
-        userDao.createUser(username,  password, email, "ROLE_CUSTOMER");
+        this.createUser(username,  password, email, "ROLE_CUSTOMER");
         this.jdbcTemplate.update("insert into customer(c_username,first_name,address,minit,last_name,birth_date,verified,newsletter) " +
                 "values(?,?,?,?,?,?,?,?);", username, firstName, address, minit, lastName, birthDate, verified, newsletter);
     }
 
     public void updateCustomer(final String username, final String password, final String email, final String firstName, final String address, final String minit, final String lastName, final String birthDate, final Byte verified, final Byte newsletter) {
-        userDao.updateUser(username, password, email);
+        this.updateUser(username, password, email);
         final List<ColumnValue> columnValues = new ArrayList<>();
         if (firstName != null) {
             columnValues.add(ColumnValue.builder()
@@ -70,5 +70,9 @@ public class CustomerDao {
                     .build());
         }
         jdbcTemplate.update(SqlUtil.createSqlUpdateString("customer", (ColumnValue[]) columnValues.toArray()));
+    }
+
+    public List<Customer> getCustomers() {
+        return this.jdbcTemplate.query("select * from customer", new CustomerMapper());
     }
 }
