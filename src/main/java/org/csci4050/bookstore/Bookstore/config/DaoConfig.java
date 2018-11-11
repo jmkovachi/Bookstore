@@ -1,5 +1,6 @@
 package org.csci4050.bookstore.Bookstore.config;
 
+import org.csci4050.bookstore.Bookstore.dao.BookDao;
 import org.csci4050.bookstore.Bookstore.dao.ClientDao;
 import org.csci4050.bookstore.Bookstore.dao.UserDao;
 import org.csci4050.bookstore.Bookstore.dao.VendorDao;
@@ -23,6 +24,11 @@ public class DaoConfig {
     @Bean
     public ClientDao clientDao(final JdbcTemplate jdbcTemplate) {
         return new ClientDao(jdbcTemplate);
+    }
+
+    @Bean
+    public BookDao bookDao(final JdbcTemplate jdbcTemplate) {
+        return new BookDao(jdbcTemplate);
     }
 
 }
