@@ -38,4 +38,8 @@ public class UserDao {
         return this.jdbcTemplate.query("select * from user", new UserMapper());
     }
 
+    public void deleteUser(final String username) {
+        this.jdbcTemplate.query("delete from user where username=?", new Object[] {username}, new UserMapper());
+    }
+
 }

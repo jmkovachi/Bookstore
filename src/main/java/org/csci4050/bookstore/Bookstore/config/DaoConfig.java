@@ -1,9 +1,6 @@
 package org.csci4050.bookstore.Bookstore.config;
 
-import org.csci4050.bookstore.Bookstore.dao.BookDao;
-import org.csci4050.bookstore.Bookstore.dao.ClientDao;
-import org.csci4050.bookstore.Bookstore.dao.UserDao;
-import org.csci4050.bookstore.Bookstore.dao.VendorDao;
+import org.csci4050.bookstore.Bookstore.dao.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -30,5 +27,8 @@ public class DaoConfig {
     public BookDao bookDao(final JdbcTemplate jdbcTemplate) {
         return new BookDao(jdbcTemplate);
     }
+
+    @Bean
+    public PromotionDao promotionDao(final JdbcTemplate jdbcTemplate) { return new PromotionDao(jdbcTemplate); }
 
 }
