@@ -3,9 +3,11 @@ package org.csci4050.bookstore.Bookstore.model;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
 @Builder
-public class Client extends User {
+public class Client extends User implements Serializable {
     private String name;
     private String company;
     private String address;

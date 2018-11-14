@@ -1,8 +1,10 @@
 package org.csci4050.bookstore.Bookstore.controllers;
 
 import com.google.gson.Gson;
+import org.csci4050.bookstore.Bookstore.model.Client;
 import org.csci4050.bookstore.Bookstore.model.Customer;
 import org.csci4050.bookstore.Bookstore.model.Vendor;
+import org.csci4050.bookstore.Bookstore.service.ClientService;
 import org.csci4050.bookstore.Bookstore.service.CustomerService;
 import org.csci4050.bookstore.Bookstore.service.VendorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +26,14 @@ public class RegisterController {
     private VendorService vendorService;
 
     @Autowired
+    private ClientService clientService;
+
+    @Autowired
     private Gson gson;
 
-    @RequestMapping(value = "customer", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
     /**
+     * Controller that registers a customer. Tested that it works.
+     *
      * Example JSON body for posting to registerCustomer
      * {
      * 	"firstName" : "John",
@@ -44,15 +49,18 @@ public class RegisterController {
      * 	"role" : "ROLE_CUSTOMER",
      * 	"imageUrl" : "url"
      * }
+     * @param jsonCustomer customer we are inserting
+     * @return json response mapping from created customer (should be the same json string we posted)
+     * @throws Exception when an insert using JDBC fails
      */
+    @RequestMapping(value = "customer", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public String registerCustomer(@RequestBody final String jsonCustomer) throws Exception {
         final Customer customer = gson.fromJson(jsonCustomer, Customer.class);
-        customerService.registerCustomer(customer);
-        return gson.toJson(customer);
+        return gson.toJson(customerService.registerCustomer(customer));
     }
 
-    @RequestMapping(value = "vendor", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
+
     /**
      * Example json body:
      * {
@@ -65,9 +73,35 @@ public class RegisterController {
      *  "imageUrl" : "url"
      * }
      */
+    @RequestMapping(value = "vendor", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public String registerVendor(@RequestBody final String jsonVendor) throws Exception {
         final Vendor vendor = gson.fromJson(jsonVendor, Vendor.class);
-        vendorService.registerVendor(vendor);
-        return gson.toJson(vendor);
+        return gson.toJson(vendorService.registerVendor(vendor));
+    }
+
+    /**
+     * Controller that registers a client. Tested that it works.
+     *
+     * Example JSON body:
+     * {
+     * 	"name" : "John Smith",
+     * 	"company" : "Scholastic",
+     * 	"address" : "480 Menlo pk dr",
+     * 	"username" : "clientUser",
+     *  "password" : "clientPass",
+     *  "email" : "gmail.com",
+     *  "role" : "ROLE_CLIENT",
+     *  "imageUrl" : "url"
+     * }
+     * @param jsonClient json string we are consuming
+     * @return json response mapping from created client (should be the same json string we posted)
+     * @throws Exception JDBC insert fails
+     */
+    @RequestMapping(value = "client", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String registerClient(@RequestBody final String jsonClient) throws Exception {
+        final Client client = gson.fromJson(jsonClient, Client.class);
+        return gson.toJson(clientService.registerClient(client));
     }
 }
