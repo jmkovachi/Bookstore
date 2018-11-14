@@ -106,7 +106,7 @@ ON UPDATE CASCADE
 
 -- ************************************** `bookstoreDB`.`Promotion`
 
-CREATE TABLE `bookstoreDB`.`Promotion`
+CREATE TABLE IF NOT EXISTS `bookstoreDB`.`Promotion`
 (
  `promo_id`    int unsigned NOT NULL AUTO_INCREMENT ,
  `promo_code`  varchar(20) ,
