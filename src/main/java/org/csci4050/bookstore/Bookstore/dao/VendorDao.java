@@ -20,7 +20,7 @@ public class VendorDao extends UserDao {
 
     public void createVendor(final Vendor vendor) {
         this.createUser(vendor);
-        final String sql = "insert into vendor(v_username, company, address) values(?,?,?,?);";
+        final String sql = "insert into vendor(v_username, company, address) values(?,?,?);";
         this.jdbcTemplate.update(sql, vendor.getUsername(), vendor.getCompany(), vendor.getAddress());
     }
 
