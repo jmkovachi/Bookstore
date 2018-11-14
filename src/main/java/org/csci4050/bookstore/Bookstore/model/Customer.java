@@ -1,6 +1,5 @@
 package org.csci4050.bookstore.Bookstore.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Data;
 
@@ -14,7 +13,6 @@ public class Customer extends User implements Serializable {
     private String minit;
     private String lastName;
     private String address;
-    @JsonFormat(pattern="MM-dd-yyyy")
     private Date birthDate;
     private Boolean verified;
     private Boolean newsletter;

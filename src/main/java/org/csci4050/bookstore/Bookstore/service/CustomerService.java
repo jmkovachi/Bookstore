@@ -18,7 +18,6 @@ public class CustomerService extends UserService {
     }
 
     public Customer registerCustomer(final Customer customer) throws Exception {
-        this.registerUser(customer);
         customerDao.createCustomer(customer);
         final Optional<Customer> retrieveCustomer = customerDao.getCustomer(customer.getUsername());
         if (retrieveCustomer.isPresent() && retrieveCustomer.get().equals(customer)) {

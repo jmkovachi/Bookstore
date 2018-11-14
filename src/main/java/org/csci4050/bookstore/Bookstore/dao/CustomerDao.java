@@ -15,6 +15,7 @@ public class CustomerDao extends UserDao {
 
     @Autowired
     public CustomerDao(final JdbcTemplate jdbcTemplate) {
+        super(jdbcTemplate);
         this.jdbcTemplate = jdbcTemplate;
     }
 

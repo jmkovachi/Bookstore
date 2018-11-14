@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/").permitAll()
+                .antMatchers("/register/customer").permitAll()
                 .antMatchers("/yo").permitAll()
                 .antMatchers("/cart").hasRole("USER") // example of a pattern that could be used for auth
                 .antMatchers("/**").hasAnyRole("ADMIN", "USER")
@@ -63,6 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll()
                 .and()
+                .csrf().disable()
                 .httpBasic(); // Authenticate users with HTTP basic authentication
     }
 }

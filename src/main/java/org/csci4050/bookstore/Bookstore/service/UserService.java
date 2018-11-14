@@ -18,7 +18,7 @@ public class UserService {
     public User registerUser(final User user) throws Exception {
         userDao.createUser(user);
         final Optional<User> retrieveUser = userDao.getUser(user.getUsername());
-        if (retrieveUser.isPresent() && retrieveUser.get().equals(user)) {
+        if (retrieveUser.isPresent()) {
             return retrieveUser.get();
         } else {
             throw new Exception();

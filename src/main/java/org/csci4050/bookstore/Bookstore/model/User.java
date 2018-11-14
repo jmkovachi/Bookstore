@@ -1,11 +1,13 @@
 package org.csci4050.bookstore.Bookstore.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 @Data
+@EqualsAndHashCode
 @NoArgsConstructor
 public class User implements Serializable {
     private String username;
