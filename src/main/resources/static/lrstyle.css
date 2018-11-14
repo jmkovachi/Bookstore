@@ -1,0 +1,102 @@
+/* Fonts from Google Fonts - more at https://fonts.google.com */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+  background-color: white;
+  font-family: "Open Sans", sans-serif;
+  font-size: 10px;
+  color: #444;
+}
+
+h1 {
+  font-family: "Merriweather", serif;
+  font-size: 17px;
+}
+
+#loginOuterBox {
+  margin: auto;
+  width: 275px;
+  height: 280px;
+  border-radius: 5px;
+  border: .75px solid #c9c9c9;
+}
+
+#outerBox {
+  margin: auto;
+  width: 275px;
+  height: 500px;
+  border-radius: 5px;
+  border: .75px solid #c9c9c9;
+}
+
+h3 {
+  margin:8px;
+  font-size: 23px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+}
+
+h2 {
+  font-size: 12px;
+  font-weight: normal;
+}
+
+p {
+  margin-bottom: 0px;
+  font-size: 11px;
+  margin-left:20px;
+  font-weight: bold;
+}
+
+#birthday {
+  font-family: "Open Sans", sans-serif;
+}
+
+.fields{
+  margin-left:20px;
+  margin-top:0px;
+  width: 225px;
+  border-radius: 2px;
+  border: .8px solid #b7b7b7;
+  font-size: 11px;
+  padding:5px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.fields:focus {
+  border: 2px solid #71e4ff
+}
+
+#loginButton {
+  margin-top: 20px;
+}
+
+.buttons{
+  margin-left:20px;
+  display:block;
+  width:226px;
+  border-radius: 2px;
+  background-color: #71e4ff;
+  border: none;
+  padding:5px;
+  font-size: 10px;
+  cursor: pointer;
+  text-align:center;
+}
+
+.buttons:hover{
+  background-color: #45dafd;
+}
+
+hr {
+  margin: 20px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  border: .5px solid #c9c9c9;
+  
+}
