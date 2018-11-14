@@ -1,17 +1,20 @@
 package org.csci4050.bookstore.Bookstore.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Builder
 @Data
-public class Customer extends User {
+public class Customer extends User implements Serializable {
     private String firstName;
     private String minit;
     private String lastName;
     private String address;
+    @JsonFormat(pattern="MM-dd-yyyy")
     private Date birthDate;
     private Boolean verified;
     private Boolean newsletter;

@@ -19,6 +19,11 @@ public class DaoConfig {
     }
 
     @Bean
+    public CustomerDao customerDao(final JdbcTemplate jdbcTemplate) {
+        return new CustomerDao(jdbcTemplate);
+    }
+
+    @Bean
     public ClientDao clientDao(final JdbcTemplate jdbcTemplate) {
         return new ClientDao(jdbcTemplate);
     }

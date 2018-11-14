@@ -10,8 +10,13 @@ import java.util.Optional;
 
 public class CustomerDao extends UserDao {
 
-    @Autowired
+
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public CustomerDao(final JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     public void createCustomer(final Customer customer) {
         this.createUser(customer);

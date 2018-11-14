@@ -29,9 +29,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery("select username, password, true"
-                        + " from users where username=?")
+                        + " from user where username=?")
                 .authoritiesByUsernameQuery("select username, role "
-                        + "from users where username=?")
+                        + "from user where username=?")
                 .passwordEncoder(new PasswordEncoder() {
                     // temporary solution here. Use BCrypt when user service is added.
                     @Override
@@ -54,6 +54,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/yo").permitAll()
                 .antMatchers("/cart").hasRole("USER") // example of a pattern that could be used for auth
                 .antMatchers("/**").hasAnyRole("ADMIN", "USER")
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/yo", true)
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll()
                 .and()
                 .httpBasic(); // Authenticate users with HTTP basic authentication
     }
