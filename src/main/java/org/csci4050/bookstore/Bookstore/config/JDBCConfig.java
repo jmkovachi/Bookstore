@@ -27,7 +27,7 @@ import java.sql.SQLException;
 @Configuration
 public class JDBCConfig {
 
-    private static final String RDS_INSTANCE_HOSTNAME = getHostName();
+    private static final String INSTANCE_HOSTNAME = getHostName();
     private static final String JDBC_URL = getJDBCURL();
 
     // modify this variable to switch back and forth from dev to prod DB
@@ -35,7 +35,7 @@ public class JDBCConfig {
 
     private static final String DB_USER = "group6";
     private static final String DB_PASSWORD = "groupNumber6";
-    private static final int RDS_INSTANCE_PORT = 3306;
+    private static final int INSTANCE_PORT = 3306;
 
     private static final String SSL_CERTIFICATE = "rds-ca-2015-us-east-2.pem";
 
@@ -84,6 +84,8 @@ public class JDBCConfig {
             setSslProperties();
             dataSource.setVerifyServerCertificate(true);
             dataSource.setUseSSL(true);
+        } else {
+            dataSource.setUseSSL(false);
         }
         dataSource.setDatabaseName("bookstoreDB");
         dataSource.setUser(DB_USER);
@@ -152,6 +154,6 @@ public class JDBCConfig {
     }
 
     private static String getJDBCURL() {
-        return "jdbc:mysql://" + RDS_INSTANCE_HOSTNAME + ":" + RDS_INSTANCE_PORT + "/bookstoreDB";
+        return "jdbc:mysql://" + INSTANCE_HOSTNAME + ":" + INSTANCE_PORT + "/bookstoreDB";
     }
 }

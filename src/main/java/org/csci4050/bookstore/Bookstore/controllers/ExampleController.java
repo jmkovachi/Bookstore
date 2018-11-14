@@ -32,7 +32,7 @@ public class ExampleController {
 		client.setRole("ROLE_CLIENT");
 		clientDao.createClient(client);
 		System.out.println(userDao.getUser("u"));
-		System.out.println(clientDao.getClient("u"));
+		System.out.println(clientDao.getClient( "u"));
 		client.setAddress("newAddress");
 		client.setName("John");
 		clientDao.updateClient(client);
