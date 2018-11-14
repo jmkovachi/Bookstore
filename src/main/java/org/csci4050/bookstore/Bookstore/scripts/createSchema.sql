@@ -273,3 +273,16 @@ ON DELETE CASCADE
 ON UPDATE CASCADE
 );
 
+
+
+-- ************************************** `bookstoreDB`.`Verification`
+
+CREATE TABLE IF NOT EXISTS `bookstoreDB`.`Verification`
+(
+ `verification_code` int NOT NULL AUTO_INCREMENT ,
+ `c_username`        varchar(45) NOT NULL ,
+ `email`             varchar(45) NOT NULL ,
+PRIMARY KEY (`verification_code`),
+KEY `c_username_fk` (`c_username`),
+CONSTRAINT `FK_302` FOREIGN KEY `c_username_fk` (`c_username`) REFERENCES `bookstoreDB`.`Customer` (`c_username`)
+) AUTO_INCREMENT=1000;
