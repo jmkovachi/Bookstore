@@ -36,4 +36,9 @@ public class DaoConfig {
     @Bean
     public PromotionDao promotionDao(final JdbcTemplate jdbcTemplate) { return new PromotionDao(jdbcTemplate); }
 
+    @Bean
+    public VerificationDao verificationDao(final JdbcTemplate jdbcTemplate) {
+        return new VerificationDao(jdbcTemplate);
+    }
+
 }
