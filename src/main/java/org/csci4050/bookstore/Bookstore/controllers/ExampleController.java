@@ -37,7 +37,7 @@ public class ExampleController {
 		client.setName("John");
 		clientDao.updateClient(client);
 		System.out.println(clientDao.getClient("u"));
-		return new ModelAndView("views/helloworld", "yo", null);
+		return new ModelAndView("views/helloworld", "client", client);
 	}
 
 }
