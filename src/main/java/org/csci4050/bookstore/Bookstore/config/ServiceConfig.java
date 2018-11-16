@@ -28,7 +28,9 @@ public class ServiceConfig {
     }
 
     @Bean
-    public VerificationService verificationService(final JavaMailSender javaMailSender, final VerificationDao verificationDao) {
-        return new VerificationService(javaMailSender, verificationDao);
+    public VerificationService verificationService(final JavaMailSender javaMailSender,
+                                                   final VerificationDao verificationDao,
+                                                   final CustomerService customerService) {
+        return new VerificationService(javaMailSender, verificationDao, customerService);
     }
 }

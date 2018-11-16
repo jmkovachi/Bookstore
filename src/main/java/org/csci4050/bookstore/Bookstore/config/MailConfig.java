@@ -11,9 +11,10 @@ import java.util.Properties;
 @Configuration
 public class MailConfig {
 
-
     /**
      * https://www.baeldung.com/spring-email
+     *
+     * Also helpful: https://stackoverflow.com/a/34885171
      * @return JavaMailSender
      */
     @Bean
@@ -21,16 +22,20 @@ public class MailConfig {
         final JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
+        mailSender.setProtocol("smtp");
+        mailSender.setUsername("bookstorecsci4050@gmail.com");
+        mailSender.setPassword("groupNumber6");
 
-        mailSender.setUsername("my.gmail@gmail.com");
-        mailSender.setPassword("password");
-
-        final Properties props = mailSender.getJavaMailProperties();
-        props.put("mail.transport.protocol", "smtp");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.debug", "true");
-
+        final Properties properties = new Properties();
+        properties.put("mail.smtp.auth", true);
+        properties.put("mail.smtp.starttls.enable", true);
+        properties.put("mail.smtp.quitwait", false);
+        properties.put("mail.smtp.ssl.trust", "*");
+        properties.put("mail.smtp.socketFactory.port", true);
+        properties.put("mail.smtp.debug", true);
+        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        properties.put("mail.smtp.socketFactory.fallback", true);
+        mailSender.setJavaMailProperties(properties);
         return mailSender;
     }
 }

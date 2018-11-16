@@ -15,10 +15,10 @@ public class VerificationController {
     @Autowired
     private VerificationService verificationService;
 
-    @RequestMapping(value = "verify/{username}/{email}", method = RequestMethod.GET)
-    public ModelAndView verify(@PathVariable final String username, @PathVariable final String email) throws VerificationException {
-        verificationService.sendVerificationEmail(username, email);
+    @RequestMapping(value = "verify/{username}", method = RequestMethod.GET)
+    public ModelAndView verify(@PathVariable final String username) throws VerificationException {
+        verificationService.sendVerificationEmail(username);
         // Populating ModelAndView to be implemented.
-        return null;
+        return new ModelAndView("views/verification", "verify", null);
     }
 }
