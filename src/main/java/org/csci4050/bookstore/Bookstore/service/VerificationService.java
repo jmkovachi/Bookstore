@@ -1,7 +1,7 @@
 package org.csci4050.bookstore.Bookstore.service;
 
 import org.csci4050.bookstore.Bookstore.dao.VerificationDao;
-import org.csci4050.bookstore.Bookstore.exceptions.VerificationException;
+import org.csci4050.bookstore.Bookstore.exceptions.ValidationException;
 import org.csci4050.bookstore.Bookstore.model.Customer;
 import org.csci4050.bookstore.Bookstore.model.Verification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +25,11 @@ public class VerificationService {
         this.customerService = customerService;
     }
 
-    public void sendVerificationEmail(final String username) throws VerificationException {
+    public void sendVerificationEmail(final String username) throws ValidationException {
         final Optional<Customer> retrieveCustomer = customerService.getCustomer(username);
 
         if (!retrieveCustomer.isPresent()) {
-            throw new VerificationException("Customer with username <%s> not found", username);
+            throw new ValidationException("Customer with username <%s> not found", username);
         }
         final Customer customer = retrieveCustomer.get();
 
@@ -42,16 +42,16 @@ public class VerificationService {
             if (verification.isPresent()) {
                 javaMailSender.send(createMail(verification.get()));
             } else {
-                throw new VerificationException("Creation of verification email for customer <%s> failed", username);
+                throw new ValidationException("Creation of verification email for customer <%s> failed", username);
             }
         }
     }
 
-    public boolean verifyCustomer(final String username, final int code) throws VerificationException {
+    public boolean verifyCustomer(final String username, final int code) throws ValidationException {
         final Optional<Customer> retrieveCustomer = customerService.getCustomer(username);
 
         if (!retrieveCustomer.isPresent()) {
-            throw new VerificationException("Customer with username <%s> not found", username);
+            throw new ValidationException("Customer with username <%s> not found", username);
         }
 
         final Customer customer = retrieveCustomer.get();

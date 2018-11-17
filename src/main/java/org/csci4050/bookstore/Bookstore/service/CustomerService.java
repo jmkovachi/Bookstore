@@ -2,6 +2,7 @@ package org.csci4050.bookstore.Bookstore.service;
 
 import org.csci4050.bookstore.Bookstore.dao.CustomerDao;
 import org.csci4050.bookstore.Bookstore.dao.UserDao;
+import org.csci4050.bookstore.Bookstore.exceptions.ValidationException;
 import org.csci4050.bookstore.Bookstore.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,13 +18,13 @@ public class CustomerService extends UserService {
         this.customerDao = customerDao;
     }
 
-    public Customer registerCustomer(final Customer customer) throws Exception {
+    public Customer registerCustomer(final Customer customer) throws ValidationException {
         customerDao.createCustomer(customer);
         final Optional<Customer> retrieveCustomer = customerDao.getCustomer(customer.getUsername());
         if (retrieveCustomer.isPresent() && retrieveCustomer.get().equals(customer)) {
             return retrieveCustomer.get();
         } else {
-            throw new Exception();
+            throw new ValidationException("Customer with username <%s> could not be registered", customer.getUsername());
         }
     }
 

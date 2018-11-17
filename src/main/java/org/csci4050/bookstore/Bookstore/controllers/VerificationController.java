@@ -1,6 +1,6 @@
 package org.csci4050.bookstore.Bookstore.controllers;
 
-import org.csci4050.bookstore.Bookstore.exceptions.VerificationException;
+import org.csci4050.bookstore.Bookstore.exceptions.ValidationException;
 import org.csci4050.bookstore.Bookstore.service.VerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ public class VerificationController {
     private VerificationService verificationService;
 
     @RequestMapping(value = "verify/{username}", method = RequestMethod.GET)
-    public ModelAndView verify(@PathVariable final String username) throws VerificationException {
+    public ModelAndView verify(@PathVariable final String username) throws ValidationException {
         verificationService.sendVerificationEmail(username);
         // Populating ModelAndView to be implemented.
         return new ModelAndView("views/verification", "verify", null);
