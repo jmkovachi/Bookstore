@@ -30,4 +30,8 @@ public class CustomerService extends UserService {
     public Optional<Customer> getCustomer(final String username) {
         return customerDao.getCustomer(username);
     }
+
+    public void updateCustomer(final Customer customer) {
+        customerDao.updateCustomer(customer);
+    }
 }

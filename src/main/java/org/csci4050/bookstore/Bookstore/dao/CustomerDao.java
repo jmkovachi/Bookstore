@@ -26,7 +26,7 @@ public class CustomerDao extends UserDao {
                 customer.getLastName(), customer.getBirthDate(), customer.getVerified(), customer.getNewsletter());
     }
 
-    public void updateCustomer(final Customer customer) throws Exception {
+    public void updateCustomer(final Customer customer) {
         this.updateUser(customer);
         final String sql = "update customer set first_name=?,address=?,minit=?,last_name=?,birth_date=?,verified=?,newsletter=?"
                 + "where c_username=?;";

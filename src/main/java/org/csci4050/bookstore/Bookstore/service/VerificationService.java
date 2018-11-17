@@ -29,7 +29,7 @@ public class VerificationService {
         final Optional<Customer> retrieveCustomer = customerService.getCustomer(username);
 
         if (!retrieveCustomer.isPresent()) {
-            throw new VerificationException("Customer with username <%> not found", username);
+            throw new VerificationException("Customer with username <%s> not found", username);
         }
         final Customer customer = retrieveCustomer.get();
 
@@ -46,6 +46,27 @@ public class VerificationService {
             }
         }
     }
+
+    public boolean verifyCustomer(final String username, final int code) throws VerificationException {
+        final Optional<Customer> retrieveCustomer = customerService.getCustomer(username);
+
+        if (!retrieveCustomer.isPresent()) {
+            throw new VerificationException("Customer with username <%s> not found", username);
+        }
+
+        final Customer customer = retrieveCustomer.get();
+
+        final Optional<Verification> verification = verificationDao.getVerification(customer.getUsername(), customer.getEmail());
+
+        if (verification.isPresent() && verification.get().getVerificationCode() == code) {
+            customer.setVerified(true);
+            customerService.updateCustomer(customer);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     private SimpleMailMessage createMail(final Verification verification) {
         final SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
