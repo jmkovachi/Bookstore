@@ -29,7 +29,7 @@ public class CustomerDao extends UserDao {
     public void updateCustomer(final Customer customer) {
         this.updateUser(customer);
         final String sql = "update customer set first_name=?,address=?,minit=?,last_name=?,birth_date=?,verified=?,newsletter=?"
-                + "where c_username=?;";
+                + " where c_username=?;";
         jdbcTemplate.update(sql, customer.getFirstName(), customer.getAddress(), customer.getMinit(), customer.getLastName(),
                 customer.getBirthDate(), customer.getVerified(), customer.getNewsletter(), customer.getUsername());
     }

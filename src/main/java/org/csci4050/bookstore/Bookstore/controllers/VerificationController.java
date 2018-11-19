@@ -1,8 +1,11 @@
 package org.csci4050.bookstore.Bookstore.controllers;
 
+import lombok.Builder;
+import lombok.Data;
 import org.csci4050.bookstore.Bookstore.exceptions.ValidationException;
 import org.csci4050.bookstore.Bookstore.service.VerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,18 +22,29 @@ public class VerificationController {
 
     @RequestMapping(value = "verify/{username}", method = RequestMethod.GET)
     public ModelAndView verify(@PathVariable final String username) throws ValidationException {
-        verificationService.sendVerificationEmail(username);
-        // Populating ModelAndView to be implemented.
-        return new ModelAndView("views/email-confirmation", "verify", null);
+        // send verification email and return the address mailed to
+        final String mailedAddress = verificationService.sendVerificationEmail(username);
+        final VerificationViewModel verificationViewModel = VerificationViewModel.builder()
+                .username(username)
+                .email(mailedAddress)
+                .build();
+        return new ModelAndView("views/email-confirmation", "verify", verificationViewModel);
     }
 
     @RequestMapping(value = "verify/{username}/{code}", method = RequestMethod.POST)
     public ResponseEntity verify(@PathVariable final String username, @PathVariable final String code) throws ValidationException {
         final int parsedCode = Integer.parseInt(code);
         if (verificationService.verifyCustomer(username, parsedCode)) {
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity<>("", new HttpHeaders(), HttpStatus.OK);
         } else {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @Data
+    @Builder
+    public static class VerificationViewModel {
+        private String username;
+        private String email;
     }
 }

@@ -25,7 +25,7 @@ public class VerificationService {
         this.customerService = customerService;
     }
 
-    public void sendVerificationEmail(final String username) throws ValidationException {
+    public String sendVerificationEmail(final String username) throws ValidationException {
         final Optional<Customer> retrieveCustomer = customerService.getCustomer(username);
 
         if (!retrieveCustomer.isPresent()) {
@@ -36,11 +36,13 @@ public class VerificationService {
         final Optional<Verification> preVerification = verificationDao.getVerification(username, customer.getEmail());
         if (preVerification.isPresent()) {
             javaMailSender.send(createMail(preVerification.get()));
+            return customer.getAddress();
         } else {
             this.verificationDao.createVerification(username, customer.getEmail());
             final Optional<Verification> verification = verificationDao.getVerification(username, customer.getEmail());
             if (verification.isPresent()) {
                 javaMailSender.send(createMail(verification.get()));
+                return customer.getAddress();
             } else {
                 throw new ValidationException("Creation of verification email for customer <%s> failed", username);
             }
