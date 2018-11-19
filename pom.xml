@@ -136,6 +136,15 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 		</dependency>
+
+		<!-- dev tools https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html
+			 https://stackoverflow.com/questions/23155244/spring-boot-hotswap-with-intellij-ide
+		-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
     </dependencies>
 
 	<dependencyManagement>

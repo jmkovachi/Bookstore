@@ -21,7 +21,7 @@ public class VerificationController {
     public ModelAndView verify(@PathVariable final String username) throws ValidationException {
         verificationService.sendVerificationEmail(username);
         // Populating ModelAndView to be implemented.
-        return new ModelAndView("views/verification", "verify", null);
+        return new ModelAndView("views/email-confirmation", "verify", null);
     }
 
     @RequestMapping(value = "verify/{username}/{code}", method = RequestMethod.POST)
