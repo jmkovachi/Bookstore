@@ -35,7 +35,7 @@ $(document).ready(function() {
                 "role" : "ROLE_CUSTOMER",
                 "imageUrl" : imageUrl
              };
-            postAjax(url, JSON.stringify(data), "/home");
+            postAjax(url, JSON.stringify(data), "/verify/" + username);
         }
     });
 });
