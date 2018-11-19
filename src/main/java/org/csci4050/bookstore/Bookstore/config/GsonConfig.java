@@ -11,7 +11,7 @@ public class GsonConfig {
     @Bean
     public Gson gson() {
         return new GsonBuilder()
-                .setDateFormat("MM-dd-yyyy")
+                .setDateFormat("yyyy-MM-dd")
                 .create();
     }
 

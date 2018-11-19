@@ -1,6 +1,7 @@
 package org.csci4050.bookstore.Bookstore.controllers;
 
 import com.google.gson.Gson;
+import org.csci4050.bookstore.Bookstore.exceptions.ValidationException;
 import org.csci4050.bookstore.Bookstore.model.Client;
 import org.csci4050.bookstore.Bookstore.model.Customer;
 import org.csci4050.bookstore.Bookstore.model.Vendor;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("register")
@@ -58,6 +60,11 @@ public class RegisterController {
     public String registerCustomer(@RequestBody final String jsonCustomer) throws Exception {
         final Customer customer = gson.fromJson(jsonCustomer, Customer.class);
         return gson.toJson(customerService.registerCustomer(customer));
+    }
+
+    @RequestMapping(value = "customer", method = RequestMethod.GET)
+    public ModelAndView registerCustomerPage() throws ValidationException {
+        return new ModelAndView("views/register", "register", null);
     }
 
 
