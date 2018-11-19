@@ -41,4 +41,9 @@ public class DaoConfig {
         return new VerificationDao(jdbcTemplate);
     }
 
+    @Bean
+    public CartDao cartDao(final JdbcTemplate jdbcTemplate) {
+        return new CartDao(jdbcTemplate);
+    }
+
 }

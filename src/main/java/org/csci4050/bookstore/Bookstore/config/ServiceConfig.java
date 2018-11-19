@@ -1,10 +1,7 @@
 package org.csci4050.bookstore.Bookstore.config;
 
 import org.csci4050.bookstore.Bookstore.dao.*;
-import org.csci4050.bookstore.Bookstore.service.ClientService;
-import org.csci4050.bookstore.Bookstore.service.CustomerService;
-import org.csci4050.bookstore.Bookstore.service.VendorService;
-import org.csci4050.bookstore.Bookstore.service.VerificationService;
+import org.csci4050.bookstore.Bookstore.service.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -32,5 +29,10 @@ public class ServiceConfig {
                                                    final VerificationDao verificationDao,
                                                    final CustomerService customerService) {
         return new VerificationService(javaMailSender, verificationDao, customerService);
+    }
+
+    @Bean
+    public CartService cartService(final CartDao cartDao, final CustomerService customerService) {
+        return new CartService(cartDao, customerService);
     }
 }
