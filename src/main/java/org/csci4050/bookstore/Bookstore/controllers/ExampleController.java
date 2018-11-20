@@ -40,4 +40,9 @@ public class ExampleController {
 		return new ModelAndView("views/helloworld", "client", client);
 	}
 
+	@RequestMapping("ex")
+	public ModelAndView mv() throws Exception {
+		return new ModelAndView("views/cart", "yo", null);
+	}
+
 }
