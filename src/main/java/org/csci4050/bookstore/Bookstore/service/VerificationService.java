@@ -65,7 +65,7 @@ public class VerificationService {
             customerService.updateCustomer(customer);
             return true;
         } else {
-            return false;
+            throw new ValidationException("Customer with username <%s> could not be verified with code <%s>", username, Integer.toString(code));
         }
     }
 

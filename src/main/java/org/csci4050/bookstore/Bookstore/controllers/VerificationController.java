@@ -34,11 +34,8 @@ public class VerificationController {
     @RequestMapping(value = "verify/{username}/{code}", method = RequestMethod.POST)
     public ResponseEntity verify(@PathVariable final String username, @PathVariable final String code) throws ValidationException {
         final int parsedCode = Integer.parseInt(code);
-        if (verificationService.verifyCustomer(username, parsedCode)) {
-            return new ResponseEntity<>("", new HttpHeaders(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        }
+        verificationService.verifyCustomer(username, parsedCode);
+        return new ResponseEntity<>("", new HttpHeaders(), HttpStatus.OK);
     }
 
     @Data

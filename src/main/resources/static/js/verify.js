@@ -22,7 +22,7 @@ $(document).ready(function() {
             success: function() {
                 window.location.href = "/home";
             },
-            error: function() {
+            error: function(res) {
                 alert("The code that was entered failed. Please try a different code.");
             }
         })
