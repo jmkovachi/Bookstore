@@ -10,4 +10,5 @@ public class CartItem {
     private String cUsername;
     private Integer quantity;
     private Double finalPrice;
+    private Double originalPrice;
 }

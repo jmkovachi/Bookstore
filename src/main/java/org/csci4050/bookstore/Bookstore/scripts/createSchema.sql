@@ -206,6 +206,7 @@ CREATE TABLE IF NOT EXISTS `bookstoreDB`.`Cart`
  `c_username`  varchar(45) NOT NULL ,
  `quantity`    int NOT NULL ,
  `final_price` double NOT NULL ,
+ `original_price` double NOT NULL,
 PRIMARY KEY (`isbn`, `c_username`),
 KEY `isbn_fk` (`isbn`),
 CONSTRAINT `FK_189`

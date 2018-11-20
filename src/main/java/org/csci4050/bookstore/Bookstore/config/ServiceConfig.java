@@ -32,7 +32,20 @@ public class ServiceConfig {
     }
 
     @Bean
-    public CartService cartService(final CartDao cartDao, final CustomerService customerService) {
-        return new CartService(cartDao, customerService);
+    public CartService cartService(final CartDao cartDao,
+                                   final CustomerService customerService,
+                                   final BookService bookService,
+                                   final PromotionService promotionService) {
+        return new CartService(cartDao, customerService, bookService, promotionService);
+    }
+
+    @Bean
+    public BookService bookService(final BookDao bookDao, final PromotionService promotionService, final VendorService vendorService) {
+        return new BookService(bookDao, promotionService, vendorService);
+    }
+
+    @Bean
+    public PromotionService promotionService(final PromotionDao promotionDao) {
+        return new PromotionService(promotionDao);
     }
 }

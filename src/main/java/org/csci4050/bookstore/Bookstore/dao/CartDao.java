@@ -18,13 +18,13 @@ public class CartDao {
     }
 
     public void createCartItem(final CartItem cartItem) {
-        final String sql = "insert into cart(isbn,c_username,quantity,final_price) values(?,?,?,?);";
-        this.jdbcTemplate.update(sql, cartItem.getIsbn(), cartItem.getCUsername(), cartItem.getQuantity(), cartItem.getFinalPrice());
+        final String sql = "insert into cart(isbn,c_username,quantity,final_price,original_price) values(?,?,?,?,?);";
+        this.jdbcTemplate.update(sql, cartItem.getIsbn(), cartItem.getCUsername(), cartItem.getQuantity(), cartItem.getFinalPrice(), cartItem.getOriginalPrice());
     }
 
     public void updateCartItem(final CartItem cartItem) {
-        final String sql = "update cart set quantity=?,final_price=? where isbn=? and c_username=?";
-        this.jdbcTemplate.update(sql, cartItem.getQuantity(), cartItem.getFinalPrice(), cartItem.getIsbn(), cartItem.getCUsername());
+        final String sql = "update cart set quantity=?,final_price=?,original_price=? where isbn=? and c_username=?";
+        this.jdbcTemplate.update(sql, cartItem.getQuantity(), cartItem.getFinalPrice(), cartItem.getOriginalPrice(), cartItem.getIsbn(), cartItem.getCUsername());
     }
 
     public List<CartItem> getCartForCustomer(final String username) {

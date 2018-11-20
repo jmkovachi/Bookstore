@@ -24,4 +24,8 @@ public class VendorService {
             throw new Exception();
         }
     }
+
+    public Optional<Vendor> getVendor(final String vUsername) {
+        return vendorDao.getVendor(vUsername);
+    }
 }

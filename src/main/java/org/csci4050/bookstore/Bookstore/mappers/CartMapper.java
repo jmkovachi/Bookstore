@@ -15,6 +15,7 @@ public class CartMapper implements RowMapper<CartItem> {
                 .cUsername(rs.getString("c_username"))
                 .finalPrice(rs.getDouble("final_price"))
                 .quantity(rs.getInt("quantity"))
+                .originalPrice(rs.getDouble("original_price"))
                 .build();
     }
 }
