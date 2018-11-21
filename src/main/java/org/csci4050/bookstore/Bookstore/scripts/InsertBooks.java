@@ -10,7 +10,10 @@ import com.google.api.services.books.model.Volumes;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.csci4050.bookstore.Bookstore.constants.RoleConstants;
+import org.csci4050.bookstore.Bookstore.exceptions.ValidationException;
 import org.csci4050.bookstore.Bookstore.model.Book;
+import org.csci4050.bookstore.Bookstore.model.Vendor;
 import org.csci4050.bookstore.Bookstore.service.BookService;
 import org.csci4050.bookstore.Bookstore.service.VendorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -41,7 +45,7 @@ public class InsertBooks {
     private static final String CSV_FILE_PATH = "top100books.csv";
     private static final String GOOGLE_API_KEY = "AIzaSyBSN5uG32j8t4zcLiMOa9cfg3QUSlM3FQU";
 
-    public void insertBooks() throws IOException, GeneralSecurityException, ParseException, NumberFormatException {
+    public void insertBooks() throws IOException, GeneralSecurityException, ParseException, NumberFormatException, ValidationException {
         final Reader reader = new FileReader(CSV_FILE_PATH);
         final CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT
                 .withFirstRecordAsHeader()
@@ -54,7 +58,7 @@ public class InsertBooks {
                 .build();
 
         final Random random = new Random();
-        for (CSVRecord csvRecord : csvParser) {
+        for (final CSVRecord csvRecord : csvParser) {
             // Accessing values by the names assigned to each column
             final String isbn = csvRecord.get("ISBN");
             final String query = "isbn:" + isbn;
@@ -66,26 +70,20 @@ public class InsertBooks {
             } else {
                 for (final Volume volume : volumes.getItems()) {
                     try {
-                        final String imageUrl = volume.getVolumeInfo().getImageLinks().getThumbnail();
-                        final String vendor = volume.getVolumeInfo().getPublisher();
-                        final String author = volume.getVolumeInfo().getAuthors().get(0);
-                        final String title = volume.getVolumeInfo().getTitle();
-                        final String datePublishedString = volume.getVolumeInfo().getPublishedDate();
-                        final Date datePublished;
-                        if (datePublishedString.length() == 10) {
-                            datePublished = new SimpleDateFormat("yyyy-MM-dd").parse(datePublishedString);
-                        } else if (datePublishedString.length() == 7) {
-                            datePublished = new SimpleDateFormat("yyyy-MM").parse(datePublishedString);
-                        } else {
-                            datePublished = convertYearToDate(datePublishedString);
-                        }
-                        final Float rating = new Float(volume.getVolumeInfo().getAverageRating());
-                        final String summary = volume.getVolumeInfo().getDescription();
-                        final int pages = volume.getVolumeInfo().getPageCount();
                         final List<String> category = volume.getVolumeInfo().getCategories();
                         if (category.size() == 0) {
                             continue;
                         }
+                        final String imageUrl = volume.getVolumeInfo().getImageLinks().getThumbnail();
+                        final String publisher = volume.getVolumeInfo().getPublisher();
+                        final String author = volume.getVolumeInfo().getAuthors().get(0);
+                        final String title = volume.getVolumeInfo().getTitle();
+                        final String datePublishedString = volume.getVolumeInfo().getPublishedDate();
+                        final Date datePublished = convertDateStringToDate(datePublishedString);
+                        final Float rating = new Float(volume.getVolumeInfo().getAverageRating());
+                        final String summary = volume.getVolumeInfo().getDescription();
+                        final int pages = volume.getVolumeInfo().getPageCount();
+                        final String vUsername = makeUsernameFromPublisher(publisher);
                         final Book book = Book.builder()
                                 .author(author)
                                 .isbn(isbn)
@@ -95,17 +93,31 @@ public class InsertBooks {
                                 .totalInventory(random.nextInt(1000))
                                 .pages(pages)
                                 .category(category.get(0))
-                                .vUsername(vendor)
+                                .vUsername(vUsername)
                                 .imageUrl(imageUrl)
                                 .price(Double.parseDouble(String.format("%.2f", 5 + (15 - 5) * random.nextDouble())))
                                 .datePublished(datePublished)
                                 .build();
-                        System.out.println(book.toString());
-                    } catch(NullPointerException n) {
+
+                        final Optional<Vendor> preVendor = vendorService.getVendor(vUsername);
+
+                        if (!preVendor.isPresent()) {
+                            final Vendor vendor = Vendor.builder()
+                                    .address("placeholder")
+                                    .company(publisher)
+                                    .build();
+                            vendor.setUsername(vUsername);
+                            vendor.setEmail(vUsername + "@" + vUsername + ".com");
+                            vendor.setImageUrl("placeholder");
+                            vendor.setPassword(vUsername);
+                            vendor.setRole(RoleConstants.VENDOR);
+                            vendorService.registerVendor(vendor);
+                        }
+
+                        bookService.insertBook(book);
+                    } catch (final NullPointerException n) {
                         System.out.println(n);
                     }
-
-
                 }
             }
         }
@@ -123,5 +135,19 @@ public class InsertBooks {
         final Date date1 = new SimpleDateFormat("yyyy").parse(year);
         final Date date2 = new SimpleDateFormat("yyyy").parse(Integer.toString(Integer.parseInt(year)+1));
         return new Date(ThreadLocalRandom.current().nextLong(date1.getTime(), date2.getTime()));
+    }
+
+    private static String makeUsernameFromPublisher(final String publisher) {
+        return publisher.toLowerCase().replace(" ", "");
+    }
+
+    private static Date convertDateStringToDate(final String dateString) throws ParseException {
+        if (dateString.length() == 10) {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
+        } else if (dateString.length() == 7) {
+            return new SimpleDateFormat("yyyy-MM").parse(dateString);
+        } else {
+            return convertYearToDate(dateString);
+        }
     }
 }

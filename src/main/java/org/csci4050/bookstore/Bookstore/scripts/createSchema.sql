@@ -128,9 +128,9 @@ CREATE TABLE IF NOT EXISTS `bookstoreDB`.`Book`
  `price`           double NOT NULL ,
  `total_inventory` int NOT NULL ,
  `promo_id`        int unsigned ,
- `image_url`	   varchar(45) ,
- `rating`          float(1,1) ,
- `summary`         varchar(1000) NOT NULL ,
+ `image_url`	   varchar(144) ,
+ `rating`          float ,
+ `summary`         text NOT NULL ,
  `pages`           smallint NOT NULL ,
  `v_username`      varchar(45) NOT NULL ,
 PRIMARY KEY (`isbn`),
@@ -286,4 +286,6 @@ CREATE TABLE IF NOT EXISTS `bookstoreDB`.`Verification`
 PRIMARY KEY (`verification_code`),
 KEY `c_username_fk` (`c_username`),
 CONSTRAINT `FK_302` FOREIGN KEY `c_username_fk` (`c_username`) REFERENCES `bookstoreDB`.`Customer` (`c_username`)
+ON DELETE CASCADE
+ON UPDATE CASCADE
 ) AUTO_INCREMENT=1000;

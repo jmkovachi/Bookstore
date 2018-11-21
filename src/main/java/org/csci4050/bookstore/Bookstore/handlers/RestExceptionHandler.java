@@ -5,6 +5,7 @@ import lombok.Data;
 import org.csci4050.bookstore.Bookstore.exceptions.ValidationException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -19,17 +20,26 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ValidationException.class)
-    public ResponseEntity<Object> handleEntityNotFound(final ValidationException ve) {
-        final ValidationExceptionModel validationExceptionModel = ValidationExceptionModel.builder()
-                .message(ve.getMessage())
+    public ResponseEntity<Object> handleValidationException(final ValidationException ve) {
+        return handleException(ve);
+    }
+
+    @ExceptionHandler(DataAccessException.class)
+    public ResponseEntity<Object> handleDatabaseException(final DataAccessException da) {
+        return handleException(da);
+    }
+
+    private ResponseEntity<Object> handleException(final Exception e) {
+        final ExceptionModel exceptionModel = ExceptionModel.builder()
+                .message(e.getMessage())
                 .status(HttpStatus.NOT_FOUND)
                 .build();
-        return new ResponseEntity<>(validationExceptionModel, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(exceptionModel, HttpStatus.NOT_FOUND);
     }
 
     @Data
     @Builder
-    public static class ValidationExceptionModel {
+    public static class ExceptionModel {
         private HttpStatus status;
         private String message;
     }
