@@ -82,8 +82,12 @@ public class CartService {
         final Double originalPrice = cartItem.getQuantity() * book.getPrice();
         cartItem.setOriginalPrice(originalPrice);
         if (book.getPromoId() != null) {
-            final Promotion promotion = promotionService.getPromotion(book.getPromoId()).get();
-            this.applyPromotion(originalPrice, promotion, cartItem);
+            final Optional<Promotion> promotion = promotionService.getPromotion(book.getPromoId());
+            if (promotion.isPresent()) {
+                this.applyPromotion(originalPrice, promotion.get(), cartItem);
+            } else {
+                throw new ValidationException("Promotion with promo id <%s> does not exist", Integer.toString(book.getPromoId()));
+            }
         } else {
             cartItem.setFinalPrice(originalPrice);
         }

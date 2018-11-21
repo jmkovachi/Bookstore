@@ -54,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/register/vendor").hasRole("ADMIN")
                 .antMatchers("/register/client").hasRole("ADMIN")
                 .antMatchers("/yo").permitAll()
-                .antMatchers("/cart").hasRole("CUSTOMER") // example of a pattern that could be used for auth
+                .antMatchers("/cart/**").permitAll() // example of a pattern that could be used for auth
                 .antMatchers("/**").permitAll()
                 .antMatchers("/verify/**").permitAll()
                 .and()

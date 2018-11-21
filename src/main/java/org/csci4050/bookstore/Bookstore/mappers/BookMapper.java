@@ -10,15 +10,17 @@ public class BookMapper implements RowMapper<Book> {
 
     @Override
     public Book mapRow(final ResultSet rs, final int rownumber) throws SQLException {
+        Integer promoId = rs.getInt("promo_id");
+        promoId = promoId == 0 ? null : promoId;
         return Book.builder()
-                .isbn(rs.getString("book"))
+                .isbn(rs.getString("isbn"))
                 .author(rs.getString("author"))
                 .category(rs.getString("category"))
                 .datePublished(rs.getDate("date_published"))
                 .imageUrl(rs.getString("image_url"))
                 .pages(rs.getInt("pages"))
                 .price(rs.getDouble("price"))
-                .promoId(rs.getInt("promoId"))
+                .promoId(promoId)
                 .rating(rs.getFloat("rating"))
                 .summary(rs.getString("summary"))
                 .title(rs.getString("title"))
