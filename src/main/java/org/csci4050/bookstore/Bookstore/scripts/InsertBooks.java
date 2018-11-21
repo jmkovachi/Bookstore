@@ -12,6 +12,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.csci4050.bookstore.Bookstore.model.Book;
 import org.csci4050.bookstore.Bookstore.service.BookService;
+import org.csci4050.bookstore.Bookstore.service.VendorService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.FileReader;
@@ -29,15 +30,18 @@ public class InsertBooks {
 
     private BookService bookService;
 
+    private VendorService vendorService;
+
     @Autowired
-    public InsertBooks(final BookService bookService) {
+    public InsertBooks(final BookService bookService, final VendorService vendorService) {
         this.bookService = bookService;
+        this.vendorService = vendorService;
     }
 
     private static final String CSV_FILE_PATH = "top100books.csv";
     private static final String GOOGLE_API_KEY = "AIzaSyBSN5uG32j8t4zcLiMOa9cfg3QUSlM3FQU";
 
-    public static void main(final String[] args) throws IOException, GeneralSecurityException, ParseException, NumberFormatException {
+    public void insertBooks() throws IOException, GeneralSecurityException, ParseException, NumberFormatException {
         final Reader reader = new FileReader(CSV_FILE_PATH);
         final CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT
                 .withFirstRecordAsHeader()
