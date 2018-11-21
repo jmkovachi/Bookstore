@@ -156,6 +156,10 @@
 			<artifactId>google-api-services-books</artifactId>
 			<version>v1-rev104-1.25.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
     </dependencies>
 
 	<dependencyManagement>
