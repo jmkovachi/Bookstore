@@ -52,19 +52,27 @@ public class CartService {
     }
 
     public void updateCartItem(final CartItem cartItem) throws ValidationException {
-        final Optional<CartItem> retrieveCartItem = cartDao.getCartItem(cartItem.getIsbn(), cartItem.getCUsername());
-        if (!retrieveCartItem.isPresent()) {
-            throw new ValidationException("Cart item with isbn <%s> and username <%s> does not exist", cartItem.getIsbn(), cartItem.getCUsername());
-        }
-
+        this.checkCartItemExists(cartItem.getIsbn(), cartItem.getCUsername());
         this.setPrices(cartItem);
         cartDao.updateCartItem(cartItem);
+    }
+
+    public void deleteCartItem(final String isbn, final String username) throws ValidationException {
+        this.checkCartItemExists(isbn, username);
+        cartDao.deleteCartItem(isbn, username);
     }
 
     private void checkCustomerExists(final String cUsername) throws ValidationException {
         final Optional<Customer> customer = customerService.getCustomer(cUsername);
         if (!customer.isPresent()) {
             throw new ValidationException("Customer with username <%s> not found", cUsername);
+        }
+    }
+
+    private void checkCartItemExists(final String isbn, final String username) throws ValidationException {
+        final Optional<CartItem> retrieveCartItem = cartDao.getCartItem(isbn, username);
+        if (!retrieveCartItem.isPresent()) {
+            throw new ValidationException("Cart item with isbn <%s> and username <%s> does not exist", isbn, username);
         }
     }
 
