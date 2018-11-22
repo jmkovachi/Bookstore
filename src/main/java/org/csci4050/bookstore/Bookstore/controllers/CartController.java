@@ -1,8 +1,13 @@
 package org.csci4050.bookstore.Bookstore.controllers;
 
+import lombok.Builder;
+import lombok.Data;
 import org.csci4050.bookstore.Bookstore.exceptions.ValidationException;
+import org.csci4050.bookstore.Bookstore.model.Book;
 import org.csci4050.bookstore.Bookstore.model.CartItem;
+import org.csci4050.bookstore.Bookstore.service.BookService;
 import org.csci4050.bookstore.Bookstore.service.CartService;
+import org.csci4050.bookstore.Bookstore.service.VendorService;
 import org.csci4050.bookstore.Bookstore.viewmodel.CartViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/cart")
@@ -24,6 +30,12 @@ public class CartController {
 
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private BookService bookService;
+
+    @Autowired
+    private VendorService vendorService;
 
     /**
      * Example JSON request body:
@@ -62,11 +74,14 @@ public class CartController {
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public ModelAndView cartPage(final Principal principal) throws ValidationException {
         // Principal is a bean defined by spring security, we can use it to get authentication details
-        final String username = principal.getName();
-        final List<CartItem> cartItems = cartService.getCartForCustomer(username);
+        final String username = "jmkovachi";
+        final List<CartItemWithBook> cartItems = cartService.getCartForCustomer(username).stream()
+                .map(this::transformToCartItemWithBook)
+                .collect(Collectors.toList());
 
         // use java streams to calculate total price of all items
         final Double totalAmount = cartItems.stream()
+                .map(CartItemWithBook::getCartItem)
                 .map(CartItem::getFinalPrice)
                 .reduce(0.0, (c1, c2) -> c1 + c2);
 
@@ -78,5 +93,26 @@ public class CartController {
         return new ModelAndView("views/cart", "cart", cartViewModel);
     }
 
+    private CartItemWithBook transformToCartItemWithBook(final CartItem cartItem) {
+        final Book book = bookService.getBook(cartItem.getIsbn()).get();
+        final String publisher = vendorService.getVendor(book.getVUsername()).get().getCompany();
+        return CartItemWithBook.builder()
+                .cartItem(cartItem)
+                .singleFinalPrice(cartItem.getFinalPrice() / cartItem.getQuantity())
+                .singleOriginalPrice(cartItem.getOriginalPrice() / cartItem.getQuantity())
+                .publisher(publisher)
+                .book(book)
+                .build();
+    }
+
+    @Data
+    @Builder
+    public static class CartItemWithBook {
+        private CartItem cartItem;
+        private String publisher;
+        private double singleFinalPrice;
+        private double singleOriginalPrice;
+        private Book book;
+    }
 
 }

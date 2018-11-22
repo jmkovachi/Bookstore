@@ -2,7 +2,7 @@ package org.csci4050.bookstore.Bookstore.viewmodel;
 
 import lombok.Builder;
 import lombok.Data;
-import org.csci4050.bookstore.Bookstore.model.CartItem;
+import org.csci4050.bookstore.Bookstore.controllers.CartController;
 
 import java.util.List;
 
@@ -10,6 +10,6 @@ import java.util.List;
 @Builder
 public class CartViewModel {
     private String username;
-    private List<CartItem> cartItems;
+    private List<CartController.CartItemWithBook> cartItems;
     private Double totalAmount;
 }
