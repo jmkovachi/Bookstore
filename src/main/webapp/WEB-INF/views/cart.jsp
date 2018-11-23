@@ -256,11 +256,13 @@ tr:nth-child(4) td:nth-of-type(4) {
                     <td class="text-center text-md-left">
                       <span class="qty"> ${cartItem.cartItem.quantity} </span>
                       <div class="btn-group ml-2" data-toggle="buttons">
-                        <label class="btn btn-sm btn-primary btn-rounded">
-                          <div name="options" id="option1">&mdash;</div>
+                        <label data-isbn="${cartItem.cartItem.isbn}" data-quantity="${cartItem.cartItem.quantity}"
+                            class="decreaseQuantity btn btn-sm btn-primary btn-rounded">
+                          <div name="options">&mdash;</div>
                         </label>
-                        <label class="btn btn-sm btn-primary btn-rounded">
-                          <div name="options" id="option2">+</div>
+                        <label data-isbn="${cartItem.cartItem.isbn}" data-quantity="${cartItem.cartItem.quantity}"
+                            class="increaseQuantity btn btn-sm btn-primary btn-rounded">
+                          <div name="options">+</div>
                         </label>
                       </div>
                     </td>
@@ -268,7 +270,8 @@ tr:nth-child(4) td:nth-of-type(4) {
                       <strong><fmt:formatNumber type="number" maxFractionDigits="2" value="${cartItem.cartItem.finalPrice}" /></strong>
                     </td>
                     <td>
-                      <button type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Remove item">X
+                      <button type="button" class="delete btn btn-sm btn-primary" data-isbn="${cartItem.cartItem.isbn}"
+                      data-quantity="${cartItem.cartItem.quantity}" data-toggle="tooltip" data-placement="top" title="Remove item">X
                       </button>
                     </td>
                   </tr>
@@ -511,6 +514,8 @@ tr:nth-child(4) td:nth-of-type(4) {
 
   <!-- /.Cart Modal -->
 
+  <!-- Username hidden input -->
+  <input type="hidden" id="username" value="${cart.username}" />
 
   <!-- SCRIPTS -->
 
@@ -525,6 +530,7 @@ tr:nth-child(4) td:nth-of-type(4) {
 
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="/js/cartmdb.js"></script>
+  <script type"text/javascript" src="/js/cart.js"></script>
   <script type="text/javascript">
     /* WOW.js init */
     new WOW().init();

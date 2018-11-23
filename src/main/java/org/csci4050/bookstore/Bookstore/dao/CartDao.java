@@ -28,7 +28,7 @@ public class CartDao {
     }
 
     public void deleteCartItem(final String isbn, final String username) {
-        final String sql = "delete from cart where username=? and isbn=?";
+        final String sql = "delete from cart where c_username=? and isbn=?";
         this.jdbcTemplate.update(sql, username, isbn);
     }
 
