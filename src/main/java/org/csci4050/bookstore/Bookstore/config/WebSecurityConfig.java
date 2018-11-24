@@ -56,6 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/yo").permitAll()
                 .antMatchers("/cart/**").permitAll() // example of a pattern that could be used for auth
                 .antMatchers("/**").permitAll()
+                .antMatchers("/catalog/**").permitAll()
                 .antMatchers("/verify/**").permitAll()
                 .and()
                 .formLogin()

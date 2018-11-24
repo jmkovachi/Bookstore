@@ -5,6 +5,8 @@ import org.csci4050.bookstore.Bookstore.exceptions.ValidationException;
 import org.csci4050.bookstore.Bookstore.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 public class BookService {
@@ -39,6 +41,26 @@ public class BookService {
             throw new ValidationException("Book with isbn <%s> does not exist", book.getIsbn());
         }
         bookDao.updateBook(book);
+    }
+
+    public List<Book> getBooks() {
+        return this.bookDao.getBooks();
+    }
+
+    public List<Book> queryBooks(final String column, final String value) throws ValidationException {
+        final List<String> validColumns = Arrays.asList("isbn", "author", "title");
+        if (!validColumns.contains(column)) {
+            throw new ValidationException("Value <%s> is not a valid query parameter", column);
+        }
+        return bookDao.queryBooks(column, value);
+    }
+
+    public List<Book> getBooksByColumns(final String column, final String value) {
+        return bookDao.queryBooks(column, value);
+    }
+
+    public List<String> getCategoryValues() {
+        return bookDao.getValuesByColumn("category");
     }
 
     private void checkPromotionExists(final int promoId) throws ValidationException {
