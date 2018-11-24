@@ -1,6 +1,8 @@
 package org.csci4050.bookstore.Bookstore.controllers;
 
-//@Controller
+import org.springframework.stereotype.Controller;
+
+@Controller
 public class UpdateController {
 
 

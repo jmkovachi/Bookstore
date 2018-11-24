@@ -34,9 +34,10 @@ function putAjax(url, data) {
         success: function() {
             location.reload();
         },
-        error: function(res) {
-            alert(res.message);
-        }
+        error: function(xhr, status, message) {
+           const res = JSON.parse(xhr.responseText);
+           alert(res.message);
+       }
     });
 }
 
@@ -49,9 +50,10 @@ function deleteAjax(isbn, username) {
         success: function() {
             location.reload();
         },
-        error: function(res) {
-            alert(res.message);
-        }
+        error: function(xhr, status, message) {
+           const res = JSON.parse(xhr.responseText);
+           alert(res.message);
+       }
     });
 }
 
@@ -61,6 +63,6 @@ function getData(className, quantity) {
     return {
         "isbn": isbn,
         "quantity": quantity,
-        "cUsername": username
+        "username": username
     };
 }

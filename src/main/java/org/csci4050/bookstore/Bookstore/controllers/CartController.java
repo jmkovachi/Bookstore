@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -47,8 +48,16 @@ public class CartController {
      */
     @RequestMapping(value = "/add-item", method = RequestMethod.POST)
     public ResponseEntity<Object> addCartItem(@RequestBody CartItem cartItem) throws ValidationException {
-        cartService.insertCartItem(cartItem);
-        return new ResponseEntity<>(cartItem, new HttpHeaders(), HttpStatus.OK);
+        final Optional<CartItem> retrieveItem = cartService.getCartItem(cartItem.getCUsername(), cartItem.getIsbn());
+        if (retrieveItem.isPresent()) {
+            final CartItem preItem = retrieveItem.get();
+            preItem.setQuantity(preItem.getQuantity() + 1);
+            cartService.updateCartItem(preItem);
+            return new ResponseEntity<>(preItem, new HttpHeaders(), HttpStatus.OK);
+        } else {
+            cartService.insertCartItem(cartItem);
+            return new ResponseEntity<>(cartItem, new HttpHeaders(), HttpStatus.OK);
+        }
     }
 
     /**
