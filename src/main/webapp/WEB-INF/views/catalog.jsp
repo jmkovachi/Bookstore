@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>E-Commerce - MDBootstrap</title>
+    <title>Bookstore</title>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -85,66 +85,33 @@
                 <div class="row">
                     <!-- Genres-->
                     <div class="col-md-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Search by Genre</strong></h3>
+                        <h5 class="font-weight-bold dark-grey-text"><strong>Search by Genre</strong></h5>
                             <div class="divider"></div>
 
-                            <!-- Collapse button (GENRES) -->
-                            <div>
-                                <a class="btn btn-outline-success dropdown-toggle" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                    Genres
-                                </a>
-                            </div>
-                            <!-- / Collapse buttons -->
-
-                            <!-- Collapsible elements -->
-                            <div class="collapse" id="collapseExample">
-                                <div class="mt-3">
-                                    <a href="#">Genre 1</a>
+                        <!--Collapsible Genres-->
+                        <div class="panel-group" id="accordionTwo">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a  class="btn btn-outline-success dropdown-toggle" data-toggle="collapse" data-parent="#accordionTwo" href="#collapseFour">Genres</a>
+                                </div>
+                                <div class="panel-collapse collapse in" id="collapseFour">
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item" style="border:none">Genre 1</a>
+                                        <a href="#" class="list-group-item" style="border:none">Genre 2</a>
+                                        <a href="#" class="list-group-item" style="border:none">Genre 3</a>
+                                        <a href="#" class="list-group-item" style="border:none">Genre 4</a>
+                                        <a href="#" class="list-group-item" style="border:none">Genre 5</a>
+                                        <a href="#" class="list-group-item" style="border:none">Genre 6</a>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="collapse" id="collapseExample">
-                                <div class="mt-3">
-                                    <a href="#"> Genre 2 </a>
-                                </div>
-                            </div>
-
-                            <div class="collapse" id="collapseExample">
-                                <div class="mt-3">
-                                    <a href="#"> Genre 3</a>
-                                </div>
-                            </div>
-
-                            <div class="collapse" id="collapseExample">
-                                <div class="mt-3">
-                                    <a href="#"> Genre 4 </a>
-                                </div>
-                            </div>
-
-                            <div class="collapse" id="collapseExample">
-                                <div class="mt-3">
-                                    <a href="#"> Genre 5 </a>
-                                </div>
-                            </div>
-
-                            <div class="collapse" id="collapseExample">
-                                <div class="mt-3">
-                                    <a href="#"> Genre 6 </a>
-                                </div>
-                            </div>
-
-
-
-                            <!-- / Collapsible elements -->
                     </div>
-                    <!-- /Filter by category-->
+
                 </div>
                 <!-- /Grid row -->
 
-                <!-- Grid row -->
-                <div class="row">
-                </div>
-                <!-- /Grid row -->
             </div>
         </div>
         <!-- end of Genres sidebar -->
@@ -153,9 +120,9 @@
         <div class="col-lg-9">
             <!-- Products Grid -->
             <section class="section pt-4">
-                <!-- Grid row -->
+                <!-- Grid FIRST ROW -->
                 <div class="row">
-                    <!--Grid column-->
+                    <!--Grid 1st column-->
                     <div class="col-lg-4 col-md-12 mb-4">
 
                         <!--Card-->
@@ -194,54 +161,32 @@
                         <!--Card-->
 
                     </div>
-                    <!--Grid column-->
+                    <!--Grid column (first column) of first row-->
 
-                    <!--Grid column-->
+                    <!--Grid column (2nd column) of first row-->
                     <div class="col-lg-4 col-md-6 mb-4">
-
-
+                        <!-- insert code here just like 1st column-->
                     </div>
-                    <!--Grid column-->
 
-                    <!--Grid column-->
+                    <!--Grid column (3rd column)-->
                     <div class="col-lg-4 col-md-6 mb-4">
-
                     </div>
-                    <!--Grid column-->
 
-                </div>
-                <!--Grid row-->
+                </div> <!-- END OF FIRST ROW -->
 
-                <!-- Grid row -->
+
+                <!-- Grid 2nd row -->
                 <div class="row">
+                    <!-- insert columns here just like the first row -->
+                 </div>
 
-                    <!--Grid column-->
-                    <div class="col-lg-4 col-md-12 mb-4">
-                            </div>
-                            <!--Card content-->
-
-                        </div>
-                        <!--Card-->
-
-                    </div>
-                    <!--Grid column-->
-
-                </div>
-
-
-                <!--Grid row-->
+        <!-- /. end of Content -->
             </section>
-            <!-- /.Products Grid -->
+        </div>  <!-- col-lg-9 (RHS of page. The left three cols of page are for Genres)-->
+    </div> <!-- row-pt-4-->
+</div> <!--Main Container-->
 
-        </div>
-        <!-- /.Content -->
 
-    </div>
-
-</div>
-<!-- /.Main Container -->
-
-</main>
 
 
 <!--Footer-->
@@ -252,7 +197,7 @@
         <div class="container">
             </div>
         </div>
-    </div>
+
 
 
     <!-- Copyright-->
