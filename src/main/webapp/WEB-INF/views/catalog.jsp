@@ -96,12 +96,9 @@
                                 </div>
                                 <div class="panel-collapse collapse in" id="collapseFour">
                                     <div class="list-group">
-                                        <a href="#" class="list-group-item" style="border:none">Genre 1</a>
-                                        <a href="#" class="list-group-item" style="border:none">Genre 2</a>
-                                        <a href="#" class="list-group-item" style="border:none">Genre 3</a>
-                                        <a href="#" class="list-group-item" style="border:none">Genre 4</a>
-                                        <a href="#" class="list-group-item" style="border:none">Genre 5</a>
-                                        <a href="#" class="list-group-item" style="border:none">Genre 6</a>
+                                        <c:forEach items="${catalog.categories}" var="genre">
+                                            <a href="/catalog?genre=${genre}" class="list-group-item" style="border:none">${genre}</a>
+                                        </c:forEach>
                                     </div>
                                 </div>
                             </div>
@@ -120,61 +117,63 @@
         <div class="col-lg-9">
             <!-- Products Grid -->
             <section class="section pt-4">
-                <!-- Grid FIRST ROW -->
-                <div class="row">
-                    <!--Grid 1st column-->
-                    <div class="col-lg-4 col-md-12 mb-4">
-
-                        <!--Card-->
-                        <div class="card card-ecommerce">
-                            <!--Card image-->
-                            <div class="view overlay">
-                                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/1.jpg" class="img-fluid" alt="">
-                                <a>
-                                    <div class="mask rgba-white-slight"></div>
-                                </a>
-                            </div>
-                            <!--Card image-->
-
-                            <!--Card content-->
-                            <div class="card-body">
-                                <!--Category & Title-->
-
-                                <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">iPad</a></strong></h5>
-                                by Author
-
-                                <!--Card footer-->
-                                <div class="card-footer pb-0">
-                                    <div class="row mb-0">
-                                        <span class="float-left"><strong>1439$</strong></span>
-                                        <span class="float-right">
-
-                                        <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart"><i class="fa fa-shopping-cart ml-3"></i></a>
-                                        </span>
+                <c:forEach var="i" begin="0" step="3" end="${catalog.books.size()-1}">
+                    <!-- Grid FIRST ROW -->
+                    <div class="row">
+                        <c:forEach var="j" begin="${i}" end="${i+2 > catalog.books.size()-1 ? catalog.books.size()-1 : i+2}">
+                            <!--Grid 1st column-->
+                            <div class="col-lg-4 col-md-12 mb-4">
+                                <c:set var="book" value="${catalog.books.get(j)}" />
+                                <!--Card-->
+                                <div id="${book.isbn}" data-isbn="${book.isbn}" class="card card-ecommerce">
+                                    <!--Card image-->
+                                    <div class="view overlay">
+                                        <img height="225" width="225" src="${book.imageUrl}" class="text-center" alt="">
+                                        <a>
+                                            <div class="mask rgba-white-slight"></div>
+                                        </a>
                                     </div>
+                                    <!--Card image-->
+
+                                    <!--Card content-->
+                                    <div class="card-body">
+                                        <!--Category & Title-->
+
+                                        <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">${book.title}</a></strong></h5>
+                                        by ${book.author}
+
+                                        <!--Card footer-->
+                                        <div class="card-footer pb-0">
+                                            <div class="row mb-0">
+                                                <span class="float-left"><strong>$<tags:doubleFormat num="${book.price}"/></strong></span>
+                                                <span class="float-right">
+
+                                                <a class="cart" data-username="${catalog.username}" data-isbn="${book.isbn}" data-toggle="tooltip" data-placement="top" title="Add to Cart"><i class="fa fa-shopping-cart ml-3"></i></a>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!--Card content-->
+
                                 </div>
+                                <!--Card-->
 
                             </div>
-                            <!--Card content-->
+                            <!--Grid column (first column) of first row-->
+                        </c:forEach>
 
+                        <!--Grid column (2nd column) of first row-->
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <!-- insert code here just like 1st column-->
                         </div>
-                        <!--Card-->
 
-                    </div>
-                    <!--Grid column (first column) of first row-->
+                        <!--Grid column (3rd column)-->
+                        <div class="col-lg-4 col-md-6 mb-4">
+                        </div>
 
-                    <!--Grid column (2nd column) of first row-->
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <!-- insert code here just like 1st column-->
-                    </div>
-
-                    <!--Grid column (3rd column)-->
-                    <div class="col-lg-4 col-md-6 mb-4">
-                    </div>
-
-                </div> <!-- END OF FIRST ROW -->
-
-
+                    </div> <!-- END OF FIRST ROW -->
+                </c:forEach>
                 <!-- Grid 2nd row -->
                 <div class="row">
                     <!-- insert columns here just like the first row -->
@@ -225,6 +224,9 @@
 
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="/js/mdb.min.js"></script>
+
+<!-- Catalog.js -->
+<script type"text/javascript" src="/js/catalog.js"></script>
 
 <script type="text/javascript">
     /* WOW.js init */

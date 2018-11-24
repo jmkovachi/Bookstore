@@ -56,7 +56,7 @@ public class BookDao {
     }
 
     public List<String> getValuesByColumn(final String column) {
-        return this.jdbcTemplate.query("select distinct ? from book", new Object[]{column}, new RowMapper<>() {
+        return this.jdbcTemplate.query("select distinct " + column + " from book", new RowMapper<>() {
             @Override
             public String mapRow(final ResultSet rs, final int rownumber) throws SQLException {
                 return rs.getString(column);

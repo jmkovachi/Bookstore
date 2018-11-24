@@ -28,7 +28,7 @@ public class CatalogController {
     public ModelAndView catalog(@RequestParam(required = false) final String isbn,
                                 @RequestParam(required = false) final String author,
                                 @RequestParam(required = false) final String title,
-                                @RequestParam(required = false) final String category,
+                                @RequestParam(required = false) final String genre,
                                 final Principal principal) throws ValidationException {
         final List<Book> books;
         final String viewCategory;
@@ -41,15 +41,15 @@ public class CatalogController {
         } else if (title != null) {
             books = bookService.queryBooks("title", author);
             viewCategory = "Title";
-        } else if (category != null) {
-            books = bookService.queryBooks("category", category);
+        } else if (genre != null) {
+            books = bookService.getBooksByColumns("category", genre);
             viewCategory = "Category";
         } else {
             books = bookService.getBooks();
             viewCategory = null;
         }
         final List<String> categories = bookService.getCategoryValues();
-        final String username = "jmkovachi";//principal.getName();
+        final String username = principal.getName();
 
         final CatalogViewModel catalogViewModel = CatalogViewModel.builder()
                 .username(username)
