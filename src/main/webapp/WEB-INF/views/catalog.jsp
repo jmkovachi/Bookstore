@@ -1,6 +1,8 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags/"%>
 <head>
     <meta charset="UTF-8">
@@ -50,13 +52,23 @@
             <ul class="navbar-nav mr-auto">
             </ul>
 
-
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Search by...
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">ISBN</a>
+                    <a class="dropdown-item" href="#">Title</a>
+                    <a class="dropdown-item" href="#">Author</a>
+                </div>
+            </div>
             <!-- Search form -->
-            <form class="search-form" role="search">
+            <form class="search-form" role="search" style="width: 70%;">
                 <div class="form-group md-form my-0 waves-light">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search...">
                 </div>
             </form>
+            <button class="btn btn-success btn-rounded btn-sm my-0" type="submit">Search</button>
         </div>
         <!-- Collapsible content -->
 
@@ -68,43 +80,62 @@
 
         <!-- Sidebar (book genres) -->
         <div class="col-lg-3">
-
             <div class="">
                 <!-- Grid row -->
                 <div class="row">
-
-
-                    <!-- Filter by category-->
+                    <!-- Genres-->
                     <div class="col-md-6 col-lg-12 mb-5">
-                        <h5 class="font-weight-bold dark-grey-text"><strong>Filter by Genre</strong></h3>
+                        <h5 class="font-weight-bold dark-grey-text"><strong>Search by Genre</strong></h3>
                             <div class="divider"></div>
 
-                            <!--Radio group-->
-                            <div class="form-group ">
-                                <input class="form-check-input" name="group100" type="radio" id="radio100">
-                                <label for="radio100" class="form-check-label dark-grey-text">All</label>
+                            <!-- Collapse button (GENRES) -->
+                            <div>
+                                <a class="btn btn-outline-success dropdown-toggle" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    Genres
+                                </a>
+                            </div>
+                            <!-- / Collapse buttons -->
+
+                            <!-- Collapsible elements -->
+                            <div class="collapse" id="collapseExample">
+                                <div class="mt-3">
+                                    <a href="#">Genre 1</a>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <input class="form-check-input" name="group100" type="radio" id="radio101" checked>
-                                <label for="radio101" class="form-check-label dark-grey-text">Laptop</label>
+                            <div class="collapse" id="collapseExample">
+                                <div class="mt-3">
+                                    <a href="#"> Genre 2 </a>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <input class="form-check-input" name="group100" type="radio" id="radio102">
-                                <label for="radio102" class="form-check-label dark-grey-text">Smartphone</label>
+                            <div class="collapse" id="collapseExample">
+                                <div class="mt-3">
+                                    <a href="#"> Genre 3</a>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <input class="form-check-input" name="group100" type="radio" id="radio103">
-                                <label for="radio103" class="form-check-label dark-grey-text">Tablet</label>
+                            <div class="collapse" id="collapseExample">
+                                <div class="mt-3">
+                                    <a href="#"> Genre 4 </a>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <input class="form-check-input" name="group100" type="radio" id="radio104">
-                                <label for="radio104" class="form-check-label dark-grey-text">Headphones</label>
+                            <div class="collapse" id="collapseExample">
+                                <div class="mt-3">
+                                    <a href="#"> Genre 5 </a>
+                                </div>
                             </div>
-                            <!--Radio group-->
+
+                            <div class="collapse" id="collapseExample">
+                                <div class="mt-3">
+                                    <a href="#"> Genre 6 </a>
+                                </div>
+                            </div>
+
+
+
+                            <!-- / Collapsible elements -->
                     </div>
                     <!-- /Filter by category-->
                 </div>
@@ -112,28 +143,23 @@
 
                 <!-- Grid row -->
                 <div class="row">
-
                 </div>
                 <!-- /Grid row -->
             </div>
-
         </div>
-        <!-- /.Sidebar -->
+        <!-- end of Genres sidebar -->
 
         <!-- Content -->
         <div class="col-lg-9">
             <!-- Products Grid -->
             <section class="section pt-4">
-
                 <!-- Grid row -->
                 <div class="row">
-
                     <!--Grid column-->
                     <div class="col-lg-4 col-md-12 mb-4">
 
                         <!--Card-->
                         <div class="card card-ecommerce">
-
                             <!--Card image-->
                             <div class="view overlay">
                                 <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/1.jpg" class="img-fluid" alt="">
@@ -148,7 +174,7 @@
                                 <!--Category & Title-->
 
                                 <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">iPad</a></strong></h5>
-
+                                by Author
 
                                 <!--Card footer-->
                                 <div class="card-footer pb-0">
@@ -172,82 +198,13 @@
 
                     <!--Grid column-->
                     <div class="col-lg-4 col-md-6 mb-4">
-                        <!--Card-->
-                        <div class="card card-ecommerce">
 
-                            <!--Card image-->
-                            <div class="view overlay">
-                                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/15.jpg" class="img-fluid" alt="">
-                                <a>
-                                    <div class="mask rgba-white-slight"></div>
-                                </a>
-                            </div>
-                            <!--Card image-->
-
-                            <!--Card content-->
-                            <div class="card-body">
-                                <!--Category & Title-->
-                                <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">Sony T56-v</a></strong></h5>
-
-                                <!--Card footer-->
-                                <div class="card-footer pb-0">
-                                    <div class="row mb-0">
-                                        <span class="float-left"><strong>1439$</strong></span>
-                                        <span class="float-right">
-
-                                                <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart"><i class="fa fa-shopping-cart ml-3"></i></a>
-                                                </span>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <!--Card content-->
-
-
-                        </div>
-                        <!--Card-->
 
                     </div>
                     <!--Grid column-->
 
                     <!--Grid column-->
                     <div class="col-lg-4 col-md-6 mb-4">
-
-                        <!--Card-->
-                        <div class="card card-ecommerce">
-
-                            <!--Card image-->
-                            <div class="view overlay">
-                                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/6.jpg" class="img-fluid" alt="">
-                                <a>
-                                    <div class="mask rgba-white-slight"></div>
-                                </a>
-                            </div>
-                            <!--Card image-->
-
-                            <!--Card content-->
-                            <div class="card-body">
-                                <!--Category & Title-->
-
-                                <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">Headphones</a></strong></h5>
-
-
-                                <!--Card footer-->
-                                <div class="card-footer pb-0">
-                                    <div class="row mb-0">
-                                        <span class="float-left"><strong>1439$</strong></span>
-                                        <span class="float-right">
-
-                                            <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart"><i class="fa fa-shopping-cart ml-3"></i></a>
-                                            </span>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <!--Card content-->
-
-                        </div>
-                        <!--Card-->
 
                     </div>
                     <!--Grid column-->
@@ -260,36 +217,6 @@
 
                     <!--Grid column-->
                     <div class="col-lg-4 col-md-12 mb-4">
-
-                        <!--Card-->
-                        <div class="card card-ecommerce">
-
-                            <!--Card image-->
-                            <div class="view overlay">
-                                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" class="img-fluid" alt="">
-                                <a>
-                                    <div class="mask rgba-white-slight"></div>
-                                </a>
-                            </div>
-                            <!--Card image-->
-
-                            <!--Card content-->
-                            <div class="card-body">
-                                <!--Category & Title-->
-
-                                <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">Samsung CT-567</a></strong></h5>
-
-
-                                <!--Card footer-->
-                                <div class="card-footer pb-0">
-                                    <div class="row mb-0">
-                                        <span class="float-left"><strong>1439$</strong></span>
-                                        <span class="float-right">
-                                            <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart"><i class="fa fa-shopping-cart ml-3"></i></a>
-                                            </span>
-                                    </div>
-                                </div>
-
                             </div>
                             <!--Card content-->
 
@@ -321,7 +248,8 @@
 <footer class="page-footer text-center text-md-left stylish-color-dark pt-0">
 
     <div style="background-color: #4285f4;">
-        ><div class="container">
+        .
+        <div class="container">
             </div>
         </div>
     </div>
@@ -330,7 +258,7 @@
     <!-- Copyright-->
     <div class="footer-copyright py-3 text-center">
         <div class="container-fluid">
-            © 2018 Copyright: <a href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank"> MDBootstrap.com </a>
+             <a href="#" target="_blank"> Bookstore.com </a>
         </div>
     </div>
     <!--/.Copyright -->
