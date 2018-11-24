@@ -63,7 +63,7 @@
                 </div>
             </div>
             <!-- Search form -->
-            <form class="search-form" role="search" style="width: 70%;">
+            <form class="search-form" role="search" style="width: 60%;">
                 <div class="form-group md-form my-0 waves-light">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search...">
                 </div>
