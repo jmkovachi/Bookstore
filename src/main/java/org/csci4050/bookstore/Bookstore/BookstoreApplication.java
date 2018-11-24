@@ -46,10 +46,14 @@ public class BookstoreApplication extends SpringBootServletInitializer implement
      */
 	@Override
 	public void run(final ApplicationArguments args) throws Exception {
-		final List<String> argValuesList = args.getOptionValues("script");
-		if (!argValuesList.isEmpty() && argValuesList.get(0).equals("true")) {
-			insertBooks.insertBooks();
-		}
+		try {
+            final List<String> argValuesList = args.getOptionValues("script");
+            if (!argValuesList.isEmpty() && argValuesList.get(0).equals("true")) {
+                insertBooks.insertBooks();
+            }
+        } catch (final NullPointerException npe) {
+		    // OK
+        }
 	}
 
 }
