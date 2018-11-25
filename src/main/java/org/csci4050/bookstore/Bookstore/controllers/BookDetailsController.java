@@ -32,8 +32,9 @@ public class BookDetailsController {
     @Autowired
     private BookService bookService;
 
-    @RequestMapping(value = "/view", method = RequestMethod.GET)
-    public ModelAndView bookDetails(@RequestBody Book book) throws ValidationException {
+    @RequestMapping(value = "/book/{isbn}", method = RequestMethod.GET)
+    public ModelAndView bookDetails(@PathVariable final String isbn) throws ValidationException {
+        final Book book = bookService.getBook(isbn).get();
         return new ModelAndView("views/book-details", "book", book);
     }
 }

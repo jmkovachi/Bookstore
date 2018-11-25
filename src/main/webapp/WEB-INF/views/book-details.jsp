@@ -23,7 +23,7 @@
     <br/>
     <br/>
 	<div class="row">
-		<div class =  "pl-5 col-md-4"><img src=${book.imgUrl}></div>
+		<div class =  "pl-5 col-md-4"><img src=${book.imageUrl}></div>
 		<div class = "col">
 			<div class = "col-md-5">${book.title}</div>
 			<br/>

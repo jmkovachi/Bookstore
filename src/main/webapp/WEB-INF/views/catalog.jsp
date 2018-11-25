@@ -150,7 +150,7 @@
                                             <div class="card-body">
                                                 <!--Category & Title-->
 
-                                                <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">${book.title}</a></strong></h5>
+                                                <h5 class="card-title mb-1"><strong><a href="/details/book/${book.isbn}" class="dark-grey-text">${book.title}</a></strong></h5>
                                                 by ${book.author}
 
                                                 <!--Card footer-->
