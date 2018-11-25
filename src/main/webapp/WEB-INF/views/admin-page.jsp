@@ -183,6 +183,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body mx-3">
+                                    <!-- Modal fields -->
                                     <div class="md-form mb-5">
                                         <input type="text" id="orangeForm-username" class="form-control validate">
                                         <label data-error="" data-success="" for="orangeForm-username">Username</label>
@@ -205,6 +206,8 @@
                                         <label data-error="" data-success="" for="orangeForm-passClient">Password</label>
                                     </div>
                                 </div>
+
+                                <!-- Modal footer -->
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     <button type="button" class="btn btn-primary">Save changes</button>
@@ -212,12 +215,12 @@
                             </div>
                         </div>
 
-                    </div>
+                    </div> <!-- Client Modal -->
 
 
                 </div>
                 </center>
-            </div>  <!-- first col -->
+            </div>  <!-- first col of Admin Menu grid (still on first row)-->
 
             <!--Grid 2nd column-->
             <div class="col-lg-4 col-md-12 mb-4">
@@ -249,7 +252,7 @@
 
         <hr>
 
-        <!-- Grid 2ND ROW -->
+        <!-- Grid 2ND ROW (BOOKS) -->
         <h2>Books</h2>
         <div class="row">
 
@@ -274,9 +277,58 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
+
                                     <div class="modal-body">
-                                        ...
-                                    </div>
+
+                                        <!-- Title -->
+                                        <div class="md-form mb-5">
+                                            <input type="text" id="orangeForm-bktitle" class="form-control validate">
+                                            <label data-error="" data-success="" for="orangeForm-bktitle">Title</label>
+                                        </div>
+
+                                        <!-- Author -->
+                                        <div class="md-form mb-5">
+                                            <input type="text" id="orangeForm-bkauthor" class="form-control validate">
+                                            <label data-error="" data-success="" for="orangeForm-bkauthor">Author</label>
+                                        </div>
+
+                                        <!-- Price -->
+                                        <div class="md-form input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text md-addon">$</span>
+                                                <input type="text" id="orangeForm-bkPrice" class="form-control validate" placeholder="0.00">
+                                                <label data-error="" data-success="" for="orangeForm-bkPrice">Price</label>
+                                            </div>
+                                        </div>
+
+                                        <!-- ISBN -->
+                                        <div class="md-form mb-4">
+                                            <input type="text" id="orangeForm-bookISBN" class="form-control validate">
+                                            <label data-error="" data-success="" for="orangeForm-bookISBN">ISBN</label>
+                                        </div>
+
+                                        <!-- Image src field -->
+                                        <div class="md-form mb-5">
+                                            <input type="text" id="orangeForm-imageAddr" class="form-control validate">
+                                            <label data-error="" data-success="" for="orangeForm-imageAddr">Enter image url</label>
+                                        </div>
+                                        <h4><strong>Browse Image:</strong></h4>
+                                        <!-- Image preview (script is at bottom) -->
+                                        <div class="md-form mb-5">
+                                            <input type="file" accept="image/*" onchange="loadFile(event)">
+                                            <img style="width:100%; height:80%" id="output"/>
+                                        </div>
+
+
+                                        <!-- Book description -->
+                                        <div class="form-group">
+                                            <label for="comment">Book Description:</label>
+                                            <textarea class="form-control" rows="5" id="comment"></textarea>
+                                        </div>
+
+                                    </div> <!-- end of modal body -->
+
+                                    <!-- Modal footer: -->
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-primary">Save changes</button>
@@ -286,9 +338,9 @@
 
                         </div>
 
-                    </div>
+                    </div> <!-- modal-->
                 </center>
-            </div>  <!-- first col -->
+            </div>  <!-- first col (ADD NEW BOOK button of grid)-->
 
             <!--Grid 2nd column-->
             <div class="col-lg-4 col-md-12 mb-4">
@@ -309,9 +361,75 @@
                     <input type="text" class="form-control" placeholder="Enter ISBN of Book to Edit">
                 </div>
                 <center>
-                    <button class="btn btn-info" type="button">
-                        Edit Book Info
-                    </button>
+
+                    <!-- Button trigger modal -->
+                    <a href="#myModalEditBook" role="button" class="btn btn-info" data-toggle="modal">Edit Book Info</a>
+
+                    <!-- EDIT Book Modal -->
+                    <div id="myModalEditBook" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Edit Book</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+
+                                    <!--Grid row-->
+                                    <div class="row wow fadeIn">
+
+                                        <!--Grid column-->
+                                        <div class="col-md-6 mb-4">
+                                            <img src="https://res.cloudinary.com/vop/image/fetch/c_lfill,f_auto,g_center,w_800/https://bi-admin.bibleinfo.com/sites/default/files/images/2017/ShieldOfFaith.med-750px.jpg" class="img-fluid" alt="">
+                                            <!-- block with input and button to add an image -->
+
+                                            <div class = "img-upload">
+                                                <br/>
+                                                <input type = "text" placeholder = "Enter image source"/>
+                                                <button class="btn btn-primary">Insert Image</button>
+                                            </div>
+
+                                        </div>
+                                        <!--Grid column-->
+
+                                        <!--Grid column-->
+                                        <div class="col-md-6 mb-4">
+
+                                            <!--Content-->
+                                            <div class="p-4" style="word-wrap: break-word">
+                                                <!-- word wrap ensures that text doesn't go outside div-->
+                                                <h3 contenteditable="true">Book Title</h3>
+                                                <h6 contenteditable="true">by Author</h6>
+                                                <p contenteditable="true" class="lead">
+                                                    <span>$20</span>
+                                                </p>
+                                            </div>
+                                            <!--Grid column-->
+
+                                        </div> <!-- Grid row -->
+                                    </div> <!-- modal body/content area -->
+
+                                    <!-- Book Description -->
+                                    <div class="form-group">
+                                        <label for="comment">Description:</label>
+                                        <textarea class="form-control" rows="5" id="comment"></textarea>
+                                    </div>
+
+
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div> <!-- modal-->
 
                 </center>
 
@@ -472,8 +590,16 @@
 
 
 <!-- SCRIPTS -->
+    <!-- script for previewing book image in modal after entering src-->
+    <script>
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
 
-    <!-- script for modal -->
+
+    <!-- script for overall modal -->
     <script type="text/javascript">
     $('#exampleModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget); //Button that triggered the modal
