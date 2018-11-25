@@ -35,7 +35,7 @@ public class BookstoreApplication extends SpringBootServletInitializer implement
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(BookstoreApplication.class, args);
+ 		SpringApplication.run(BookstoreApplication.class, args);
 	}
 
     /**

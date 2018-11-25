@@ -25,18 +25,18 @@ public class ExampleController {
 				.address("address")
 				.company("company")
 				.build();
-		client.setUsername("u");
-		client.setPassword("password1");
-		client.setImageUrl("url");
-		client.setEmail("yahoo.com");
+		client.setUsername("i");
+		client.setPassword("password2");
+		client.setImageUrl("url1");
+		client.setEmail("yahoo2.com");
 		client.setRole("ROLE_CLIENT");
 		clientDao.createClient(client);
-		System.out.println(userDao.getUser("u"));
-		System.out.println(clientDao.getClient( "u"));
+		System.out.println(userDao.getUser("i"));
+		System.out.println(clientDao.getClient( "i"));
 		client.setAddress("newAddress");
 		client.setName("John");
 		clientDao.updateClient(client);
-		System.out.println(clientDao.getClient("u"));
+		System.out.println(clientDao.getClient("i"));
 		return new ModelAndView("views/helloworld", "client", client);
 	}
 

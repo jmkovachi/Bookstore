@@ -2,6 +2,7 @@ package org.csci4050.bookstore.Bookstore.controllers;
 
 import lombok.Builder;
 import lombok.Data;
+import org.apache.tomcat.util.http.parser.Authorization;
 import org.csci4050.bookstore.Bookstore.exceptions.ValidationException;
 import org.csci4050.bookstore.Bookstore.model.Book;
 import org.csci4050.bookstore.Bookstore.model.CartItem;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +28,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping(value = "/cart")
 public class CartController {
 
     @Autowired
@@ -80,10 +81,10 @@ public class CartController {
         return new ResponseEntity<>("", new HttpHeaders(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/view", method = RequestMethod.GET)
-    public ModelAndView cartPage(final Principal principal) throws ValidationException {
+    @RequestMapping(value = "/cart/view", method = RequestMethod.GET)
+    public ModelAndView cartPage(final Principal principal, final Authentication authentication) throws ValidationException {
         // Principal is a bean defined by spring security, we can use it to get authentication details
-        final String username = "jmkovachi";
+        final String username = principal.getName();
         final List<CartItemWithBook> cartItems = cartService.getCartForCustomer(username).stream()
                 .map(this::transformToCartItemWithBook)
                 .collect(Collectors.toList());
