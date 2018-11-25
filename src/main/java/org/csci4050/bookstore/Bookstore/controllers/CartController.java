@@ -2,7 +2,6 @@ package org.csci4050.bookstore.Bookstore.controllers;
 
 import lombok.Builder;
 import lombok.Data;
-import org.apache.tomcat.util.http.parser.Authorization;
 import org.csci4050.bookstore.Bookstore.exceptions.ValidationException;
 import org.csci4050.bookstore.Bookstore.model.Book;
 import org.csci4050.bookstore.Bookstore.model.CartItem;
@@ -28,6 +27,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
+@RequestMapping("/cart")
 public class CartController {
 
     @Autowired
@@ -81,7 +81,7 @@ public class CartController {
         return new ResponseEntity<>("", new HttpHeaders(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/cart/view", method = RequestMethod.GET)
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
     public ModelAndView cartPage(final Principal principal, final Authentication authentication) throws ValidationException {
         // Principal is a bean defined by spring security, we can use it to get authentication details
         final String username = principal.getName();
