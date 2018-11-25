@@ -51,6 +51,10 @@ public class CartService {
         return cartDao.getCartForCustomer(cUsername);
     }
 
+    public Optional<CartItem> getCartItem(final String cUsername, final String isbn) {
+        return cartDao.getCartItem(isbn, cUsername);
+    }
+
     public void updateCartItem(final CartItem cartItem) throws ValidationException {
         this.checkCartItemExists(cartItem.getIsbn(), cartItem.getCUsername());
         this.setPrices(cartItem);
