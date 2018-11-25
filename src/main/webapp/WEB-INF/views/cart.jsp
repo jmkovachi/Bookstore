@@ -146,7 +146,7 @@ tr:nth-child(4) td:nth-of-type(4) {
 </head>
 
 <body class="cart-v1 hidden-sn white-skin animated">
-  <tags:nav />
+  <tags:nav username="${cart.username}"/>
 
   <!--Main Layout-->
   <main>

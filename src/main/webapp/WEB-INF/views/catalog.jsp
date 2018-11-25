@@ -29,7 +29,7 @@
 
 <body class="category-v1 hidden-sn white-skin animated">
 
-<tags:nav />
+<tags:nav username="${catalog.username}"/>
 
 <!-- Main Container -->
 <div class="container mt-5 pt-3">
@@ -157,10 +157,11 @@
                                                 <div class="card-footer pb-0">
                                                     <div class="row mb-0">
                                                         <span class="float-left"><strong>$<tags:doubleFormat num="${book.price}"/></strong></span>
-                                                        <span class="float-right">
-
-                                                        <a class="cart" data-username="${catalog.username}" data-isbn="${book.isbn}" data-toggle="tooltip" data-placement="top" title="Add to Cart"><i class="fa fa-shopping-cart ml-3"></i></a>
-                                                        </span>
+                                                        <c:if test="${not empty catalog.username}">
+                                                            <span class="float-right">
+                                                                <a class="cart" data-username="${catalog.username}" data-isbn="${book.isbn}" data-toggle="tooltip" data-placement="top" title="Add to Cart"><i class="fa fa-shopping-cart ml-3"></i></a>
+                                                            </span>
+                                                        </c:if>
                                                     </div>
                                                 </div>
 
