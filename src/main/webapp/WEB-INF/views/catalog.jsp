@@ -53,22 +53,25 @@
             </ul>
 
             <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="dropdownText btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Search by...
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">ISBN</a>
-                    <a class="dropdown-item" href="#">Title</a>
-                    <a class="dropdown-item" href="#">Author</a>
+                    <a value="isbn" class="dropdown-item">ISBN</a>
+                    <a value="title" class="dropdown-item">Title</a>
+                    <a value="author" class="dropdown-item">Author</a>
                 </div>
             </div>
-            <!-- Search form -->
-            <form class="search-form" role="search" style="width: 60%;">
-                <div class="form-group md-form my-0 waves-light">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search...">
-                </div>
-            </form>
-            <button class="btn btn-success btn-rounded btn-sm my-0" type="submit">Search</button>
+            <div class="">
+                <!-- Search form -->
+                <form id="search" class="form-inline search-form" style="width: 60%;">
+                    <div class="form-group md-form my-0 waves-light">
+                        <input id="searchInput" name="searchInput" type="hidden" class="searchInput" />
+                        <input name="searchText" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search...">
+                        <button class="btn btn-success btn-rounded btn-sm my-0" type="submit">Search</button>
+                    </div>
+                </form>
+            </div>
         </div>
         <!-- Collapsible content -->
 
@@ -116,64 +119,77 @@
         <!-- Content -->
         <div class="col-lg-9">
             <!-- Products Grid -->
+            <div class="row">
+                <c:if test="${catalog.books.size() > 0 and not empty catalog.viewCategory}">
+                    <h3 style="margin-top: 10px;">Results for ${catalog.viewCategory}s matching query <q>${catalog.viewString}</q></h3>
+                    <a href="/catalog" style="margin-left: 15px;" class="btn btn-danger">Clear</a>
+                </c:if>
+            </div>
             <section class="section pt-4">
-                <c:forEach var="i" begin="0" step="3" end="${catalog.books.size()-1}">
-                    <!-- Grid FIRST ROW -->
-                    <div class="row">
-                        <c:forEach var="j" begin="${i}" end="${i+2 > catalog.books.size()-1 ? catalog.books.size()-1 : i+2}">
-                            <!--Grid 1st column-->
-                            <div class="col-lg-4 col-md-12 mb-4">
-                                <c:set var="book" value="${catalog.books.get(j)}" />
-                                <!--Card-->
-                                <div id="${book.isbn}" data-isbn="${book.isbn}" class="card card-ecommerce">
-                                    <!--Card image-->
-                                    <div class="view overlay">
-                                        <img height="225" width="225" src="${book.imageUrl}" class="text-center" alt="">
-                                        <a>
-                                            <div class="mask rgba-white-slight"></div>
-                                        </a>
-                                    </div>
-                                    <!--Card image-->
-
-                                    <!--Card content-->
-                                    <div class="card-body">
-                                        <!--Category & Title-->
-
-                                        <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">${book.title}</a></strong></h5>
-                                        by ${book.author}
-
-                                        <!--Card footer-->
-                                        <div class="card-footer pb-0">
-                                            <div class="row mb-0">
-                                                <span class="float-left"><strong>$<tags:doubleFormat num="${book.price}"/></strong></span>
-                                                <span class="float-right">
-
-                                                <a class="cart" data-username="${catalog.username}" data-isbn="${book.isbn}" data-toggle="tooltip" data-placement="top" title="Add to Cart"><i class="fa fa-shopping-cart ml-3"></i></a>
-                                                </span>
+                <c:choose>
+                    <c:when test="${catalog.books.size() > 0}">
+                        <c:forEach var="i" begin="0" step="3" end="${catalog.books.size()-1}">
+                            <!-- Grid FIRST ROW -->
+                            <div class="row">
+                                <c:forEach var="j" begin="${i}" end="${i+2 > catalog.books.size()-1 ? catalog.books.size()-1 : i+2}">
+                                    <!--Grid 1st column-->
+                                    <div class="col-lg-4 col-md-12 mb-4">
+                                        <c:set var="book" value="${catalog.books.get(j)}" />
+                                        <!--Card-->
+                                        <div id="${book.isbn}" data-isbn="${book.isbn}" class="card card-ecommerce">
+                                            <!--Card image-->
+                                            <div class="view overlay">
+                                                <img height="225" width="225" src="${book.imageUrl}" class="text-center" alt="">
+                                                <a>
+                                                    <div class="mask rgba-white-slight"></div>
+                                                </a>
                                             </div>
+                                            <!--Card image-->
+
+                                            <!--Card content-->
+                                            <div class="card-body">
+                                                <!--Category & Title-->
+
+                                                <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text">${book.title}</a></strong></h5>
+                                                by ${book.author}
+
+                                                <!--Card footer-->
+                                                <div class="card-footer pb-0">
+                                                    <div class="row mb-0">
+                                                        <span class="float-left"><strong>$<tags:doubleFormat num="${book.price}"/></strong></span>
+                                                        <span class="float-right">
+
+                                                        <a class="cart" data-username="${catalog.username}" data-isbn="${book.isbn}" data-toggle="tooltip" data-placement="top" title="Add to Cart"><i class="fa fa-shopping-cart ml-3"></i></a>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!--Card content-->
+
                                         </div>
+                                        <!--Card-->
 
                                     </div>
-                                    <!--Card content-->
+                                    <!--Grid column (first column) of first row-->
+                                </c:forEach>
 
+                                <!--Grid column (2nd column) of first row-->
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <!-- insert code here just like 1st column-->
                                 </div>
-                                <!--Card-->
 
-                            </div>
-                            <!--Grid column (first column) of first row-->
+                                <!--Grid column (3rd column)-->
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                </div>
+
+                            </div> <!-- END OF FIRST ROW -->
                         </c:forEach>
-
-                        <!--Grid column (2nd column) of first row-->
-                        <div class="col-lg-4 col-md-6 mb-4">
-                            <!-- insert code here just like 1st column-->
-                        </div>
-
-                        <!--Grid column (3rd column)-->
-                        <div class="col-lg-4 col-md-6 mb-4">
-                        </div>
-
-                    </div> <!-- END OF FIRST ROW -->
-                </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <h2> No results for the given query </h2>
+                    </c:otherwise>
+                </c:choose>
                 <!-- Grid 2nd row -->
                 <div class="row">
                     <!-- insert columns here just like the first row -->

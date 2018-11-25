@@ -13,4 +13,5 @@ public class CatalogViewModel {
     private List<String> categories;
     private String username;
     private String viewCategory;
+    private String viewString;
 }
