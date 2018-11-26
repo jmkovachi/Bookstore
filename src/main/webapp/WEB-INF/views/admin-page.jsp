@@ -24,6 +24,9 @@
         }
     </style>
 
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
 </head>
 
 <body class="category-v1 hidden-sn white-skin animated">
@@ -312,18 +315,11 @@
                                             <input type="text" id="orangeForm-imageAddr" class="form-control validate">
                                             <label data-error="" data-success="" for="orangeForm-imageAddr">Enter image url</label>
                                         </div>
-                                        <h4><strong>Browse Image:</strong></h4>
-                                        <!-- Image preview (script is at bottom) -->
-                                        <div class="md-form mb-5">
-                                            <input type="file" accept="image/*" onchange="loadFile(event)">
-                                            <img style="width:100%; height:80%" id="output"/>
-                                        </div>
-
 
                                         <!-- Book description -->
                                         <div class="form-group">
-                                            <label for="comment">Book Description:</label>
-                                            <textarea class="form-control" rows="5" id="comment"></textarea>
+                                            <label for="descripxn">Book Description:</label>
+                                            <textarea class="form-control" rows="5" id="descripxn"></textarea>
                                         </div>
 
                                     </div> <!-- end of modal body -->
@@ -464,8 +460,42 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        ...
-                                    </div>
+                                        <div class="md-form mb-5">
+                                            <input type="text" id="orangeForm-orderCust" class="form-control validate">
+                                            <label data-error="" data-success="" for="orangeForm-orderCust">Customer Username</label>
+                                        </div>
+
+                                        <!-- Editable list of Book ISBN's -->
+
+                                        <div class="container">
+
+
+                                                    <form>
+
+                                                            <div class="form-group" >
+
+                                                                <h5>Enter Books to add to Order:</h5>
+                                                                <br/>
+                                                                <input type="text" name="item" id="add" placeholder="Enter ISBN of Book">
+                                                                <input type="text" name="quantity" id="quantity" placeholder="Enter quantity">
+                                                                <br/>
+                                                                <button id="addbtn" name="addbtn" class="btn btn-primary">Add to List</button>
+
+                                                            </div>
+
+
+                                                        <div class="form-group">
+                                                            <h5>List:</h5>
+                                                            <hr>
+
+
+                                                            <ul id="list" class="list-group">
+                                                            </ul>
+                                                        </div>
+                                                    </form>
+                                        </div> <!-- container -->
+                                    </div> <!-- modal body -->
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-primary">Save changes</button>
@@ -533,7 +563,43 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            ...
+                                            <div class="md-form mb-5">
+                                                <input type="text" id="orangeForm-promoCode" class="form-control validate">
+                                                <label data-error="" data-success="" for="orangeForm-promoCode">Promotion Code</label>
+                                            </div>
+
+                                            Discount Amount:
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" placeholder="Percentage Off">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">%</span>
+                                                </div>
+                                            </div>
+                                            <br/>
+
+                                            <!-- Editable list of Book ISBN's -->
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div>
+                                                        <form>
+                                                            <div class="row">
+                                                                <div class="form-group">
+                                                                    <label>Add books to apply this promotion to:</label>
+                                                                    <input type="text" name="item" id="addPromo" placeholder="Enter ISBN of Book">
+                                                                    <button id="addbtnPromo" name="addbtnPromo" class="btn btn-primary">Add to List</button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <h5>List:</h5>
+                                                                <hr>
+                                                                <ul id="listPromo" class="list-group">
+                                                                </ul>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -590,6 +656,54 @@
 
 
 <!-- SCRIPTS -->
+
+    <!-- FOR ADDING BOOK ISBN'S TO ORDER -->
+    <script>
+        $(document).ready(function(){
+            $('#addbtn').click(function() {
+                var isbn = $('#add').val();
+                var quantity = $('#quantity').val();
+                var uniqid = Math.round(new Date().getTime() + (Math.random() * 100));
+                $('#list').append('<li id="'+uniqid+'" class="list-group-item">' +
+                    '   <div class="row"> ' +
+                    '       <div class="col-4"> ISBN: '+isbn+' </div> ' +
+                    '       <div class="col-4"> Quantity: '+quantity+' </div> ' +
+                    '       <div class="col-4"> <input type="button" data-isbn="'+isbn+'" data-quantity="'+quantity+'" + ' +
+                    '          data-id="'+uniqid+'" class="listelement" value="X"/></div> ' +
+                    '   </div> ' +
+                    '<input type="hidden" name="listed[]" value="'+isbn+'"></li>');
+
+
+                $('#add').val(''); // resets the field after submitting (i.e. clicking the "Add to List" button)
+                $('#quantity').val('');
+                return false;
+            });
+            $('#list').delegate(".listelement", "click", function() {
+                var elemid = $(this).attr('data-id');
+                $("#"+elemid).remove();
+            });
+        });
+    </script>
+
+    <!-- FOR ADDING BOOK ISBN'S TO PROMOTION -->
+    <script>
+        $(document).ready(function(){
+            // add item to list
+            $('#addbtnPromo').click(function(){
+                var newitem = $('#addPromo').val();
+                var uniqid = Math.round(new Date().getTime() + (Math.random() * 100));
+                $('#listPromo').append('<li id="'+uniqid+'" class="list-group-item"><input type="button" data-id="'+uniqid+'" class="listelement" value="X" /> '+newitem+'<input type="hidden" name="listed[]" value="'+newitem+'"></li>');
+                $('#addPromo').val('');
+                return false;
+            });
+            // remove item from list
+            $('#listPromo').delegate(".listelement", "click", function() {
+                var elemid = $(this).attr('data-id');
+                $("#"+elemid).remove();
+            });
+        });
+    </script>
+
     <!-- script for previewing book image in modal after entering src-->
     <script>
         var loadFile = function(event) {
