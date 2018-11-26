@@ -10,7 +10,7 @@ body {
   color: #444;
 }
 
-h1 {
+div h1 {
   font-family: "Merriweather", serif;
   font-size: 17px;
 }
@@ -18,7 +18,7 @@ h1 {
 #loginOuterBox {
   margin: auto;
   width: 275px;
-  height: 280px;
+  height: 320px;
   border-radius: 5px;
   border: .75px solid #c9c9c9;
 }
@@ -26,7 +26,7 @@ h1 {
 #outerBox {
   margin: auto;
   width: 275px;
-  height: 500px;
+  height: 675px;
   border-radius: 5px;
   border: .75px solid #c9c9c9;
 }
@@ -52,14 +52,14 @@ h1 {
     padding-right: 10px;
 }
 
-h3 {
+div h3 {
   margin:8px;
   font-size: 23px;
   font-family: 'Roboto', sans-serif;
   font-weight: normal;
 }
 
-h2 {
+div h2 {
   font-size: 12px;
   font-weight: normal;
 }
@@ -90,7 +90,7 @@ p {
   padding:5px;
 }
 
-a {
+div a {
     text-decoration: none;
 }
 
@@ -100,23 +100,24 @@ a {
 
 #loginButton {
   margin-top: 20px;
+  margin-left: 100px;
+}
+
+#registerButton {
+  margin-left: 65px;
+}
+
+#login {
+  margin-left: 60px;
+}
+
+#register{
+  margin-left: 45px;
 }
 
 .buttons{
-  margin-left:20px;
-  display:block;
-  width:226px;
-  border-radius: 2px;
-  background-color: #71e4ff;
-  border: none;
-  padding:5px;
-  font-size: 10px;
-  cursor: pointer;
   text-align:center;
-}
-
-.buttons:hover{
-  background-color: #45dafd;
+  color: black;
 }
 
 hr {

@@ -43,10 +43,10 @@
                 <input class="radio" type="radio" name="newsletter" value="true"> <div class="radio-label"> Yes </div>
                 <input class="radio" type="radio" name="newsletter" value="false"> <div class="radio-label"> No </div>
             <br>
-            <a id="register" class="buttons">Create Account</a>
+            <a id="register" class="btn btn-primary buttons">Create Account</a>
             <hr>
             <h2 style="text-align:center">Already Have an Account?</h2>
-            <a id="login" href="/login" class="buttons">Login Here</a>
+            <a id="login" href="/login" class="btn btn-primary buttons">Login Here</a>
         </div>
     </body>
 </html>
