@@ -9,5 +9,5 @@ $(document).ready(function() {
         const newsletter = $('input[name="newsletter"]:checked').val();
         console.log(newsletter + "#newsletter");
         const url = "confirm/user"
-    }
-}
+    })
+});

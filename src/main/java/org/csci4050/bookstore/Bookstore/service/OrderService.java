@@ -54,7 +54,19 @@ public class OrderService {
             paymentId = paymentDao.createPayment(paymentInfo);
             order.setPaymentId(paymentId);
         }
+
+        // use java streams to calculate total price of all items
+        final Double totalAmount = orderItems.stream()
+                .map(OrderItem::getFinalPrice)
+                .reduce(0.0, (c1, c2) -> c1 + c2);
+
+        order.setTotal(totalAmount);
+
         final int orderId = orderDao.createOrder(order);
+
+        // set order id for each order item
+        orderItems.forEach(orderItem -> orderItem.setOrderId(orderId));
+
         final List<Book> oldBooks = new ArrayList<>();
         try {
             for (final OrderItem item : orderItems) {
@@ -84,6 +96,8 @@ public class OrderService {
 
             cartService.deleteCartForCustomer(order.getUsername());
         } catch (final DataAccessException da) {
+            System.out.println(da.toString());
+
             // delete payment info
             if (order.getPaymentType().equals("CREDIT")) {
                 paymentDao.deletePayment(paymentId);

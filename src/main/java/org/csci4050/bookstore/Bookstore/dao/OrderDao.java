@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.Optional;
 
 public class OrderDao {
@@ -19,14 +21,21 @@ public class OrderDao {
     }
 
     public int createOrder(final Order order) {
-        final String sql = "insert into order(c_username,date,total,payment_type,payment_id) values(?,?,?,?,?)";
+        final String sql = "insert into `order`(c_username,total,payment_type,payment_id) values(?,?,?,?)";
         final KeyHolder keyHolder = new GeneratedKeyHolder();
-        this.jdbcTemplate.update(sql, order.getUsername(), order.getDate(), order.getTotal(), order.getPaymentType(), order.getPaymentId(), keyHolder);
+        jdbcTemplate.update(connection -> {
+            final PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, order.getUsername());
+            ps.setDouble(2, order.getTotal());
+            ps.setString(3, order.getPaymentType());
+            ps.setInt(4, order.getPaymentId());
+            return ps;
+        }, keyHolder);
         return keyHolder.getKey().intValue();
     }
 
     public Optional<Order> getOrder(final int orderId) {
-        final String sql = "select * from order where order_id = ?";
+        final String sql = "select * from `order` where order_id = ?";
         return this.jdbcTemplate.query(sql, new Object[] {orderId}, new OrderMapper()).stream().findAny();
     }
 

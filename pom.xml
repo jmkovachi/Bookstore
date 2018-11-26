@@ -139,11 +139,11 @@
 
 		<!-- dev tools https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html
 			 https://stackoverflow.com/questions/23155244/spring-boot-hotswap-with-intellij-ide -->
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
-			<optional>true</optional>
-		</dependency>
+			<scope>runtime</scope>
+		</dependency>-->
 
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-csv -->
 		<dependency>

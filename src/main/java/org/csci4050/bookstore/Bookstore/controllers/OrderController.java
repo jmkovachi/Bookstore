@@ -13,6 +13,7 @@ import org.csci4050.bookstore.Bookstore.service.ShippingAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,8 +36,9 @@ public class OrderController {
     @Autowired
     private Gson gson;
 
-    @RequestMapping(value = "/order", method = RequestMethod.POST)
+    @RequestMapping(value = "/order", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> order(@RequestBody final String checkoutInfoJson) throws ValidationException {
+        System.out.println();
         final CheckoutInfo checkoutInfo = gson.fromJson(checkoutInfoJson, CheckoutInfo.class);
         final Order order = orderService.createOrder(checkoutInfo.getOrder(), checkoutInfo.getPaymentInfo(), checkoutInfo.getOrderItems());
         final OrderResponse orderResponse = OrderResponse.builder()
