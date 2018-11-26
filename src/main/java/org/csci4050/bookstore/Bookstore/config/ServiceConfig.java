@@ -35,8 +35,9 @@ public class ServiceConfig {
     public CartService cartService(final CartDao cartDao,
                                    final CustomerService customerService,
                                    final BookService bookService,
-                                   final PromotionService promotionService) {
-        return new CartService(cartDao, customerService, bookService, promotionService);
+                                   final PromotionService promotionService,
+                                   final VendorService vendorService) {
+        return new CartService(cartDao, customerService, bookService, promotionService, vendorService);
     }
 
     @Bean
@@ -47,5 +48,11 @@ public class ServiceConfig {
     @Bean
     public PromotionService promotionService(final PromotionDao promotionDao) {
         return new PromotionService(promotionDao);
+    }
+
+    @Bean
+    public OrderService orderService(final CustomerService customerService, final PaymentDao paymentDao,
+                                     final OrderItemDao orderItemDao, final OrderDao orderDao) {
+        return new OrderService(orderDao, orderItemDao, customerService, paymentDao);
     }
 }
