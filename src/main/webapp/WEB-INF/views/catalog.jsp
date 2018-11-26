@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -89,7 +88,7 @@
                     <!-- Genres-->
                     <div class="col-md-6 col-lg-12 mb-5">
                         <h5 class="font-weight-bold dark-grey-text"><strong>Search by Genre</strong></h5>
-                            <div class="divider"></div>
+                        <div class="divider"></div>
 
                         <!--Collapsible Genres-->
                         <div class="panel-group" id="accordionTwo">
@@ -194,9 +193,9 @@
                 <!-- Grid 2nd row -->
                 <div class="row">
                     <!-- insert columns here just like the first row -->
-                 </div>
+                </div>
 
-        <!-- /. end of Content -->
+                <!-- /. end of Content -->
             </section>
         </div>  <!-- col-lg-9 (RHS of page. The left three cols of page are for Genres)-->
     </div> <!-- row-pt-4-->
@@ -211,15 +210,15 @@
     <div style="background-color: #4285f4;">
         .
         <div class="container">
-            </div>
         </div>
+    </div>
 
 
 
     <!-- Copyright-->
     <div class="footer-copyright py-3 text-center">
         <div class="container-fluid">
-             <a href="#" target="_blank"> Bookstore.com </a>
+            <a href="#" target="_blank"> Bookstore.com </a>
         </div>
     </div>
     <!--/.Copyright -->
@@ -248,11 +247,10 @@
 <script type="text/javascript">
     /* WOW.js init */
     new WOW().init();
-
-    // Tooltips Initialization
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
+// Tooltips Initialization
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
 </script>
 <script>
     var slider = $("#calculatorSlider");
@@ -276,12 +274,10 @@
             price: 79,
         }
     }
-
     function calculate(price, value) {
         client.text((Math.round((price - (value / 100 * price)))) + '$');
         reseller.text((Math.round(((percentageBonus - value) / 100 * price))) + '$')
     }
-
     function reset(price) {
         slider.val(0);
         client.text(price + '$');

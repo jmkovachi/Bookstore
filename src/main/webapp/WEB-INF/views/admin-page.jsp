@@ -244,10 +244,7 @@
                     <input type="text" class="form-control" placeholder="Enter Username to Edit">
                 </div>
                 <center>
-                    <button class="btn btn-info" type="button">
-                        Edit User Info
-                    </button>
-
+                        <a href="/edit/profile" class = "btn btn-info">Edit User Info</a>
                 </center>
 
             </div>  <!-- 3rd col -->
@@ -443,67 +440,67 @@
             <div class="col-lg-4 col-md-12 mb-4">
                 <center>
                     <br/>
-                    <br/>
-                    <br/>
-                    <div>
-                        <!-- Button trigger modal -->
-                        <a href="#myModal3" role="button" class="btn btn-success" data-toggle="modal">Add New Order</a>
+                    <br/><!-- Button trigger modal -->
+                    <a href="#myModal3" role="button" class="btn btn-success" data-toggle="modal">Add New Order</a>
 
-                        <!-- Modal -->
-                        <div id="myModal3" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5>New Order</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                    <!-- Modal -->
+                    <div id="myModal3" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>New Order</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="md-form mb-5">
+                                        <input type="text" id="orangeForm-orderCust" class="form-control validate">
+                                        <label data-error="" data-success="" for="orangeForm-orderCust">Customer Username</label>
                                     </div>
-                                    <div class="modal-body">
-                                        <div class="md-form mb-5">
-                                            <input type="text" id="orangeForm-orderCust" class="form-control validate">
-                                            <label data-error="" data-success="" for="orangeForm-orderCust">Customer Username</label>
-                                        </div>
 
-                                        <!-- Editable list of Book ISBN's -->
+                                    <!-- Editable list of Book ISBN's -->
 
-                                        <div class="container">
+                                    <div class="container">
 
 
-                                                    <form>
+                                        <form>
 
-                                                            <div class="form-group" >
+                                            <div class="form-group" >
 
-                                                                <h5>Enter Books to add to Order:</h5>
-                                                                <br/>
-                                                                <input type="text" name="item" id="add" placeholder="Enter ISBN of Book">
-                                                                <input type="text" name="quantity" id="quantity" placeholder="Enter quantity">
-                                                                <br/>
-                                                                <button id="addbtn" name="addbtn" class="btn btn-primary">Add to List</button>
+                                                <h5>Enter Books to add to Order:</h5>
+                                                <br/>
+                                                <input type="text" name="item" id="add" placeholder="Enter ISBN of Book">
+                                                <input type="text" name="quantity" id="quantity" placeholder="Enter quantity">
+                                                <br/>
+                                                <button id="addbtn" name="addbtn" class="btn btn-primary">Add to List</button>
 
-                                                            </div>
-
-
-                                                        <div class="form-group">
-                                                            <h5>List:</h5>
-                                                            <hr>
+                                            </div>
 
 
-                                                            <ul id="list" class="list-group">
-                                                            </ul>
-                                                        </div>
-                                                    </form>
-                                        </div> <!-- container -->
-                                    </div> <!-- modal body -->
+                                            <div class="form-group">
+                                                <h5>List:</h5>
+                                                <hr>
 
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
+
+                                                <ul id="list" class="list-group">
+                                                </ul>
+                                            </div>
+                                        </form>
+                                    </div> <!-- container -->
+                                </div> <!-- modal body -->
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
                                 </div>
                             </div>
-
                         </div>
+
+                    </div>
+                    <br/>
+                    <div>
+
                     </div>
                 </center>
             </div>  <!-- first col -->
@@ -527,10 +524,64 @@
                     <input type="text" class="form-control" placeholder="Enter ID of Order to Edit">
                 </div>
                 <center>
-                    <button class="btn btn-info" type="button">
-                        Edit Order Info
-                    </button>
+                    <!-- Button trigger modal -->
+                    <a href="#myModalEditOrder" role="button" class="btn btn-info" data-toggle="modal">Edit Order Info</a>
 
+                    <!-- Modal -->
+                    <div id="myModalEditOrder" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Edit Order</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="md-form mb-5">
+                                        <input type="text" id="orangeForm-editOrderCust" class="form-control validate">
+                                        <label data-error="" data-success="" for="orangeForm-editOrderCust">Customer Username</label>
+                                    </div>
+
+                                    <!-- Editable list of Book ISBN's -->
+
+                                    <div class="container">
+
+
+                                        <form>
+
+                                            <div class="form-group" >
+
+                                                <h5>Enter Books to add to Order:</h5>
+                                                <br/>
+                                                <input type="text" name="item" id="addEditOrder" placeholder="Enter ISBN of Book">
+                                                <input type="text" name="quantity" id="quantityEditOrder" placeholder="Enter quantity">
+                                                <br/>
+                                                <button id="addbtnEditOrder" name="addbtn" class="btn btn-primary">Add to List</button>
+
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <h5>List:</h5>
+                                                <hr>
+
+
+                                                <ul id="listEditOrder" class="list-group">
+                                                </ul>
+                                            </div>
+                                        </form>
+                                    </div> <!-- container -->
+                                </div> <!-- modal body -->
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </center>
 
             </div>  <!-- 3rd col -->
@@ -634,11 +685,69 @@
                     <input type="text" class="form-control" placeholder="Enter ID of Promotion to Edit">
                 </div>
                 <center>
-                    <button class="btn btn-info" type="button">
-                        Edit Promotion
-                    </button>
+                    <!-- Button trigger modal -->
+                    <a href="#myModalEditPromo" role="button" class="btn btn-info" data-toggle="modal">Edit Promotion</a>
 
-                </center>
+                    <!-- Modal -->
+                    <div id="myModalEditPromo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>New Promotion</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="md-form mb-5">
+                                        <input type="text" id="orangeForm-editPromoCode" class="form-control validate">
+                                        <label data-error="" data-success="" for="orangeForm-editPromoCode">Promotion Code</label>
+                                    </div>
+
+                                    Discount Amount:
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Percentage Off">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </div>
+                                    </div>
+                                    <br/>
+
+                                    <!-- Editable list of Book ISBN's -->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div>
+                                                <form>
+                                                    <div class="row">
+                                                        <div class="form-group">
+                                                            <label>Add books to apply this promotion to:</label>
+                                                            <input type="text" name="item" id="addEditPromo" placeholder="Enter ISBN of Book">
+                                                            <button id="addbtnEditPromo" name="addbtnPromo" class="btn btn-primary">Add to List</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <h5>List:</h5>
+                                                        <hr>
+                                                        <ul id="listEditPromo" class="list-group">
+                                                        </ul>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+            </center>
 
             </div>  <!-- 3rd col -->
         </div> <!-- 4th row -->
@@ -648,7 +757,7 @@
     </section>
 
 
-
+</div>
 
 
 
@@ -685,6 +794,8 @@
         });
     </script>
 
+
+
     <!-- FOR ADDING BOOK ISBN'S TO PROMOTION -->
     <script>
         $(document).ready(function(){
@@ -704,6 +815,55 @@
         });
     </script>
 
+<!-- Edit Promotion -->
+<!-- FOR ADDING BOOK ISBN'S TO PROMOTION -->
+<script>
+    $(document).ready(function(){
+        // add item to list
+        $('#addbtnEditPromo').click(function(){
+            var newitem = $('#addEditPromo').val();
+            var uniqid = Math.round(new Date().getTime() + (Math.random() * 100));
+            $('#listEditPromo').append('<li id="'+uniqid+'" class="list-group-item"><input type="button" data-id="'+uniqid+'" class="listelement" value="X" /> '+newitem+'<input type="hidden" name="listed[]" value="'+newitem+'"></li>');
+            $('#addEditPromo').val('');
+            return false;
+        });
+        // remove item from list
+        $('#listEditPromo').delegate(".listelement", "click", function() {
+            var elemid = $(this).attr('data-id');
+            $("#"+elemid).remove();
+        });
+    });
+</script>
+
+<!-- Edit Order -->
+<script>
+    $(document).ready(function(){
+        $('#addbtnEditOrder').click(function() {
+            var isbn = $('#addEditOrder').val();
+            var quantity = $('#quantityEditOrder').val();
+            var uniqid = Math.round(new Date().getTime() + (Math.random() * 100));
+            $('#listEditOrder').append('<li id="'+uniqid+'" class="list-group-item">' +
+                '   <div class="row"> ' +
+                '       <div class="col-4"> ISBN: '+isbn+' </div> ' +
+                '       <div class="col-4"> Quantity: '+quantity+' </div> ' +
+                '       <div class="col-4"> <input type="button" data-isbn="'+isbn+'" data-quantity="'+quantity+'" + ' +
+                '          data-id="'+uniqid+'" class="listelement" value="X"/></div> ' +
+                '   </div> ' +
+                '<input type="hidden" name="listed[]" value="'+isbn+'"></li>');
+
+
+            $('#addEditOrder').val(''); // resets the field after submitting (i.e. clicking the "Add to List" button)
+            $('#quantityEditOrder').val('');
+            return false;
+        });
+        $('#listEditOrder').delegate(".listelement", "click", function() {
+            var elemid = $(this).attr('data-id');
+            $("#"+elemid).remove();
+        });
+    });
+
+
+</script>
     <!-- script for previewing book image in modal after entering src-->
     <script>
         var loadFile = function(event) {
