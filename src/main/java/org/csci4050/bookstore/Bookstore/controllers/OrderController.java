@@ -9,6 +9,7 @@ import org.csci4050.bookstore.Bookstore.model.OrderItem;
 import org.csci4050.bookstore.Bookstore.model.PaymentInfo;
 import org.csci4050.bookstore.Bookstore.model.ShippingAddress;
 import org.csci4050.bookstore.Bookstore.service.OrderService;
+import org.csci4050.bookstore.Bookstore.service.ShippingAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,9 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private ShippingAddressService shippingAddressService;
 
     @Autowired
     private Gson gson;
@@ -49,6 +53,20 @@ public class OrderController {
         }
         final Order order = orderOptional.get();
 
+        final Optional<ShippingAddress> shippingAddressOptional = shippingAddressService.getShippingAddress(order.getAddressId());
+        if (!shippingAddressOptional.isPresent()) {
+            throw new ValidationException("Address with address id <%s> not present", Integer.toString(order.getAddressId()));
+        }
+        final ShippingAddress shippingAddress = shippingAddressOptional.get();
+
+        final List<OrderItem> orderItems = orderService.getOrderItemsForOrderId(order.getOrderId());
+        final CheckoutInfo confirmedInfo = CheckoutInfo.builder()
+                .order(order)
+                .orderItems(orderItems)
+                .shippingAddress(shippingAddress)
+                .build();
+
+        return gson.toJson(confirmedInfo);
     }
 
     @Data

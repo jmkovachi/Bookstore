@@ -4,13 +4,11 @@ import org.csci4050.bookstore.Bookstore.dao.OrderDao;
 import org.csci4050.bookstore.Bookstore.dao.OrderItemDao;
 import org.csci4050.bookstore.Bookstore.dao.PaymentDao;
 import org.csci4050.bookstore.Bookstore.exceptions.ValidationException;
-import org.csci4050.bookstore.Bookstore.model.Customer;
-import org.csci4050.bookstore.Bookstore.model.Order;
-import org.csci4050.bookstore.Bookstore.model.OrderItem;
-import org.csci4050.bookstore.Bookstore.model.PaymentInfo;
+import org.csci4050.bookstore.Bookstore.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,13 +23,20 @@ public class OrderService {
     
     private PaymentDao paymentDao;
 
+    private BookService bookService;
+
+    private CartService cartService;
+
     @Autowired
     public OrderService(final OrderDao orderDao, final OrderItemDao orderItemDao,
-                        final CustomerService customerService, final PaymentDao paymentDao) {
+                        final CustomerService customerService, final PaymentDao paymentDao,
+                        final BookService bookService, final CartService cartService) {
         this.orderDao = orderDao;
         this.orderItemDao = orderItemDao;
         this.customerService = customerService;
         this.paymentDao = paymentDao;
+        this.bookService = bookService;
+        this.cartService = cartService;
     }
 
 
@@ -50,14 +55,46 @@ public class OrderService {
             order.setPaymentId(paymentId);
         }
         final int orderId = orderDao.createOrder(order);
+        final List<Book> oldBooks = new ArrayList<>();
         try {
             for (final OrderItem item : orderItems) {
+                final Optional<Book> bookOptional = bookService.getBook(item.getIsbn());
+                if (!bookOptional.isPresent()) {
+                    throw new ValidationException("Book with isbn <%s> and title <%s> does not exist", item.getIsbn());
+                }
+                final Book book = bookOptional.get();
+
+                if (item.getQuantity() > book.getTotalInventory()) {
+                    throw new ValidationException("Order quantity for book <%s> is greater than total inventory", book.getTitle());
+                }
+
+                // create copy of book
+                final Book oldBook = book.toBuilder().build();
+
+                // update total inventory of book
+                book.setTotalInventory(book.getTotalInventory() - item.getQuantity());
+                bookService.updateBook(book);
+
+                // collect books with previous inventories so we can reupdate if error is thrown
+                oldBooks.add(oldBook);
+
+                // create order item
                 orderItemDao.createOrderItem(item);
             }
+
+            cartService.deleteCartForCustomer(order.getUsername());
         } catch (final DataAccessException da) {
+            // delete payment info
             if (order.getPaymentType().equals("CREDIT")) {
                 paymentDao.deletePayment(paymentId);
             }
+
+            // update books with old quantities
+            for (final Book book : oldBooks) {
+                bookService.updateBook(book);
+            }
+
+            // delete stale order items
             orderItemDao.deleteOrderItemsForOrderId(orderId);
             throw new ValidationException("Could not create order items for order <%s>", Integer.toString(orderId));
         }
@@ -69,5 +106,8 @@ public class OrderService {
         return orderDao.getOrder(orderId);
     }
 
+    public List<OrderItem> getOrderItemsForOrderId(final int orderId) {
+        return orderItemDao.getOrderItemsForOrderId(orderId);
+    }
 
 }

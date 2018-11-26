@@ -1,8 +1,11 @@
 package org.csci4050.bookstore.Bookstore.dao;
 
+import org.csci4050.bookstore.Bookstore.mappers.OrderItemMapper;
 import org.csci4050.bookstore.Bookstore.model.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import java.util.List;
 
 public class OrderItemDao {
 
@@ -19,7 +22,12 @@ public class OrderItemDao {
     }
 
     public void deleteOrderItemsForOrderId(final int orderId) {
-        final String sql = "delete from orderitem where order_id = ?";
+        final String sql = "delete from orderitem where order_id=?";
         this.jdbcTemplate.update(sql, orderId);
+    }
+
+    public List<OrderItem> getOrderItemsForOrderId(final int orderId) {
+        final String sql = "select * from orderitem where order_id=?";
+        return this.jdbcTemplate.query(sql, new Object[] {orderId}, new OrderItemMapper());
     }
 }

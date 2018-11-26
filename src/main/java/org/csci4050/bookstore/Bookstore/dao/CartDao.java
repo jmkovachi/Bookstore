@@ -32,6 +32,11 @@ public class CartDao {
         this.jdbcTemplate.update(sql, username, isbn);
     }
 
+    public void deleteCartItemsForUsername(final String username) {
+        final String sql = "delete from cart where c_username=?";
+        this.jdbcTemplate.update(sql, username);
+    }
+
     public List<CartItem> getCartForCustomer(final String username) {
         return this.jdbcTemplate.query("select * from cart where c_username=?", new Object[] {username}, new CartMapper());
     }

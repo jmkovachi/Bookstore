@@ -61,4 +61,9 @@ public class DaoConfig {
         return new OrderItemDao(jdbcTemplate);
     }
 
+    @Bean
+    public ShippingAddressDao shippingAddressDao(final JdbcTemplate jdbcTemplate) {
+        return new ShippingAddressDao(jdbcTemplate);
+    }
+
 }

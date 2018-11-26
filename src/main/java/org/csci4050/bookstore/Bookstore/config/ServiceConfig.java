@@ -52,7 +52,13 @@ public class ServiceConfig {
 
     @Bean
     public OrderService orderService(final CustomerService customerService, final PaymentDao paymentDao,
-                                     final OrderItemDao orderItemDao, final OrderDao orderDao) {
-        return new OrderService(orderDao, orderItemDao, customerService, paymentDao);
+                                     final OrderItemDao orderItemDao, final OrderDao orderDao,
+                                     final BookService bookService, final CartService cartService) {
+        return new OrderService(orderDao, orderItemDao, customerService, paymentDao, bookService, cartService);
+    }
+
+    @Bean
+    public ShippingAddressService shippingAddressService(final ShippingAddressDao shippingAddressDao) {
+        return new ShippingAddressService(shippingAddressDao);
     }
 }

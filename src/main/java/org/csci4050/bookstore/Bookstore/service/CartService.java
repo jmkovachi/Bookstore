@@ -71,6 +71,11 @@ public class CartService {
         cartDao.deleteCartItem(isbn, username);
     }
 
+    public void deleteCartForCustomer(final String username) throws ValidationException {
+        this.checkCustomerExists(username);
+        cartDao.deleteCartItemsForUsername(username);
+    }
+
     private void checkCustomerExists(final String cUsername) throws ValidationException {
         final Optional<Customer> customer = customerService.getCustomer(cUsername);
         if (!customer.isPresent()) {

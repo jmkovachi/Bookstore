@@ -15,6 +15,7 @@ public class OrderItemMapper implements RowMapper<OrderItem> {
                 .isbn(rs.getString("isbn"))
                 .finalPrice(rs.getDouble("final_price"))
                 .itemId(rs.getInt("item_id"))
+                .quantity(rs.getInt("quantity"))
                 .build();
     }
 }

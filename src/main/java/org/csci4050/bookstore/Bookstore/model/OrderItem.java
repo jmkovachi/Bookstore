@@ -10,4 +10,5 @@ public class OrderItem {
     private Integer orderId;
     private String isbn;
     private Double finalPrice;
+    private int quantity;
 }
