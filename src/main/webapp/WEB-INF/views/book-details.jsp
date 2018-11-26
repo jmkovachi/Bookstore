@@ -3,39 +3,37 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags/"%>
+<c:set var="username" value="${book.username}" />
+<c:set var="book" value="${book.book}" />
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Material Design Bootstrap</title>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="/css/mdb.min.css" rel="stylesheet">
-    <!-- Your custom styles (optional) -->
-    <link href="/css/style.min.css" rel="stylesheet">
+    <tags:dependency />
+    <script type="text/javascript" src="/js/catalog.js"></script>
 </head>
 <body>
-    <tags:nav />
+    <tags:nav username="${username}"/>
     <br/>
     <br/>
     <br/>
 	<div class="row">
 		<div class =  "pl-5 col-md-4"><img src=${book.imageUrl}></div>
 		<div class = "col">
-			<div class = "col-md-5">${book.title}</div>
+			<div class = "col-md-5 h2">${book.title}</div>
 			<br/>
+			<div class = "col-md-5 h4">${book.author}</div>
 			<br/>
-			<div class = "col-md-5">${book.author}</div>
+			<div class = "col-md-5">ISBN: ${book.isbn}</div>
 			<br/>
+			<div class = "col-md-5">Category: ${book.category}</div>
+			<br/>
+			<div class = "col-md-5">Price: $${book.price}</div>
 			<br/>
 			<div class = "col-md-5">${book.summary}</div>
 		</div>
 	</div>
     <br/>
     <br/>
-    <center> <button type="button" class="btn btn-primary">Reserve Book</button><button type="button" class="btn btn-primary">Add to Cart</button></center>
+    <c:if test="${not empty username}">
+        <center><a href="/reserve/view" class = "btn btn-primary">Reserve Book</a><button type="button" class="btn btn-primary cart" data-username="${username}" data-isbn="${book.isbn}">Add to Cart</button></center>
+    </c:if>
 </body>
 </html>

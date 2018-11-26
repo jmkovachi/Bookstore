@@ -36,22 +36,26 @@ public class ProfileController {
 
     @RequestMapping(value = "/direct", method = RequestMethod.GET)
     public ModelAndView userProfile(final Principal principal, final Authentication authentication) throws ValidationException {
-        final String username = principal.getName();
-        final Optional<? extends GrantedAuthority> authority = authentication.getAuthorities().stream().findAny();
-        if (!authority.isPresent()) {
-            throw new ValidationException("no role%s", username);
-        } else {
-            final String role = authority.get().getAuthority();
-            switch (role) {
-                case "ROLE_CUSTOMER":
-                    return new ModelAndView("redirect:/customer/view");
-                case "ROLE_VENDOR":
-                    return new ModelAndView("redirect:/vendor");
-                case "ROLE_CLIENT":
-                    return new ModelAndView("redirect:/client");
-                default:
-                    throw new ValidationException("invalid role%s", username);
+        try {
+            final String username = principal.getName();
+            final Optional<? extends GrantedAuthority> authority = authentication.getAuthorities().stream().findAny();
+            if (!authority.isPresent()) {
+                throw new ValidationException("no role assigned%s");
+            } else {
+                final String role = authority.get().getAuthority();
+                switch (role) {
+                    case "ROLE_CUSTOMER":
+                        return new ModelAndView("redirect:/customer/view");
+                    case "ROLE_VENDOR":
+                        return new ModelAndView("redirect:/vendor/view");
+                    case "ROLE_CLIENT":
+                        return new ModelAndView("redirect:/client/view");
+                    default:
+                        throw new ValidationException("invalid role%s", username);
+                }
             }
+        } catch (Exception e){
+            return new ModelAndView("redirect:/login");
         }
     }
 }

@@ -28,6 +28,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
+@RequestMapping(value = "/cart")
 public class CartController {
 
     @Autowired
@@ -81,7 +82,7 @@ public class CartController {
         return new ResponseEntity<>("", new HttpHeaders(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/cart/view", method = RequestMethod.GET)
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
     public ModelAndView cartPage(final Principal principal, final Authentication authentication) throws ValidationException {
         // Principal is a bean defined by spring security, we can use it to get authentication details
         final String username = principal.getName();

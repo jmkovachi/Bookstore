@@ -18,7 +18,7 @@
         <link href="/css/style.min.css" rel="stylesheet">
     </head>
     <body>
-        <tags:nav />
+        <tags:nav username="${username}"/>
         <br/>
         <br/>
         <br/>
@@ -63,7 +63,7 @@
                 <br/>
                 <br/>
             </div>
-            <center> <button type="button" class="btn btn-primary">Edit Profile</button></center>
+            <center><a href="/edit/profile" class = "btn btn-primary">Edit Profile</a></center>
         </div>
 
     </body>

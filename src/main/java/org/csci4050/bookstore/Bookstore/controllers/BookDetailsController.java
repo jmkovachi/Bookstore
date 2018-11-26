@@ -1,22 +1,11 @@
 package org.csci4050.bookstore.Bookstore.controllers;
-import lombok.Builder;
-import lombok.Data;
-import org.apache.tomcat.util.http.parser.Authorization;
 import org.csci4050.bookstore.Bookstore.exceptions.ValidationException;
 import org.csci4050.bookstore.Bookstore.model.Book;
-import org.csci4050.bookstore.Bookstore.model.CartItem;
 import org.csci4050.bookstore.Bookstore.service.BookService;
-import org.csci4050.bookstore.Bookstore.service.CartService;
-import org.csci4050.bookstore.Bookstore.service.VendorService;
-import org.csci4050.bookstore.Bookstore.viewmodel.CartViewModel;
+import org.csci4050.bookstore.Bookstore.viewmodel.BookDetailsModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,8 +22,13 @@ public class BookDetailsController {
     private BookService bookService;
 
     @RequestMapping(value = "/book/{isbn}", method = RequestMethod.GET)
-    public ModelAndView bookDetails(@PathVariable final String isbn) throws ValidationException {
+    public ModelAndView bookDetails(@PathVariable final String isbn, final Principal principal) throws ValidationException {
+        final String username = principal != null ? principal.getName() : null;
         final Book book = bookService.getBook(isbn).get();
-        return new ModelAndView("views/book-details", "book", book);
+        final BookDetailsModel bookDetailsModel = BookDetailsModel.builder()
+                .username(username)
+                .book(book)
+                .build();
+        return new ModelAndView("views/book-details", "book", bookDetailsModel);
     }
 }

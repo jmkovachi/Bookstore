@@ -30,9 +30,6 @@ public class CustomerProfileController {
     @Autowired
     private CustomerService customerService;
 
-    @Autowired
-    private Gson gson;
-
     @RequestMapping(value = "/view", method = RequestMethod.GET)
     public ModelAndView customerProfile(final Principal principal, final Authentication authentication) throws ValidationException {
         final String username = principal.getName();

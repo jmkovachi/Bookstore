@@ -39,7 +39,7 @@ $(document).ready(function() {
         console.log(username);
         $.ajax({
             method: "POST",
-            url: "cart/add-item",
+            url: "/cart/add-item",
             dataType: "json",
             contentType: "application/json",
             data : JSON.stringify({
