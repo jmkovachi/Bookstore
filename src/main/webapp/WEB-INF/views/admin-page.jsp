@@ -18,6 +18,8 @@
 
     <!-- Material Design Bootstrap -->
     <link href="/css/catalogmdb.css" rel="stylesheet">
+
+
     <style type="text/css">
         .multiple-select-dropdown li [type=checkbox]+label {
             height: 1rem;
@@ -459,6 +461,7 @@
                                         <label data-error="" data-success="" for="orangeForm-orderCust">Customer Username</label>
                                     </div>
 
+
                                     <!-- Editable list of Book ISBN's -->
 
                                     <div class="container">
@@ -479,14 +482,111 @@
 
 
                                             <div class="form-group">
-                                                <h5>List:</h5>
-                                                <hr>
+
 
 
                                                 <ul id="list" class="list-group">
                                                 </ul>
                                             </div>
                                         </form>
+
+
+                                        <hr>
+                                        <h3>Total: $ </h3>
+                                        <hr>
+
+                                        <div class="d-block my-3">
+                                            <div class="custom-control custom-radio">
+                                                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+                                                <label class="custom-control-label" for="credit">Credit card</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input id="check" name="paymentMethod" type="radio" class="custom-control-input" required>
+                                                <label class="custom-control-label" for="check">Check</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input id="cash" name="paymentMethod" type="radio" class="custom-control-input" required>
+                                                <label class="custom-control-label" for="cash">Cash</label>
+                                            </div>
+                                        </div>
+
+                                        <div id = "showCreditFields">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="cc-name">Name on card</label>
+                                                <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                                                <small class="text-muted">Full name as displayed on card</small>
+                                                <div class="invalid-feedback">
+                                                    Name on card is required
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="cc-number">Credit card number</label>
+                                                <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                                                <div class="invalid-feedback">
+                                                    Credit card number is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3 mb-3">
+                                                <label for="cc-expiration">Expiration</label>
+                                                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                                                <div class="invalid-feedback">
+                                                    Expiration date required
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="cc-expiration">CVV</label>
+                                                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                                                <div class="invalid-feedback">
+                                                    Security code required
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div> <!-- id: showCreditFields (for Javascript) -->
+
+
+                                        <div id = "showCheckFields" style="display:none">
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="cc-name">Bank Name</label>
+                                                    <input type="text" class="form-control" id="cc-bankname" placeholder="" required>
+                                                    <div class="invalid-feedback">
+                                                        Bank name is required
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="cc-number">Routing #</label>
+                                                    <input type="text" class="form-control" id="cc-banknumber" placeholder="" required>
+                                                    <div class="invalid-feedback">
+                                                        Routing # is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="cc-expiration">Bank Account #</label>
+                                                    <input type="text" class="form-control" id="cc-bankAccountNum" placeholder="" required>
+                                                    <div class="invalid-feedback">
+                                                        Bank Account # is required
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="cc-expiration">Enter 'Checking' or 'Savings'</label>
+                                                    <input type="text" class="form-control" id="cc-accountType" placeholder="" required>
+                                                    <div class="invalid-feedback">
+                                                        Account type is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> <!-- id: showCheckFields (for Javascript) -->
+
+
+                                        <div id="showCashMsg" style="display:none">
+                                            <h3>In-store only</h3>
+                                        </div>
+
                                     </div> <!-- container -->
                                 </div> <!-- modal body -->
 
@@ -503,6 +603,8 @@
 
                     </div>
                 </center>
+
+
             </div>  <!-- first col -->
 
             <!--Grid 2nd column-->
@@ -563,14 +665,17 @@
 
 
                                             <div class="form-group">
-                                                <h5>List:</h5>
-                                                <hr>
 
 
                                                 <ul id="listEditOrder" class="list-group">
                                                 </ul>
                                             </div>
                                         </form>
+
+                                        <hr>
+                                        <h3>Total: $</h3>
+
+
                                     </div> <!-- container -->
                                 </div> <!-- modal body -->
 
@@ -765,6 +870,48 @@
 
 
 <!-- SCRIPTS -->
+
+<!-- Order Modal: If Credit radio button is selected, show credit card fields -->
+<script>
+    $(document).ready(function() {
+        $('input[type="radio"]').click(function() {
+         if($(this).attr('id') == 'credit') {
+            $('#showCreditFields').show();
+        }
+    else {
+        $('#showCreditFields').hide();
+    }
+    });
+    });
+</script>
+
+<!-- Order modal: if check is selected -->
+<script>
+    $(document).ready(function() {
+        $('input[type="radio"]').click(function() {
+            if($(this).attr('id') == 'check') {
+                $('#showCheckFields').show();
+            }
+            else {
+                $('#showCheckFields').hide();
+            }
+        });
+    });
+</script>
+
+<!-- Order Modal: if cash is selected -->
+<script>
+    $(document).ready(function() {
+        $('input[type="radio"]').click(function() {
+            if($(this).attr('id') == 'cash') {
+                $('#showCashMsg').show();
+            }
+            else {
+                $('#showCashMsg').hide();
+            }
+        });
+    });
+</script>
 
     <!-- FOR ADDING BOOK ISBN'S TO ORDER -->
     <script>
