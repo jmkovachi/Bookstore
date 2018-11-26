@@ -24,4 +24,8 @@ public class ClientService {
             throw new Exception();
         }
     }
+
+    public Optional<Client> getClient(final String cUsername) {
+        return clientDao.getClient(cUsername);
+    }
 }

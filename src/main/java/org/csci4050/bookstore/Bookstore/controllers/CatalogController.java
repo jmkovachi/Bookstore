@@ -63,10 +63,10 @@ public class CatalogController {
                 .sorted(Comparator.comparing(Book::getTitle).thenComparing(Book::getAuthor))
                 .collect(Collectors.toList());
         final List<String> categories = bookService.getCategoryValues();
-        //final String username = principal.getName();
+        final String username = principal != null ? principal.getName() : null;
 
         final CatalogViewModel catalogViewModel = CatalogViewModel.builder()
-                .username("jmkovachi")
+                .username(username)
                 .books(books)
                 .viewCategory((viewCategory != null) ? viewCategory.toLowerCase() : null)
                 .viewString(viewString)

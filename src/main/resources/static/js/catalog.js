@@ -36,9 +36,10 @@ $(document).ready(function() {
     $(".cart").click(function() {
         const isbn = $(this).data("isbn");
         const username = $(this).data("username");
+        console.log(username);
         $.ajax({
             method: "POST",
-            url: "cart/add-item",
+            url: "/cart/add-item",
             dataType: "json",
             contentType: "application/json",
             data : JSON.stringify({

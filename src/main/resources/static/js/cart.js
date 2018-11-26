@@ -1,13 +1,13 @@
 $(document).ready(function() {
     $(".increaseQuantity").click(function() {
-        const quantity = $(".increaseQuantity").data("quantity")+1;
-        const data = getData(".increaseQuantity", quantity);
+        const quantity = $(this).data("quantity")+1;
+        const data = getData($(this), quantity);
         putAjax("/cart/update-item", data);
     });
 
     $(".decreaseQuantity").click(function() {
-        const quantity = $(".decreaseQuantity").data("quantity")-1;
-        const data = getData(".decreaseQuantity", quantity);
+        const quantity = $(this).data("quantity")-1;
+        const data = getData($(this), quantity);
         if (quantity == 0 && confirm("Are you sure you want to remove this item from your cart?")) {
             deleteAjax(data.isbn, data.cUsername);
         } else if (quantity > 0) {
@@ -17,7 +17,7 @@ $(document).ready(function() {
 
     $(".delete").click(function() {
         if (confirm("Are you sure you want to remove this item from your cart?")) {
-            const isbn = $(".delete").data("isbn");
+            const isbn = $(this).data("isbn");
             const username = $("#username").val();
             deleteAjax(isbn, username);
         }
@@ -57,12 +57,12 @@ function deleteAjax(isbn, username) {
     });
 }
 
-function getData(className, quantity) {
+function getData(element, quantity) {
     const username = $("#username").val();
-    const isbn = $(className).data("isbn");
+    const isbn = element.data("isbn");
     return {
         "isbn": isbn,
         "quantity": quantity,
-        "username": username
+        "cUsername": username
     };
 }

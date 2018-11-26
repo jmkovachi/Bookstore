@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +27,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping(value = "/cart")
+@RequestMapping("/cart")
 public class CartController {
 
     @Autowired
@@ -81,9 +82,9 @@ public class CartController {
     }
 
     @RequestMapping(value = "/view", method = RequestMethod.GET)
-    public ModelAndView cartPage(final Principal principal) throws ValidationException {
+    public ModelAndView cartPage(final Principal principal, final Authentication authentication) throws ValidationException {
         // Principal is a bean defined by spring security, we can use it to get authentication details
-        final String username = "jmkovachi";
+        final String username = principal.getName();
         final List<CartItemWithBook> cartItems = cartService.getCartForCustomer(username).stream()
                 .map(this::transformToCartItemWithBook)
                 .collect(Collectors.toList());

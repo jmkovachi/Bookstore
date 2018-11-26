@@ -5,6 +5,7 @@
 <html>
   <head>
     <tags:dependency />
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/lrstyle.css">
   </head>
   <body>
@@ -18,10 +19,10 @@
         <p>Password</p>
         <input class="fields" name="password" id="password" placeholder="Enter your password..." type="password">
         <br>
-        <button type="submit" name="submit" id="loginButton" class="buttons">Login</button>
+        <button type="submit" name="submit" id="loginButton" class="btn btn-primary buttons">Login</button>
         <hr>
         <h2 style="text-align:center">New User?</h2>
-        <a id="registerButton" href="/register/customer" class="buttons">Register Here</a>
+        <a id="registerButton" href="/register/customer" class="btn btn-primary buttons">Register Here</a>
       </form>
     </div>
     <c:choose>
