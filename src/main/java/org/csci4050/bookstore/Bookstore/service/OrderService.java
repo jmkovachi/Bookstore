@@ -27,20 +27,24 @@ public class OrderService {
 
     private CartService cartService;
 
+    private ShippingAddressService shippingAddressService;
+
     @Autowired
     public OrderService(final OrderDao orderDao, final OrderItemDao orderItemDao,
                         final CustomerService customerService, final PaymentDao paymentDao,
-                        final BookService bookService, final CartService cartService) {
+                        final BookService bookService, final CartService cartService,
+                        final ShippingAddressService shippingAddressService) {
         this.orderDao = orderDao;
         this.orderItemDao = orderItemDao;
         this.customerService = customerService;
         this.paymentDao = paymentDao;
         this.bookService = bookService;
         this.cartService = cartService;
+        this.shippingAddressService = shippingAddressService;
     }
 
 
-    public Order createOrder(final Order order, final PaymentInfo paymentInfo, final List<OrderItem> orderItems) throws ValidationException {
+    public Order createOrder(final Order order, final PaymentInfo paymentInfo, final ShippingAddress shippingAddress, final List<OrderItem> orderItems) throws ValidationException {
         final Optional<Customer> customerOptional = customerService.getCustomer(order.getUsername());
         if (!customerOptional.isPresent()) {
             throw new ValidationException("Customer with username <%s> does not exist", order.getUsername());
@@ -54,6 +58,9 @@ public class OrderService {
             paymentId = paymentDao.createPayment(paymentInfo);
             order.setPaymentId(paymentId);
         }
+
+        // create shipping address
+        shippingAddressService.createShippingAddress(shippingAddress);
 
         // use java streams to calculate total price of all items
         final Double totalAmount = orderItems.stream()

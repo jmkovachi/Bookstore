@@ -15,6 +15,10 @@ public class ShippingAddressService {
         this.shippingAddressDao = shippingAddressDao;
     }
 
+    public void createShippingAddress(final ShippingAddress shippingAddress) {
+        this.shippingAddressDao.createShippingAddress(shippingAddress);
+    }
+
     public Optional<ShippingAddress> getShippingAddress(final int addressId) {
         return shippingAddressDao.getShippingAddress(addressId);
     }
