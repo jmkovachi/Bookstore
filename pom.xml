@@ -138,12 +138,12 @@
 		</dependency>
 
 		<!-- dev tools https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html
-			 https://stackoverflow.com/questions/23155244/spring-boot-hotswap-with-intellij-ide
+			 https://stackoverflow.com/questions/23155244/spring-boot-hotswap-with-intellij-ide -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
-		</dependency> -->
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-csv -->
 		<dependency>
@@ -160,10 +160,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		<!--<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-		</dependency>-->
     </dependencies>
 
 	<dependencyManagement>
