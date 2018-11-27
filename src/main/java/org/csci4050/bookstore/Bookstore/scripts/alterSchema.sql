@@ -2,8 +2,8 @@
 -- When inserting books and vendors I found some of these columns had to be changed
 
 ALTER TABLE `bookstoredb`.`book`
-CHANGE COLUMN `image_url` `image_url` VARCHAR(144) NULL DEFAULT NULL
-CHANGE COLUMN `rating` `rating` FLOAT NULL DEFAULT NULL
+CHANGE COLUMN `image_url` `image_url` VARCHAR(144) NULL DEFAULT NULL,
+CHANGE COLUMN `rating` `rating` FLOAT NULL DEFAULT NULL,
 CHANGE COLUMN `summary` `summary` TEXT NOT NULL ;
 
 ALTER TABLE `bookstoredb`.`user`
@@ -17,3 +17,12 @@ ADD CONSTRAINT `FK_302`
   REFERENCES `bookstoredb`.`customer` (`c_username`)
   ON DELETE CASCADE
   ON UPDATE CASCADE;
+
+
+ALTER TABLE `bookstoredb`.`promotion`
+CHANGE COLUMN `expire_date` `expire_date` DATE NULL ;
+
+ALTER TABLE `order` AUTO_INCREMENT = 1000000;
+
+ALTER TABLE `bookstoredb`.`orderitem`
+ADD COLUMN `quantity` INT NOT NULL AFTER `final_price`;

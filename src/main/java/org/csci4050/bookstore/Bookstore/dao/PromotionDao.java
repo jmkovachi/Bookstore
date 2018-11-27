@@ -32,6 +32,11 @@ public class PromotionDao {
         return promotion.stream().findAny();
     }
 
+    public Optional<Promotion> getPromotionWithPromoCode(final int promoCode) {
+        final List<Promotion> promotions = this.jdbcTemplate.query("select * from promotion where promo_code=?", new Object[] {promoCode}, new PromotionMapper());
+        return promotions.stream().findAny();
+    }
+
     public List<Promotion> getPromotions() {
         return this.jdbcTemplate.query("select * from promotion", new PromotionMapper());
     }

@@ -1,5 +1,6 @@
 package org.csci4050.bookstore.Bookstore.service;
 
+import org.csci4050.bookstore.Bookstore.controllers.CartController;
 import org.csci4050.bookstore.Bookstore.dao.CartDao;
 import org.csci4050.bookstore.Bookstore.exceptions.ValidationException;
 import org.csci4050.bookstore.Bookstore.model.Book;
@@ -19,14 +20,15 @@ public class CartService {
 
     private BookService bookService;
 
-    private PromotionService promotionService;
+    private VendorService vendorService;
 
     @Autowired
-    public CartService(final CartDao cartDao, final CustomerService customerService, final BookService bookService, final PromotionService promotionService) {
+    public CartService(final CartDao cartDao, final CustomerService customerService,
+                       final BookService bookService, final VendorService vendorService) {
         this.cartDao = cartDao;
         this.customerService = customerService;
         this.bookService = bookService;
-        this.promotionService = promotionService;
+        this.vendorService = vendorService;
     }
 
     public void insertCartItem(final CartItem cartItem) throws ValidationException {
@@ -66,6 +68,11 @@ public class CartService {
         cartDao.deleteCartItem(isbn, username);
     }
 
+    public void deleteCartForCustomer(final String username) throws ValidationException {
+        this.checkCustomerExists(username);
+        cartDao.deleteCartItemsForUsername(username);
+    }
+
     private void checkCustomerExists(final String cUsername) throws ValidationException {
         final Optional<Customer> customer = customerService.getCustomer(cUsername);
         if (!customer.isPresent()) {
@@ -93,15 +100,18 @@ public class CartService {
         final Book book = retrieveBook.get();
         final Double originalPrice = cartItem.getQuantity() * book.getPrice();
         cartItem.setOriginalPrice(originalPrice);
-        if (book.getPromoId() != null) {
-            final Optional<Promotion> promotion = promotionService.getPromotion(book.getPromoId());
-            if (promotion.isPresent()) {
-                this.applyPromotion(originalPrice, promotion.get(), cartItem);
-            } else {
-                throw new ValidationException("Promotion with promo id <%s> does not exist", Integer.toString(book.getPromoId()));
-            }
-        } else {
-            cartItem.setFinalPrice(originalPrice);
-        }
+        cartItem.setFinalPrice(originalPrice);
+    }
+
+    public CartController.CartItemWithBook transformToCartItemWithBook(final CartItem cartItem) {
+        final Book book = bookService.getBook(cartItem.getIsbn()).get();
+        final String publisher = vendorService.getVendor(book.getVUsername()).get().getCompany();
+        return CartController.CartItemWithBook.builder()
+                .cartItem(cartItem)
+                .singleFinalPrice(cartItem.getFinalPrice() / cartItem.getQuantity())
+                .singleOriginalPrice(cartItem.getOriginalPrice() / cartItem.getQuantity())
+                .publisher(publisher)
+                .book(book)
+                .build();
     }
 }

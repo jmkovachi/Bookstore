@@ -12,6 +12,8 @@ public class GsonConfig {
     public Gson gson() {
         return new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd")
+                .setDateFormat("MM/yyyy")
+                .setDateFormat("MM-yyyy")
                 .create();
     }
 

@@ -1,26 +1,20 @@
 $(document).ready(function() {
     $("#confirm").click(function() {
-        const fname = $("#fname").val();
-        const lname = $("#lname").val();
         const email = $("#email").val();
         const address = $("#address").val();
-        const birthdate = $("#birthdate").val();
-        const newsletter = $('input[name="newsletter"]:checked').val();\
-        console.log(newsletter + "newsletter");
-        const url = "/customer/update";
+        const company = $("#company").val();
+        const url = "/vendor/update";
+
         const data = {
-            "firstName" : fname,
-            "lastName" : lname,
             "email" : email,
             "address" : address,
-            "birthDate" : birthdate,
-            "newsletter" : newsletter
+            "company" : company
         };
         postAjax(url, JSON.stringify(data), "/profile/direct");
     });
 });
 
-function postAjax(url, data, redirectUrl){
+function postAjax(url, data, redirectUrl) {
     $.ajax({
         type: "POST",
         url : url,
@@ -36,4 +30,6 @@ function postAjax(url, data, redirectUrl){
             alert(error.message);
         }
     });
+
+
 }
