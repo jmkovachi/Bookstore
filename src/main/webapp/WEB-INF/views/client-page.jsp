@@ -34,36 +34,133 @@
 <body class="category-v1 hidden-sn white-skin animated">
 
 <tags:nav />
+
 <br/>
 <br/>
 <br/>
-<!-- 3 ool layout -->
+<!-- 3 col layout -->
 <div class="container">
 
     <section class="section pt-4">
         <center>
             <h1>Client Reports</h1>
+            <hr>
+
+            <div style="width:50%">
+                <a type="button" href="/end-of-day-sales" class="btn btn-primary"><i class="fa fa-calendar-o">End of Day Sales</i></a>
+
+                <a type="button" href="/book-sales" class="btn btn-primary"><i class="fa fa-book">Book Sales</i></a>
+
+                <a type="button" href="/publisher-sales" class="btn btn-primary"><i class="fa fa-line-chart">Publisher Sales</i></a>
+
+                <a type="button" href="/low-inv-notice" class="btn btn-primary"><i class="fa fa-warning">Low Inventory Notices</i></a>
+            </div>
+
+
         </center>
-
-        <!-- Grid FIRST ROW -->
-        <div class="row">
-            <!--Grid 1st column-->
-            <div class="col-lg-4 col-md-12 mb-4">
-                VIEW REPORT 1
-            </div>
-
-            <!-- Grid 2nd column-->
-            <div class="col-lg-4 col-md-12 mb-4">
-                VIEW REPORT 2
-            </div>
-
-            <!-- Grid 3rd column -->
-            <div class="col-lg-4 col-md-12 mb-4">
-                VIEW REPORT 3
-            </div>
-        </div>
     </section>
+
 </div>
 
+
+
+
+
+
+<!-- JQuery -->
+<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="/js/popper.min.js"></script>
+
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="/js/mdb.min.js"></script>
+
+<script type="text/javascript">
+    /* WOW.js init */
+    new WOW().init();
+
+    // Tooltips Initialization
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+<script>
+    var slider = $("#calculatorSlider");
+    var developerBtn = $("#developerBtn");
+    var corporateBtn = $("#corporateBtn");
+    var privateBtn = $("#privateBtn");
+    var reseller = $("#resellerEarnings");
+    var client = $("#clientPrice");
+    // var percentageBonus = 30; // = 30%
+    var license = {
+        corpo: {
+            active: true,
+            price: 319,
+        },
+        dev: {
+            active: false,
+            price: 149,
+        },
+        priv: {
+            active: false,
+            price: 79,
+        }
+    }
+
+    function calculate(price, value) {
+        client.text((Math.round((price - (value / 100 * price)))) + '$');
+        reseller.text((Math.round(((percentageBonus - value) / 100 * price))) + '$')
+    }
+
+    function reset(price) {
+        slider.val(0);
+        client.text(price + '$');
+        reseller.text((Math.round((percentageBonus / 100 * price))) + '$');
+    }
+    developerBtn.on('click', function (e) {
+        license.dev.active = true;
+        license.corpo.active = false;
+        license.priv.active = false;
+        reset(license.dev.price)
+    });
+    privateBtn.on('click', function (e) {
+        license.dev.active = false;
+        license.corpo.active = false;
+        license.priv.active = true;
+        reset(license.priv.price);
+    });
+    corporateBtn.on('click', function (e) {
+        license.dev.active = false;
+        license.corpo.active = true;
+        license.priv.active = false;
+        reset(license.corpo.price);
+    });
+    slider.on("input change", function (e) {
+        if (license.priv.active) {
+            calculate(license.priv.price, $(this).val());
+        } else if (license.corpo.active) {
+            calculate(license.corpo.price, $(this).val());
+        } else if (license.dev.active) {
+            calculate(license.dev.price, $(this).val());
+        }
+    })
+</script>
+<script>
+    // Material Select Initialization
+    $(document).ready(function () {
+        $('.mdb-select').material_select();
+    });
+</script>
+<script>
+    // SideNav Initialization
+    $(".button-collapse").sideNav();
+</script>
+</body>
+
+</html>
 </body>
 </html>

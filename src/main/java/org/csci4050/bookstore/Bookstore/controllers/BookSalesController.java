@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class VendorMenuController {
+public class BookSalesController {
 
-    @RequestMapping(value = "/vendorMenu", method = RequestMethod.GET)
-    public ModelAndView vendorPage() {
-        return new ModelAndView("views/vendor-menu", "vendor", null);
+    @RequestMapping(value = "/book-sales", method = RequestMethod.GET)
+    public ModelAndView bookSales() {
+        return new ModelAndView("views/book-sales", "bookSales", null);
     }
 
 
