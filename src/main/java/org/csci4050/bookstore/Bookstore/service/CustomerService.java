@@ -32,7 +32,13 @@ public class CustomerService extends UserService {
         return customerDao.getCustomer(username);
     }
 
-    public void updateCustomer(final Customer customer) {
+    public Customer updateCustomer(final Customer customer) throws ValidationException {
         customerDao.updateCustomer(customer);
+        final Optional<Customer> retrieveCustomer = customerDao.getCustomer(customer.getUsername());
+        if (retrieveCustomer.isPresent() && retrieveCustomer.get().equals(customer)) {
+            return retrieveCustomer.get();
+        } else {
+            throw new ValidationException("Customer could not be updated");
+        }
     }
 }
