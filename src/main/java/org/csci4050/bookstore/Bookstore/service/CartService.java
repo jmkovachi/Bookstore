@@ -100,7 +100,9 @@ public class CartService {
         final Book book = retrieveBook.get();
         final Double originalPrice = cartItem.getQuantity() * book.getPrice();
         cartItem.setOriginalPrice(originalPrice);
-        cartItem.setFinalPrice(originalPrice);
+        if (cartItem.getFinalPrice() == null) {
+            cartItem.setFinalPrice(originalPrice);
+        }
     }
 
     public CartController.CartItemWithBook transformToCartItemWithBook(final CartItem cartItem) {

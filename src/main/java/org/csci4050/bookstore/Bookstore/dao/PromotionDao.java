@@ -22,7 +22,7 @@ public class PromotionDao {
                         "values(?,?,?);", promotion.getExpireDate(), promotion.getPercentOff(), promotion.getPromoCode());
     }
 
-    public void updatPromotion(final Promotion promotion) {
+    public void updatePromotion(final Promotion promotion) {
         final String sql = "update promotion set expire_date=?, percent_off=?, promo_code=? where promo_id=?";
         jdbcTemplate.update(sql, promotion.getExpireDate(), promotion.getPercentOff(), promotion.getPromoCode(), promotion.getPromoId());
     }

@@ -39,6 +39,24 @@ $(document).ready(function() {
         postAjax("/order",JSON.stringify(postData));
     });
 
+    $("#promo").on("submit", function (event) {
+        event.preventDefault();
+        const data = $("#promoCode").val();
+        $.ajax({
+            method: "POST",
+            url: "/promotion/apply/" + data,
+            contentType: "application/json",
+            data: "",
+            success: function (res) {
+                alert("Successfully applied promotion");
+                location.reload();
+            },
+            error: function (res) {
+                alert(res.message);
+            }
+        })
+    });
+
 });
 
 function toJson(formSerializeArr){

@@ -70,7 +70,7 @@
                                   <span class="qty"> ${orderItemWithBook.orderItem.quantity} </span>
                                 </td>
                                 <td class="font-weight-bold">
-                                  <strong><fmt:formatNumber type="number" maxFractionDigits="2" value="${orderItemWithBook.orderItem.finalPrice}" />$${orderItemWithBook.orderItem.finalPrice}</strong>
+                                  <strong>$<tags:doubleFormat num="${orderItemWithBook.orderItem.finalPrice}" /></strong>
                                 </td>
                               </tr>
                               <!-- /.First row -->
@@ -80,8 +80,7 @@
 
                       </table>
                     </div>
-
-
+                    <h2 style="text-right">Total: $<tags:doubleFormat num="${confirm.order.total}" /></h2>
 
                 </div>
             </div>

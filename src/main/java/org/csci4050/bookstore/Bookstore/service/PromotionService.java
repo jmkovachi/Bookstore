@@ -34,7 +34,7 @@ public class PromotionService {
     }
 
     public void updatePromotion(final Promotion promotion) {
-        promotionDao.updatPromotion(promotion);
+        promotionDao.updatePromotion(promotion);
     }
 
     public void updateCartWithPromotion(final Promotion promotion, final String username) throws ValidationException {
