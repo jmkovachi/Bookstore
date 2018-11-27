@@ -35,7 +35,7 @@ public class OrderDao {
     }
 
     public Optional<Order> getOrder(final int orderId) {
-        final String sql = "select * from `order` where order_id = ?";
+        final String sql = "select * from `order` where order_id=?";
         return this.jdbcTemplate.query(sql, new Object[] {orderId}, new OrderMapper()).stream().findAny();
     }
 

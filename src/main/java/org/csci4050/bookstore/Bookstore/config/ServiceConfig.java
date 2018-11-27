@@ -53,8 +53,10 @@ public class ServiceConfig {
     @Bean
     public OrderService orderService(final CustomerService customerService, final PaymentDao paymentDao,
                                      final OrderItemDao orderItemDao, final OrderDao orderDao,
-                                     final BookService bookService, final CartService cartService) {
-        return new OrderService(orderDao, orderItemDao, customerService, paymentDao, bookService, cartService);
+                                     final BookService bookService, final CartService cartService,
+                                     final ShippingAddressService shippingAddressService, final JavaMailSender javaMailSender) {
+        return new OrderService(orderDao, orderItemDao, customerService, paymentDao, bookService,
+                cartService, shippingAddressService, javaMailSender);
     }
 
     @Bean

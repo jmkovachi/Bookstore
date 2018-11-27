@@ -7,6 +7,8 @@ import org.csci4050.bookstore.Bookstore.exceptions.ValidationException;
 import org.csci4050.bookstore.Bookstore.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +31,13 @@ public class OrderService {
 
     private ShippingAddressService shippingAddressService;
 
+    private JavaMailSender javaMailSender;
+
     @Autowired
     public OrderService(final OrderDao orderDao, final OrderItemDao orderItemDao,
                         final CustomerService customerService, final PaymentDao paymentDao,
                         final BookService bookService, final CartService cartService,
-                        final ShippingAddressService shippingAddressService) {
+                        final ShippingAddressService shippingAddressService, final JavaMailSender javaMailSender) {
         this.orderDao = orderDao;
         this.orderItemDao = orderItemDao;
         this.customerService = customerService;
@@ -41,6 +45,7 @@ public class OrderService {
         this.bookService = bookService;
         this.cartService = cartService;
         this.shippingAddressService = shippingAddressService;
+        this.javaMailSender = javaMailSender;
     }
 
 
@@ -121,6 +126,25 @@ public class OrderService {
         }
         order.setOrderId(orderId);
         return order;
+    }
+
+    public void sendOrderConfirmationEmail(final int orderId) throws ValidationException {
+        final Optional<Order> optionalOrder = orderDao.getOrder(orderId);
+        if (!optionalOrder.isPresent()) {
+            throw new ValidationException("Order with id <%s> does not exist", Integer.toString(orderId));
+        }
+
+        final Order order = optionalOrder.get();
+        final Customer customer = customerService.getCustomer(order.getUsername()).get();
+        javaMailSender.send(mimeMessage -> {
+            MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+            message.setTo(customer.getEmail());
+            message.setSubject("Order #" + order.getOrderId() + " confirmation from Bookstore.com");
+            final StringBuilder str = new StringBuilder();
+            str.append("<h2> Order # " + order.getOrderId() + " </h2>");
+            str.append("<h3> Total: " + order.getTotal() + "</h3>");
+            message.setText("<h2> Order # " + order.getOrderId() + " </h2>", true);
+        });
     }
 
     public Optional<Order> getOrder(final int orderId) {

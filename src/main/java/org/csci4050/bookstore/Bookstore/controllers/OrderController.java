@@ -40,7 +40,8 @@ public class OrderController {
     public ResponseEntity<Object> order(@RequestBody final String checkoutInfoJson) throws ValidationException {
         System.out.println();
         final CheckoutInfo checkoutInfo = gson.fromJson(checkoutInfoJson, CheckoutInfo.class);
-        final Order order = orderService.createOrder(checkoutInfo.getOrder(), checkoutInfo.getPaymentInfo(), checkoutInfo.getOrderItems());
+        final Order order = orderService.createOrder(checkoutInfo.getOrder(), checkoutInfo.getPaymentInfo(),
+                checkoutInfo.getShippingAddress(), checkoutInfo.getOrderItems());
         final OrderResponse orderResponse = OrderResponse.builder()
                 .orderId(order.getOrderId())
                 .build();

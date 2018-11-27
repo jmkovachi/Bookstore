@@ -12,7 +12,7 @@ public class OrderMapper implements RowMapper<Order> {
     public Order mapRow(final ResultSet rs, final int rownumber) throws SQLException {
         return Order.builder()
                 .date(rs.getDate("date"))
-                .username(rs.getString("username"))
+                .username(rs.getString("c_username"))
                 .orderId(rs.getInt("order_id"))
                 .paymentType(rs.getString("payment_type"))
                 .total(rs.getDouble("total"))
