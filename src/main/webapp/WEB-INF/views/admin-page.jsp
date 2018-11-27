@@ -321,7 +321,7 @@
                                                 <option value="3">Genre 3</option>
                                             </select>
                                         </div>
-                                        
+
                                         <!-- Price -->
                                         <div class="md-form input-group mb-3">
                                             <div class="input-group-prepend">

@@ -4,52 +4,67 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags/"%>
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Material Design Bootstrap</title>
+
+    <title>Bookstore</title>
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Material Design Bootstrap -->
-    <link href="/css/mdb.min.css" rel="stylesheet">
-    <!-- Your custom styles (optional) -->
-    <link href="/css/style.min.css" rel="stylesheet">
+    <link href="/css/catalogmdb.css" rel="stylesheet">
+
+
+    <style type="text/css">
+        .multiple-select-dropdown li [type=checkbox]+label {
+            height: 1rem;
+        }
+    </style>
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
 </head>
-<body>
-    <tags:nav />
-    <br/>
-    <br/>
-    <br/>
-    <div class="container">
-        <div class="card">
-            <div class="card-body">
-                <center><strong>Client Profile</strong></center>
+
+<body class="category-v1 hidden-sn white-skin animated">
+
+<tags:nav />
+<br/>
+<br/>
+<br/>
+<!-- 3 ool layout -->
+<div class="container">
+
+    <section class="section pt-4">
+        <center>
+            <h1>Client</h1>
+        </center>
+
+        <!-- Grid FIRST ROW -->
+        <h2>Reports</h2>
+        <div class="row">
+            <!--Grid 1st column-->
+            <div class="col-lg-4 col-md-12 mb-4">
+                VIEW REPORT 1
+            </div>
+
+            <!-- Grid 2nd column-->
+            <div class="col-lg-4 col-md-12 mb-4">
+                VIEW REPORT 2
+            </div>
+
+            <!-- Grid 3rd column -->
+            <div class="col-lg-4 col-md-12 mb-4">
+                VIEW REPORT 3
             </div>
         </div>
-        <br/>
-        <br/>
-        <div class="row">
-            <div class="col-md-6">Username</div>
-            <div class="col-md-6">${client.username}</div>
-            <br/>
-            <br/>
-            <div class="col-md-6">Email</div>
-            <div class="col-md-6">${client.email}</div>
-            <br/>
-            <br/>
-            <div class="col-md-6">Company</div>
-            <div class="col-md-6">${client.company}</div>
-            <br/>
-            <br/>
-            <div class="col-md-6">Address</div>
-            <div class="col-md-6">${client.address}</div>
-            <br/>
-            <br/>
-        </div>
-        <center> <button type="button" class="btn btn-primary">Edit Profile</button></center>
-    </div>
+    </section>
+</div>
 
 </body>
 </html>
