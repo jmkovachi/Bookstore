@@ -20,17 +20,14 @@ public class CartService {
 
     private BookService bookService;
 
-    private PromotionService promotionService;
-
     private VendorService vendorService;
 
     @Autowired
     public CartService(final CartDao cartDao, final CustomerService customerService,
-                       final BookService bookService, final PromotionService promotionService, final VendorService vendorService) {
+                       final BookService bookService, final VendorService vendorService) {
         this.cartDao = cartDao;
         this.customerService = customerService;
         this.bookService = bookService;
-        this.promotionService = promotionService;
         this.vendorService = vendorService;
     }
 
@@ -103,16 +100,7 @@ public class CartService {
         final Book book = retrieveBook.get();
         final Double originalPrice = cartItem.getQuantity() * book.getPrice();
         cartItem.setOriginalPrice(originalPrice);
-        if (book.getPromoId() != null) {
-            final Optional<Promotion> promotion = promotionService.getPromotion(book.getPromoId());
-            if (promotion.isPresent()) {
-                this.applyPromotion(originalPrice, promotion.get(), cartItem);
-            } else {
-                throw new ValidationException("Promotion with promo id <%s> does not exist", Integer.toString(book.getPromoId()));
-            }
-        } else {
-            cartItem.setFinalPrice(originalPrice);
-        }
+        cartItem.setFinalPrice(originalPrice);
     }
 
     public CartController.CartItemWithBook transformToCartItemWithBook(final CartItem cartItem) {
