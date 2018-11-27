@@ -28,12 +28,19 @@ public class CheckoutController {
     @RequestMapping(value = "/checkout", method = RequestMethod.GET)
     public ModelAndView checkout(final Principal principal) throws ValidationException {
         //final String username = principal.getName();
-        final String username = "jmkovachi";
+        final String username = "jpreinold";
         final List<CartItem> cartItems = cartService.getCartForCustomer(username);
+
+        // use java streams to calculate total price of all items
+        final Double totalAmount = cartItems.stream()
+                .map(CartItem::getFinalPrice)
+                .reduce(0.0, (c1, c2) -> c1 + c2);
+
         final Customer customer = customerService.getCustomer(username).get();
         final CheckoutViewModel checkoutViewModel = CheckoutViewModel.builder()
                 .cartItems(cartItems.stream().map(cartService::transformToCartItemWithBook).collect(Collectors.toList()))
                 .customer(customer)
+                .totalAmount(totalAmount)
                 .build();
         return new ModelAndView("views/checkout", "checkout", checkoutViewModel);
     }

@@ -37,25 +37,21 @@
 
               <!--Grid row-->
               <div class="row">
-
                 <!--Grid column-->
-                <div class="col-md-6 mb-2">
+                <div class="col-md-2 mb-2">
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div style="text-align:center" class="col-md-8 mb-2">
 
-                  <!--firstName-->
-                  <div>
-                    ${customer.firstName}
+                  <!--Message-->
+                  <div style="text-align:center">
+                    ${customer.firstName}, please fill out the billing information below in order to checkout.
                   </div>
 
                 </div>
                 <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-md-6 mb-2">
-
-                    <div>
-                      ${customer.lastName}
-                    </div>
-
+                <div class="col-md-2 mb-2">
                 </div>
                 <!--Grid column-->
 
@@ -64,23 +60,20 @@
 
               <!--Username-->
               <div class="md-form input-group pl-0 mb-5">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">@</span>
-                </div>
-                <div> ${customer.username} </div>
+                <div> Username: ${customer.username} </div>
               </div>
 
               <!--email-->
               <div class="md-form mb-5">
                 <div>
-                    ${customer.email}
+                    Email: ${customer.email}
                 </div>
               </div>
 
               <!--address-->
               <div class="md-form mb-5">
                 <input type="text" name="address" id="address" class="form-control" placeholder="1234 Main St">
-                <label for="address" class="">Address</label>
+                <label for="address" class="">Billing Address</label>
               </div>
 
               <!--Grid row-->
@@ -93,7 +86,7 @@
                     <input type="text" name="city" id="city" class="form-control" placeholder="Athens">
                     <label for="city" class="">City</label>
                     <div class="invalid-feedback">
-                        Please provide a valid state.
+                        Please provide a city name.
                       </div>
 
                 </div>
@@ -103,9 +96,9 @@
                 <div class="col-lg-4 col-md-6 mb-4">
 
                   <input type="text" name="state" id="state" class="form-control" placeholder="Georgia">
-                  <label for="city" class="">City</label>
+                  <label for="state" class="">State</label>
                   <div class="invalid-feedback">
-                    Please provide a city name.
+                    Please provide a valid state.
                   </div>
 
                 </div>
@@ -114,8 +107,9 @@
                 <!--Grid column-->
                 <div class="col-lg-4 col-md-6 mb-4">
 
+
+                  <input type="text" name="zip" class="form-control" id="zip" placeholder="-----" required>
                   <label for="zip">Zip</label>
-                  <input type="text" name="zip" class="form-control" id="zip" placeholder="" required>
                   <div class="invalid-feedback">
                     Zip code required.
                   </div>
@@ -168,7 +162,7 @@
                 </div>
               </div>
               <hr class="mb-4">
-              <button class="checkout btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+              <button class="checkout btn btn-primary btn-lg btn-block" type="submit">Place Order</button>
               <input type="hidden" name="username" id="username" value="${customer.username}"/>
             </form>
 
@@ -199,10 +193,13 @@
                     <span>$<tags:doubleFormat num="${cartItem.cartItem.originalPrice}"/></span>
                   </c:if>
                   <span class="text-muted">$<tags:doubleFormat num="${cartItem.cartItem.finalPrice}"/></span>
-                  <input class="cartData" data-isbn="${cartItem.book.isbn}" data-finalprice="${cartItem.cartItem.finalPrice}"
+                  <input class="cartData" type="hidden" data-isbn="${cartItem.book.isbn}" data-finalprice="${cartItem.cartItem.finalPrice}"
                     data-quantity="${cartItem.cartItem.quantity}" />
                 </li>
             </c:forEach>
+            <li style="text-align:right" class="list-group-item d-flex justify-content-between lh-condensed">
+                <h6 class="my-0">Total Price: $${checkout.totalAmount}</h6>
+            </li>
           </ul>
           <!-- Cart -->
 

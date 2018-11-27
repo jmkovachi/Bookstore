@@ -12,5 +12,6 @@ import java.util.List;
 public class CheckoutViewModel {
     private Customer customer;
     private List<CartController.CartItemWithBook> cartItems;
+    private Double totalAmount;
 }
 
