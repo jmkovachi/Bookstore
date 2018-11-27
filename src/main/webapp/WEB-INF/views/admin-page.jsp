@@ -29,6 +29,8 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <!------ Include the above in your HEAD tag ---------->
+    <script src="/js/common.js"></script>
+    <script src="/js/admin.js"></script>
 </head>
 
 <body class="category-v1 hidden-sn white-skin animated">
@@ -795,15 +797,17 @@
 
             <!--Grid 2nd column-->
             <div class="col-lg-4 col-md-12 mb-4">
-                <center>
-                    <div class="md-form">
-                        <input type="text" class="form-control" placeholder="Enter ID of Promotion to Delete">
-                    </div>
-                    <button class="btn btn-danger" type="button">
-                        Delete Promotion
-                    </button>
+                <form id="deletePromotion">
+                    <center>
+                        <div class="md-form">
+                            <input name="promoId" type="text" class="form-control" placeholder="Enter ID of Promotion to Delete">
+                        </div>
+                        <button type="submit" class="btn btn-danger">
+                            Delete Promotion
+                        </button>
 
-                </center>
+                    </center>
+                </form>
             </div>  <!-- 2nd col-->
 
             <!--Grid 3rd column-->

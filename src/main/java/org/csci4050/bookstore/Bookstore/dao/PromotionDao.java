@@ -22,7 +22,7 @@ public class PromotionDao {
                         "values(?,?,?);", promotion.getExpireDate(), promotion.getPercentOff(), promotion.getPromoCode());
     }
 
-    public void updatPromotion(final Promotion promotion) {
+    public void updatePromotion(final Promotion promotion) {
         final String sql = "update promotion set expire_date=?, percent_off=?, promo_code=? where promo_id=?";
         jdbcTemplate.update(sql, promotion.getExpireDate(), promotion.getPercentOff(), promotion.getPromoCode(), promotion.getPromoId());
     }
@@ -41,7 +41,7 @@ public class PromotionDao {
         return this.jdbcTemplate.query("select * from promotion", new PromotionMapper());
     }
 
-    public void deletePromotion(final String promoId) {
-        this.jdbcTemplate.query("delete from promotion where promo_id=?", new Object[] {promoId}, new PromotionMapper());
+    public void deletePromotion(final int promoCode) {
+        this.jdbcTemplate.query("delete from promotion where promo_code=?", new Object[] {promoCode}, new PromotionMapper());
     }
 }

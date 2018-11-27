@@ -33,8 +33,12 @@ public class PromotionService {
         promotionDao.createPromotion(promotion);
     }
 
+    public void deletePromotion(final int promoCode) {
+        promotionDao.deletePromotion(promoCode);
+    }
+
     public void updatePromotion(final Promotion promotion) {
-        promotionDao.updatPromotion(promotion);
+        promotionDao.updatePromotion(promotion);
     }
 
     public void updateCartWithPromotion(final Promotion promotion, final String username) throws ValidationException {

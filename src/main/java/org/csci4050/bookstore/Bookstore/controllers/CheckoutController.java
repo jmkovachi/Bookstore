@@ -27,8 +27,7 @@ public class CheckoutController {
 
     @RequestMapping(value = "/checkout", method = RequestMethod.GET)
     public ModelAndView checkout(final Principal principal) throws ValidationException {
-        //final String username = principal.getName();
-        final String username = "jpreinold";
+        final String username = principal.getName();
         final List<CartItem> cartItems = cartService.getCartForCustomer(username);
 
         // use java streams to calculate total price of all items
