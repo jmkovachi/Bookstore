@@ -30,6 +30,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     private ResponseEntity<Object> handleException(final Exception e) {
+        System.out.println(e);
         final ExceptionModel exceptionModel = ExceptionModel.builder()
                 .message(e.getMessage())
                 .status(HttpStatus.NOT_FOUND)

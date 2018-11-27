@@ -5,7 +5,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags/"%>
 <head>
     <tags:dependency />
-    <script src="/js/register-customer.js"></script>
+    <script type="text/javascript" src="/js/confirm-profile.js"></script>
 </head>
 <body>
 
@@ -18,39 +18,34 @@
     <br/>
     <br/>
     <div class="row">
-        <div class="col-md-6">Username</div>
-        <input class="col-md-5" id="username" placeholder="Enter your new username..." type="text">
-        <br/>
-        <br/>
         <div class="col-md-6">First Name</div>
-        <input class="col-md-5" id="fname" placeholder="Enter your new first name..." type="text">
+        <input class="col-md-5" id="fname" value="${customer.firstName}" type="text">
         <br/>
         <br/>
         <div class="col-md-6">Last Name</div>
-        <input class="col-md-5" id="lname" placeholder="Enter your new last name..." type="text">
+        <input class="col-md-5" id="lname" value="${customer.lastName}" type="text">
         <br/>
         <br/>
         <div class="col-md-6">Email</div>
-        <input class="col-md-5" id="email" placeholder="Enter your new email..." type="text">
+        <input class="col-md-5" id="email" value="${customer.email}" type="text">
         <br/>
         <br/>
         <div class="col-md-6">Address</div>
-        <input class="col-md-5" id="address" placeholder="Enter your new address..." type="text">
+        <input class="col-md-5" id="address" value="${customer.address}" type="text">
         <br/>
         <br/>
         <div class="col-md-6">Birth Date</div>
-        <input class="col-md-5" id="birthdate" placeholder="Enter your new birth date..." type="date">
+        <input class="col-md-5" id="birthdate" value=${customer.birthDate} type="date">
         <br/>
         <br/>
         <div class="col-md-6">Newsletter Status</div>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="newsletter">
-            <label class="custom-control-label" for="defaultUnchecked">Subscribed</label>
-        </div>
+        <div class="header radio-header"> Receive newsletter? </div>
+                        <input class="radio" type="radio" name="newsletter" value="true"> <div class="radio-label"> Yes </div>
+                        <input class="radio" type="radio" name="newsletter" value="false"> <div class="radio-label"> No </div>
         <br/>
         <br/>
     </div>
-    <center><a id = "confirm" class = "btn btn-primary">Edit Profile</a></center>
+    <center><a id="confirm" class="btn btn-primary" data-customer="${customer.username}">Confirm</a></center>
 </div>
 
 </body>
