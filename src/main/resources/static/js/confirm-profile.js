@@ -5,21 +5,18 @@ $(document).ready(function() {
         const email = $("#email").val();
         const address = $("#address").val();
         const birthdate = $("#birthdate").val();
-        const newsletter = $('input[name="newsletter"]:checked').val();
+        const newsletter = $('input[name="newsletter"]:checked').val();\
         console.log(newsletter + "newsletter");
         const url = "/customer/update";
-
-
-
-            const data = {
-                "firstName" : fname,
-                "lastName" : lname,
-                "email" : email,
-                "address" : address,
-                "birthDate" : birthdate,
-                "newsletter" : newsletter
-            };
-            postAjax(url, JSON.stringify(data), "/profile/direct");
+        const data = {
+            "firstName" : fname,
+            "lastName" : lname,
+            "email" : email,
+            "address" : address,
+            "birthDate" : birthdate,
+            "newsletter" : newsletter
+        };
+        postAjax(url, JSON.stringify(data), "/profile/direct");
     });
 });
 

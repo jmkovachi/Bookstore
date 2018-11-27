@@ -44,7 +44,7 @@ public class CatalogController {
             viewCategory = "Author";
             viewString = author;
         } else if (title != null) {
-            books = bookService.queryBooks("title", author);
+            books = bookService.queryBooks("title", title);
             viewCategory = "Title";
             viewString = title;
         } else if (genre != null) {

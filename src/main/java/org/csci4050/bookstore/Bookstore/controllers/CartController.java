@@ -86,7 +86,7 @@ public class CartController {
         // Principal is a bean defined by spring security, we can use it to get authentication details
         final String username = principal.getName();
         final List<CartItemWithBook> cartItems = cartService.getCartForCustomer(username).stream()
-                .map(this::transformToCartItemWithBook)
+                .map(cartService::transformToCartItemWithBook)
                 .collect(Collectors.toList());
 
         // use java streams to calculate total price of all items
@@ -101,18 +101,6 @@ public class CartController {
                 .totalAmount(totalAmount)
                 .build();
         return new ModelAndView("views/cart", "cart", cartViewModel);
-    }
-
-    private CartItemWithBook transformToCartItemWithBook(final CartItem cartItem) {
-        final Book book = bookService.getBook(cartItem.getIsbn()).get();
-        final String publisher = vendorService.getVendor(book.getVUsername()).get().getCompany();
-        return CartItemWithBook.builder()
-                .cartItem(cartItem)
-                .singleFinalPrice(cartItem.getFinalPrice() / cartItem.getQuantity())
-                .singleOriginalPrice(cartItem.getOriginalPrice() / cartItem.getQuantity())
-                .publisher(publisher)
-                .book(book)
-                .build();
     }
 
     @Data

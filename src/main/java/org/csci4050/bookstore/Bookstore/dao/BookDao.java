@@ -29,10 +29,10 @@ public class BookDao {
     }
 
     public void updateBook(final Book book) {
-        final String sql = "update book set title=?,date_published=?,author=?,category=?,price=?,total_inventory=?" +
+        final String sql = "update book set title=?,date_published=?,author=?,category=?,price=?,total_inventory=?," +
                 "promo_id=?,image_url=?,rating=?,summary=?,pages=?,v_username=? where isbn=?";
         jdbcTemplate.update(sql, book.getTitle(), book.getDatePublished(), book.getAuthor(), book.getCategory(),
-                book.getCategory(), book.getPrice(), book.getTotalInventory(), book.getPromoId(), book.getImageUrl(),
+                book.getPrice(), book.getTotalInventory(), book.getPromoId(), book.getImageUrl(),
                 book.getRating(), book.getSummary(), book.getPages(), book.getVUsername(), book.getIsbn());
     }
 

@@ -46,4 +46,24 @@ public class DaoConfig {
         return new CartDao(jdbcTemplate);
     }
 
+    @Bean
+    public OrderDao orderDao(final JdbcTemplate jdbcTemplate) {
+        return new OrderDao(jdbcTemplate);
+    }
+
+    @Bean
+    public PaymentDao paymentDao(final JdbcTemplate jdbcTemplate) {
+        return new PaymentDao(jdbcTemplate);
+    }
+
+    @Bean
+    public OrderItemDao orderItemDao(final JdbcTemplate jdbcTemplate) {
+        return new OrderItemDao(jdbcTemplate);
+    }
+
+    @Bean
+    public ShippingAddressDao shippingAddressDao(final JdbcTemplate jdbcTemplate) {
+        return new ShippingAddressDao(jdbcTemplate);
+    }
+
 }
