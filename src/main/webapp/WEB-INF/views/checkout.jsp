@@ -148,7 +148,7 @@
               <div class="row">
                 <div class="col-md-3 mb-3">
                   <label for="cc-expiration">Expiration</label>
-                  <input name="expDate" type="text" class="form-control" id="cc-expiration" placeholder="mm/yyyy" required>
+                  <input name="expDate" type="text" class="form-control" id="cc-expiration" placeholder="mm-yyyy" required>
                   <div class="invalid-feedback">
                     Expiration date required
                   </div>
@@ -184,7 +184,7 @@
           <!-- Cart -->
           <ul class="cartItems list-group mb-3 z-depth-1">
             <c:forEach items="${cartItems}" var="cartItem">
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <li class="cartItem list-group-item d-flex justify-content-between lh-condensed">
                   <div>
                     <h6 class="my-0">${cartItem.book.title}</h6>
                     <small class="text-muted">${cartItem.publisher}</small>

@@ -10,7 +10,7 @@ $(document).ready(function() {
             cardNum: data.cardNum,
             expDate: data.expDate,
             securityCode: data.securityCode,
-            username: data.username,
+            username: data.username
         };
         const shippingAddress = {
             address: data.address,
@@ -20,7 +20,7 @@ $(document).ready(function() {
             username: data.username
         };
         const list = [];
-        $(".cartItems li").each(function(i, elem) {
+        $(".cartItems .cartItem").each(function(i, elem) {
             const cartItem = $(this).find(".cartData");
             console.log(cartItem);
             list.push({
@@ -59,13 +59,10 @@ function postAjax(url, data) {
         data: data,
         success: function(res) {
             alert("Successfully ordered.");
-            const order = JSON.parse(res);
-            window.location.href = "/order/" + order.orderId;
+            window.location.href = "/order/confirm/" + res.orderId;
         },
         error: function(res) {
-            console.log(res);
-            const message = JSON.parse(res);
-            alert(message);
+            alert(res.message);
         }
     });
 }

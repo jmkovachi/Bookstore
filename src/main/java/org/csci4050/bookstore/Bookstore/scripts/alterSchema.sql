@@ -19,3 +19,6 @@ ADD CONSTRAINT `FK_302`
   ON UPDATE CASCADE;
 
 ALTER TABLE `order` AUTO_INCREMENT = 1000000;
+
+ALTER TABLE `bookstoredb`.`orderitem`
+ADD COLUMN `quantity` INT NOT NULL AFTER `final_price`;
