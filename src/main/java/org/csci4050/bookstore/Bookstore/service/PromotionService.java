@@ -18,4 +18,12 @@ public class PromotionService {
     public Optional<Promotion> getPromotion(final int promoId) {
         return this.promotionDao.getPromotion(promoId);
     }
+
+    public void createPromotion(final Promotion promotion) {
+        promotionDao.createPromotion(promotion);
+    }
+
+    public void updatePromotion(final Promotion promotion) {
+        promotionDao.updatPromotion(promotion);
+    }
 }

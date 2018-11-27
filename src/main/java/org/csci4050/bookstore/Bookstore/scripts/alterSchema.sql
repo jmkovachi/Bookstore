@@ -17,3 +17,6 @@ ADD CONSTRAINT `FK_302`
   REFERENCES `bookstoredb`.`customer` (`c_username`)
   ON DELETE CASCADE
   ON UPDATE CASCADE;
+
+ALTER TABLE `bookstoredb`.`promotion`
+CHANGE COLUMN `expire_date` `expire_date` DATE NULL ;
