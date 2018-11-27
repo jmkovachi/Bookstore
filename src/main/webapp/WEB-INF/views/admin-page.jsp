@@ -294,13 +294,10 @@
                                             <label data-error="" data-success="" for="orangeForm-bkauthor">Author</label>
                                         </div>
 
-                                        <!-- Price -->
-                                        <div class="md-form input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text md-addon">$</span>
-                                                <input type="text" id="orangeForm-bkPrice" class="form-control validate" placeholder="0.00">
-                                                <label data-error="" data-success="" for="orangeForm-bkPrice">Price</label>
-                                            </div>
+                                        <!-- Vendor -->
+                                        <div class="md-form mb-5">
+                                            <input type="text" id="orangeForm-bkVendor" class="form-control validate">
+                                            <label data-error="" data-success="" for="orangeForm-bkVendor">Vendor</label>
                                         </div>
 
                                         <!-- ISBN -->
@@ -314,6 +311,27 @@
                                             <input type="text" id="orangeForm-imageAddr" class="form-control validate">
                                             <label data-error="" data-success="" for="orangeForm-imageAddr">Enter image url</label>
                                         </div>
+
+                                        <div class="md-form mb-5">
+                                            <!-- Choose Genre -->
+                                            <select class="browser-default custom-select">
+                                                <option selected>Choose Genre</option>
+                                                <option value="1">Genre 1</option>
+                                                <option value="2">Genre 2</option>
+                                                <option value="3">Genre 3</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <!-- Price -->
+                                        <div class="md-form input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text md-addon">$</span>
+                                                <input type="text" id="orangeForm-bkPrice" class="form-control validate" placeholder="0.00">
+                                                <label data-error="" data-success="" for="orangeForm-bkPrice">Price</label>
+                                            </div>
+                                        </div>
+
+
 
                                         <!-- Book description -->
                                         <div class="form-group">
@@ -378,7 +396,7 @@
 
                                         <!--Grid column-->
                                         <div class="col-md-6 mb-4">
-                                            <img src="https://res.cloudinary.com/vop/image/fetch/c_lfill,f_auto,g_center,w_800/https://bi-admin.bibleinfo.com/sites/default/files/images/2017/ShieldOfFaith.med-750px.jpg" class="img-fluid" alt="">
+                                            <img src="http://www.darleyandersonchildrens.com/img/book-placeholder" class="img-fluid" alt="">
                                             <!-- block with input and button to add an image -->
 
                                             <div class = "img-upload">
@@ -386,7 +404,14 @@
                                                 <input type = "text" placeholder = "Enter image source"/>
                                                 <button class="btn btn-primary">Insert Image</button>
                                             </div>
-
+                                            <hr>
+                                            <!--Edit genre-->
+                                            <select class="browser-default custom-select">
+                                                <option selected>Choose Genre</option>
+                                                <option value="1">Genre 1</option>
+                                                <option value="2">Genre 2</option>
+                                                <option value="3">Genre 3</option>
+                                            </select>
                                         </div>
                                         <!--Grid column-->
 
@@ -394,15 +419,37 @@
                                         <div class="col-md-6 mb-4">
 
                                             <!--Content-->
-                                            <div class="p-4" style="word-wrap: break-word">
-                                                <!-- word wrap ensures that text doesn't go outside div-->
-                                                <h3 contenteditable="true">Book Title</h3>
-                                                <h6 contenteditable="true">by Author</h6>
-                                                <p contenteditable="true" class="lead">
-                                                    <span>$20</span>
-                                                </p>
+                                            <!-- Edit title -->
+                                            <div class="md-form mb-5">
+                                                <input type="text" id="editBookTitle" class="form-control validate">
+                                                <label data-error="" data-success="" for="editBookTitle">Book Title</label>
                                             </div>
-                                            <!--Grid column-->
+                                            <!-- Edit author -->
+                                            <div class="md-form mb-5">
+                                                <input type="text" id="editBookAuthor" class="form-control validate">
+                                                <label data-error="" data-success="" for="editBookAuthor">Author</label>
+                                            </div>
+                                            <!-- Edit vendor -->
+                                            <div class="md-form mb-5">
+                                                <input type="text" id="editBookVendor" class="form-control validate">
+                                                <label data-error="" data-success="" for="editBookVendor">Vendor</label>
+                                            </div>
+
+                                            <!-- ISBN -->
+                                            <div class="md-form mb-4">
+                                                <input type="text" id="orangeForm-editISBN" class="form-control validate">
+                                                <label data-error="" data-success="" for="orangeForm-editISBN">ISBN</label>
+                                            </div>
+
+                                            <!-- Edit Price -->
+                                            <div class="md-form input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text md-addon">$</span>
+                                                    <input type="text" id="editBookPrice" class="form-control validate" placeholder="0.00">
+                                                    <label data-error="" data-success="" for="editBookPrice">Price</label>
+                                                </div>
+                                            </div>
+
 
                                         </div> <!-- Grid row -->
                                     </div> <!-- modal body/content area -->
@@ -898,6 +945,7 @@
         });
     });
 </script>
+
 
 <!-- Order Modal: if cash is selected -->
 <script>
