@@ -15,7 +15,7 @@ public class ShippingAddressMapper implements RowMapper<ShippingAddress> {
                 .addressId(rs.getInt("address_id"))
                 .city(rs.getString("city"))
                 .state(rs.getString("state"))
-                .username(rs.getString("username"))
+                .username(rs.getString("c_username"))
                 .zip(rs.getInt("zip"))
                 .build();
     }

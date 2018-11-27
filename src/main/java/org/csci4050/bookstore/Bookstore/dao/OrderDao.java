@@ -21,7 +21,7 @@ public class OrderDao {
     }
 
     public int createOrder(final Order order) {
-        final String sql = "insert into `order`(c_username,total,payment_type,payment_id) values(?,?,?,?)";
+        final String sql = "insert into `order`(c_username,total,payment_type,payment_id,address_id) values(?,?,?,?,?)";
         final KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {
             final PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -29,6 +29,7 @@ public class OrderDao {
             ps.setDouble(2, order.getTotal());
             ps.setString(3, order.getPaymentType());
             ps.setInt(4, order.getPaymentId());
+            ps.setInt(5, order.getAddressId());
             return ps;
         }, keyHolder);
         return keyHolder.getKey().intValue();

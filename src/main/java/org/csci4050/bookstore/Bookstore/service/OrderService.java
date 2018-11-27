@@ -1,5 +1,6 @@
 package org.csci4050.bookstore.Bookstore.service;
 
+import org.csci4050.bookstore.Bookstore.controllers.OrderController;
 import org.csci4050.bookstore.Bookstore.dao.OrderDao;
 import org.csci4050.bookstore.Bookstore.dao.OrderItemDao;
 import org.csci4050.bookstore.Bookstore.dao.PaymentDao;
@@ -65,7 +66,9 @@ public class OrderService {
         }
 
         // create shipping address
-        shippingAddressService.createShippingAddress(shippingAddress);
+        int shippingAddressId = shippingAddressService.createShippingAddress(shippingAddress);
+
+        order.setAddressId(shippingAddressId);
 
         // use java streams to calculate total price of all items
         final Double totalAmount = orderItems.stream()
@@ -135,15 +138,30 @@ public class OrderService {
         }
 
         final Order order = optionalOrder.get();
+        final List<OrderItem> orderItems = orderItemDao.getOrderItemsForOrderId(order.getOrderId());
         final Customer customer = customerService.getCustomer(order.getUsername()).get();
+        final ShippingAddress shippingAddress = shippingAddressService.getShippingAddress(order.getAddressId()).get();
         javaMailSender.send(mimeMessage -> {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
             message.setTo(customer.getEmail());
             message.setSubject("Order #" + order.getOrderId() + " confirmation from Bookstore.com");
             final StringBuilder str = new StringBuilder();
-            str.append("<h2> Order # " + order.getOrderId() + " </h2>");
-            str.append("<h3> Total: " + order.getTotal() + "</h3>");
-            message.setText("<h2> Order # " + order.getOrderId() + " </h2>", true);
+            str.append("<h2> Confirmation for order # " + order.getOrderId() + " </h2>");
+            str.append("<h3> Total: $" + order.getTotal() + "</h3>");
+            str.append("<br>");
+            str.append("<h3> Number of items: " + orderItems.size() + "</h3>");
+            for (final OrderItem item : orderItems) {
+                str.append("<div> Isbn: " + item.getIsbn() + " | Quantity: " + item.getQuantity() + "</div>");
+            }
+            str.append("<h3> Shipping address </h3>");
+            str.append("<div> Address: " + shippingAddress.getAddress() + " </div>");
+            str.append("<div> City: " + shippingAddress.getCity() + "|" + shippingAddress.getState() + "</div>");
+            str.append("<div> Zip: " + shippingAddress.getZip() + "</div>");
+            str.append("<a href=\"http://localhost:8080/order/confirm/" + order.getOrderId() + "\">Confirmation Link</a>");
+            OrderController.CheckoutInfo checkoutInfo = OrderController.CheckoutInfo.builder()
+                    .order(order)
+                    .build();
+            message.setText(str.toString(), true);
         });
     }
 

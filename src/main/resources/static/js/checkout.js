@@ -16,10 +16,11 @@ $(document).ready(function() {
             address: data.address,
             city: data.city,
             zip: data.zip,
-            state: data.state
+            state: data.state,
+            username: data.username
         };
         const list = [];
-        $(".cartItems").each(function(i, elem) {
+        $(".cartItems li").each(function(i, elem) {
             const cartItem = $(this).find(".cartData");
             console.log(cartItem);
             list.push({

@@ -17,8 +17,8 @@ public class OrderItemDao {
     }
 
     public void createOrderItem(final OrderItem orderItem) {
-        final String sql = "insert into orderitem(order_id,isbn,final_price) values(?,?,?)";
-        this.jdbcTemplate.update(sql, orderItem.getOrderId(), orderItem.getIsbn(), orderItem.getFinalPrice());
+        final String sql = "insert into orderitem(order_id,isbn,final_price,quantity) values(?,?,?,?)";
+        this.jdbcTemplate.update(sql, orderItem.getOrderId(), orderItem.getIsbn(), orderItem.getFinalPrice(), orderItem.getQuantity());
     }
 
     public void deleteOrderItemsForOrderId(final int orderId) {
