@@ -1,6 +1,5 @@
 package org.csci4050.bookstore.Bookstore.service;
 
-import org.csci4050.bookstore.Bookstore.controllers.OrderController;
 import org.csci4050.bookstore.Bookstore.dao.OrderDao;
 import org.csci4050.bookstore.Bookstore.dao.OrderItemDao;
 import org.csci4050.bookstore.Bookstore.dao.PaymentDao;
@@ -16,7 +15,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class OrderService {
-
     
     private OrderDao orderDao;
 
@@ -145,23 +143,8 @@ public class OrderService {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
             message.setTo(customer.getEmail());
             message.setSubject("Order #" + order.getOrderId() + " confirmation from Bookstore.com");
-            final StringBuilder str = new StringBuilder();
-            str.append("<h2> Confirmation for order # " + order.getOrderId() + " </h2>");
-            str.append("<h3> Total: $" + order.getTotal() + "</h3>");
-            str.append("<br>");
-            str.append("<h3> Number of items: " + orderItems.size() + "</h3>");
-            for (final OrderItem item : orderItems) {
-                str.append("<div> Isbn: " + item.getIsbn() + " | Quantity: " + item.getQuantity() + "</div>");
-            }
-            str.append("<h3> Shipping address </h3>");
-            str.append("<div> Address: " + shippingAddress.getAddress() + " </div>");
-            str.append("<div> City: " + shippingAddress.getCity() + "|" + shippingAddress.getState() + "</div>");
-            str.append("<div> Zip: " + shippingAddress.getZip() + "</div>");
-            str.append("<a href=\"http://localhost:8080/order/confirm/" + order.getOrderId() + "\">Confirmation Link</a>");
-            OrderController.CheckoutInfo checkoutInfo = OrderController.CheckoutInfo.builder()
-                    .order(order)
-                    .build();
-            message.setText(str.toString(), true);
+            final String html = createConfirmationHtml(order, orderItems, customer, shippingAddress);
+            message.setText(html, true);
         });
     }
 
@@ -171,6 +154,25 @@ public class OrderService {
 
     public List<OrderItem> getOrderItemsForOrderId(final int orderId) {
         return orderItemDao.getOrderItemsForOrderId(orderId);
+    }
+
+    private String createConfirmationHtml(final Order order, final List<OrderItem> orderItems,
+                                          final Customer customer, final ShippingAddress shippingAddress) {
+        final StringBuilder str = new StringBuilder();
+        str.append("<h1> Thanks for ordering with Bookstore.com, " + customer.getFirstName() + ".");
+        str.append("<h2> Confirmation for order #" + order.getOrderId() + " </h2>");
+        str.append("<h3> Total: $" + order.getTotal() + "</h3>");
+        str.append("<br>");
+        str.append("<h3> Number of items: " + orderItems.size() + "</h3>");
+        for (final OrderItem item : orderItems) {
+            str.append("<div> Isbn: " + item.getIsbn() + " | Quantity: " + item.getQuantity() + "</div>");
+        }
+        str.append("<h3> Shipping address </h3>");
+        str.append("<div> Address: " + shippingAddress.getAddress() + " </div>");
+        str.append("<div> City: " + shippingAddress.getCity() + "| State: " + shippingAddress.getState() + "</div>");
+        str.append("<div> Zip: " + shippingAddress.getZip() + "</div>");
+        str.append("<a href=\"http://localhost:8080/order/confirm/" + order.getOrderId() + "\">Link to Order Confirmation</a>");
+        return str.toString();
     }
 
 }
