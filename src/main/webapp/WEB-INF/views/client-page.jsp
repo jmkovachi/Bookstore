@@ -42,11 +42,10 @@
 
     <section class="section pt-4">
         <center>
-            <h1>Client</h1>
+            <h1>Client Reports</h1>
         </center>
 
         <!-- Grid FIRST ROW -->
-        <h2>Reports</h2>
         <div class="row">
             <!--Grid 1st column-->
             <div class="col-lg-4 col-md-12 mb-4">
