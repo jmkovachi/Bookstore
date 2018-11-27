@@ -48,7 +48,7 @@
             <br/>
             <br/>
         </div>
-        <center> <button type="button" class="btn btn-primary">Edit Profile</button></center>
+        <center><a href="/edit/vendor" class = "btn btn-primary">Edit Profile</a></center>
     </div>
 
 </body>
