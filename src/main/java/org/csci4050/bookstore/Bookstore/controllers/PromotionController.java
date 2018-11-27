@@ -41,6 +41,12 @@ public class PromotionController {
         return new ResponseEntity<>("", new HttpHeaders(), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/delete/{promoId}", method = RequestMethod.DELETE)
+    public ResponseEntity<Object> deletePromotion(@PathVariable final int promoCode) {
+        promotionService.deletePromotion(promoCode);
+        return new ResponseEntity<>("", new HttpHeaders(), HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/apply/{promoCode}", method = RequestMethod.POST)
     public ResponseEntity<Object> applyPromotion(@PathVariable final int promoCode, final Principal principal) throws ValidationException {
         final String username = principal.getName();

@@ -41,7 +41,7 @@ public class PromotionDao {
         return this.jdbcTemplate.query("select * from promotion", new PromotionMapper());
     }
 
-    public void deletePromotion(final String promoId) {
-        this.jdbcTemplate.query("delete from promotion where promo_id=?", new Object[] {promoId}, new PromotionMapper());
+    public void deletePromotion(final int promoCode) {
+        this.jdbcTemplate.query("delete from promotion where promo_code=?", new Object[] {promoCode}, new PromotionMapper());
     }
 }

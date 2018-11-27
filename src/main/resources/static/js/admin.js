@@ -1,42 +1,54 @@
 $(document).ready(function () {
     $("#addPromotion").on("submit", function (event) {
         event.preventDefault();
-        const data = toJSON($(this).serializeArray());
+        const data = toJson($(this).serializeArray());
+        console.log(data);
         postAjax("/promotion/add", data);
     });
 
     $("#editPromotion").on("submit", function (event) {
         event.preventDefault();
-        const data = toJSON($(this).serializeArray());
+        const data = toJson($(this).serializeArray());
+        console.log(data);
         postAjax("/promotion/edit", data);
-    })
-});
-
-function toJson(formSerializeArr){
-    var jsonObj = {};
-    jQuery.map( formSerializeArr, function( n, i ) {
-        jsonObj[n.name] = n.value;
     });
 
-    return jsonObj;
-}
+    $("#deletePromotion").on("submit", function (event) {
+        event.preventDefault();
+        const data = toJson($(this).serializeArray());
+        console.log(data);
+        deleteAjax("/promotion/delete", data.promoId);
+    });
+});
 
 function postAjax(url, data) {
     $.ajax({
         type: "POST",
         url: url,
-        dataType: "json",
         contentType: "application/json",
-        data: data,
+        data: JSON.stringify(data),
         success: function(res) {
-            alert("Successfully ordered.");
-            const order = JSON.parse(res);
-            window.location.href = "/order/" + order.orderId;
+            alert("Successfully updated.");
         },
         error: function(res) {
             console.log(res);
-            const message = JSON.parse(res);
-            alert(message);
+            alert(JSON.parse(res).message);
         }
     });
+}
+
+function deleteAjax(url, data) {
+    $.ajax({
+        type: "DELETE",
+        url: url,
+        contentType: "application/json",
+        data: "",
+        success: function(res) {
+            alert("Successfully deleted.");
+        },
+        error: function(res) {
+            console.log(res);
+            alert(JSON.parse(res).message);
+        }
+    })
 }

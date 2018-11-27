@@ -33,6 +33,10 @@ public class PromotionService {
         promotionDao.createPromotion(promotion);
     }
 
+    public void deletePromotion(final int promoCode) {
+        promotionDao.deletePromotion(promoCode);
+    }
+
     public void updatePromotion(final Promotion promotion) {
         promotionDao.updatePromotion(promotion);
     }
