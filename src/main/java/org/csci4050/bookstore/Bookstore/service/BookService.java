@@ -86,6 +86,10 @@ public class BookService {
         return bookDao.queryBooks(column, value);
     }
 
+    public List<Book> queryBooksInventory(final int intventoryValue) throws ValidationException {
+        return bookDao.getBooksWithInventoryLessThanNum(intventoryValue);
+    }
+
     public List<Book> getBooksByColumns(final String column, final String value) {
         return bookDao.queryBooks(column, value);
     }

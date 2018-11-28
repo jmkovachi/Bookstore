@@ -40,4 +40,7 @@ public class OrderDao {
         return this.jdbcTemplate.query(sql, new Object[] {orderId}, new OrderMapper()).stream().findAny();
     }
 
+    /*public Double queryOrderByIsbn(final String isbn) {
+        final String sql = "select SUM("
+    }*/
 }

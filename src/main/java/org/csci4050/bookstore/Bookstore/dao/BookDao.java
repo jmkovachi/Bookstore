@@ -60,6 +60,11 @@ public class BookDao {
         return this.jdbcTemplate.query(sql, new Object[] {value}, new BookMapper());
     }
 
+    public List<Book> getBooksWithInventoryLessThanNum(final int inventoryNum) {
+        final String sql = "select * from book where total_inventory < ?";
+        return this.jdbcTemplate.query(sql, new Object[] {inventoryNum}, new BookMapper());
+    }
+
     public List<String> getValuesByColumn(final String column) {
         return this.jdbcTemplate.query("select distinct " + column + " from book", new RowMapper<>() {
             @Override
