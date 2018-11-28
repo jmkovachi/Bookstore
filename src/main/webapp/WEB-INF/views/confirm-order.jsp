@@ -85,5 +85,8 @@
                 </div>
             </div>
         </div>
+        <!--Footer-->
+        <tags:footer />
+        <!--/.Footer-->
     </body>
 </html>

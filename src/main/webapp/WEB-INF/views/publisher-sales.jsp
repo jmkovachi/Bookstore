@@ -43,17 +43,21 @@
 
         <section class="section pt-4">
             <center>
-                <h1>Publisher Sales</h1>
+                <h1>Publisher Sales Report</h1>
+                <p>Publisher: ${pubSales.publisher}</p>
+                <p>Total Sales: $${pubSales.totalSales}</p>
+                <p>Average Sales: $${pubSales.averageSales} per book</p>
+                <p>Total Sales: $${pubSales.totalSales}</p>
+                <p>Best Selling Book: $${pubSales.bestSellingBook}</p>
+                <p>This Week&#39;s Sales: $${pubSales.thisWeekSales}</p>
             </center>
         </section>
     </div>
 
 
-
-
-
-
-
+<!--Footer-->
+<tags:footer />
+<!--/.Footer-->
 
 <!-- JQuery -->
 <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>

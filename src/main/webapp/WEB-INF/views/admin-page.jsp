@@ -870,6 +870,10 @@
 
 </div>
 
+<!--Footer-->
+<tags:footer />
+<!--/.Footer-->
+
 
 
 

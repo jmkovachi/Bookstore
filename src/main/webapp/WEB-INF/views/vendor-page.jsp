@@ -51,5 +51,9 @@
         <center><a href="/edit/vendor" class = "btn btn-primary">Edit Profile</a></center>
     </div>
 
+    <!--Footer-->
+    <tags:footer />
+    <!--/.Footer-->
+
 </body>
 </html>

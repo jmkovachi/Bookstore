@@ -65,6 +65,9 @@
             </div>
             <center><a href="/edit/profile" class = "btn btn-primary">Edit Profile</a></center>
         </div>
+        <!--Footer-->
+        <tags:footer />
+        <!--/.Footer-->
 
     </body>
 </html>

@@ -43,4 +43,7 @@
         <input type="hidden" id="username" value="${verify.username}" />
         <input type="hidden" id="email" value="$[verify.email}" />
     </body>
+    <!--Footer-->
+    <tags:footer />
+    <!--/.Footer-->
 </html>

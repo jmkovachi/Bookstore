@@ -206,7 +206,7 @@ tr:nth-child(4) td:nth-of-type(4) {
                     <td><fmt:formatNumber type="number" maxFractionDigits="2" value="${cartItem.singleFinalPrice}" /></td>
                     <td class="text-center text-md-left">
                       <span class="qty"> ${cartItem.cartItem.quantity} </span>
-                      <div class="btn-group ml-2" data-toggle="buttons">
+                      <div class="btn-group ml-2">
                         <label data-isbn="${cartItem.cartItem.isbn}" data-quantity="${cartItem.cartItem.quantity}"
                             class="decreaseQuantity btn btn-sm btn-primary btn-rounded">
                           <div name="options">&mdash;</div>
@@ -330,6 +330,10 @@ tr:nth-child(4) td:nth-of-type(4) {
   </div>
 
   <!-- /.Cart Modal -->
+
+  <!--Footer-->
+  <tags:footer />
+  <!--/.Footer-->
 
   <!-- Username hidden input -->
   <input type="hidden" id="username" value="${cart.username}" />

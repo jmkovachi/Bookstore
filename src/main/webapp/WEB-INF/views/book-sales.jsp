@@ -175,6 +175,10 @@
     </div>
 </center>
 
+<!--Footer-->
+<tags:footer />
+<!--/.Footer-->
+
 
 
     <!-- JQuery -->

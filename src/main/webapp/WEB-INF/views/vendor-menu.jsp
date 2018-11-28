@@ -299,6 +299,10 @@
         </section>
     </div>
 
+    <!--Footer-->
+    <tags:footer />
+    <!--/.Footer-->
+
 
 
 

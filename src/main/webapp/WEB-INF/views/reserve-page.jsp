@@ -13,5 +13,8 @@
         <br/>
         <center><div class = "col-md-10 h2">Book Reserved</div></center>
         <center><div class = "col-md-10 h4">Book is now reserved and will be ready to pick up in-store!</div></center>
+        <!--Footer-->
+        <tags:footer />
+        <!--/.Footer-->
 </body>
 </html>

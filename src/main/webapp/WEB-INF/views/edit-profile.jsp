@@ -48,5 +48,9 @@
     <center><a id="confirm" class="btn btn-primary" data-customer="${customer.username}">Confirm</a></center>
 </div>
 
+<!--Footer-->
+<tags:footer />
+<!--/.Footer-->
+
 </body>
 </html>

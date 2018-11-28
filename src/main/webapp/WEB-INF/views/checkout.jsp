@@ -224,6 +224,10 @@
   </main>
   <!--Main layout-->
 
+  <!--Footer-->
+  <tags:footer />
+  <!--/.Footer-->
+
   <!-- SCRIPTS -->
   <!-- JQuery -->
   <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>

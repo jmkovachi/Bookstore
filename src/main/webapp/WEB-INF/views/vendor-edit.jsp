@@ -31,6 +31,9 @@
     </div>
     <center><a id="confirm" class="btn btn-primary" data-vendor="${vendor.username}">Confirm</a></center>
 </div>
+<!--Footer-->
+<tags:footer />
+<!--/.Footer-->
 
 </body>
 </html>
