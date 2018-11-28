@@ -46,6 +46,13 @@
         <br/>
     </div>
     <center><a id="confirm" class="btn btn-primary" data-customer="${customer.username}">Confirm</a></center>
+    <br>
+    <br>
+    <hr>
+    <form>
+        <input id="deleteCustomer" type="hidden" value="${customer.username}">
+        <center><a id="delete" class="btn btn-danger" data-customer="${customer.username}">Delete Registration</a></center>
+    </form>
 </div>
 
 <br />

@@ -30,8 +30,15 @@
         <input class="col-md-5" id="address" value="${vendor.address}" type="text">
     </div>
     <center><a id="confirm" class="btn btn-primary" data-vendor="${vendor.username}">Confirm</a></center>
-</div>
 
+<br>
+<br>
+<hr>
+<form>
+    <input id="deleteVendor" type="hidden" value="${vendor.username}">
+    <center><a id="delete" class="btn btn-danger" data-vendor="${vendor.username}">Delete Registration</a></center>
+</form>
+</div>
 <br />
 <br />
 <br />
