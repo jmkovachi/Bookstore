@@ -36,6 +36,11 @@ public class BookDao {
                 book.getRating(), book.getSummary(), book.getPages(), book.getVUsername(), book.getIsbn());
     }
 
+    public void deleteBook(final String isbn) {
+        final String sql = "delete from book where isbn=?";
+        jdbcTemplate.update(sql, isbn);
+    }
+
     public Optional<Book> getBook(final String isbn) {
         final List<Book> book = this.jdbcTemplate.query("select * from book where isbn=?", new Object[] {isbn}, new BookMapper());
         return book.stream().findAny();

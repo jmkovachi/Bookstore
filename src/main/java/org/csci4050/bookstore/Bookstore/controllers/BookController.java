@@ -8,11 +8,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Controller
 public class BookController {
@@ -27,5 +26,31 @@ public class BookController {
         book.setPages(500);
         bookService.insertBook(book);
         return new ResponseEntity<>(book, new HttpHeaders(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/book/delete/{isbn}", method = RequestMethod.DELETE)
+    public ResponseEntity<Object> deleteBook(@PathVariable final String isbn, @RequestParam(required = false) final String vendor) throws ValidationException {
+        if (vendor != null) {
+            bookService.deleteBookForVendor(isbn, vendor);
+        } else {
+            bookService.deleteBook(isbn);
+        }
+        return new ResponseEntity<>("", new HttpHeaders(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/book/metadata/{isbn}", method = RequestMethod.GET)
+    public ResponseEntity<Object> getBook(@PathVariable final String isbn) throws ValidationException {
+        final Optional<Book> bookOptional = bookService.getBook(isbn);
+        if (!bookOptional.isPresent()) {
+            throw new ValidationException("Book with isbn <%s> does not exist", isbn);
+        }
+
+        return new ResponseEntity<>(bookOptional.get(), new HttpHeaders(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/book/update", method = RequestMethod.POST)
+    public ResponseEntity<Object> updateBook(@RequestBody final Book book) throws ValidationException {
+        bookService.updateBook(book);
+        return new ResponseEntity<>("", new HttpHeaders(), HttpStatus.OK);
     }
 }

@@ -18,7 +18,7 @@
     <link href="/css/style.min.css" rel="stylesheet">
 </head>
 <body>
-    <tags:nav />
+    <tags:nav username="${vendor.username}"/>
     <br/>
     <br/>
     <br/>
@@ -49,6 +49,7 @@
             <br/>
         </div>
         <center><a href="/edit/vendor" class = "btn btn-primary">Edit Profile</a></center>
+        <center><a href="/vendor/dashboard" class="btn btn-primary">Vendor dashboard</a></center>
     </div>
 
     <br />

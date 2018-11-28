@@ -30,10 +30,47 @@ public class BookService {
         bookDao.createBook(book);
     }
 
+    public void deleteBook(final String isbn) throws ValidationException {
+        if (!bookDao.getBook(isbn).isPresent()) {
+            throw new ValidationException("Book with isbn <%s> does not exist", isbn);
+        }
+        bookDao.deleteBook(isbn);
+    }
+
+    public void deleteBookForVendor(final String isbn, final String vUsername) throws ValidationException {
+        final Optional<Book> optionalBook = bookDao.getBook(isbn);
+        if (!optionalBook.isPresent()) {
+            throw new ValidationException("Book with isbn <%s> does not exist", isbn);
+        }
+        final Book book = optionalBook.get();
+        if (!book.getVUsername().equals(vUsername)) {
+            throw new ValidationException("Book with isbn <%s> does not belong to vendor <%s>", isbn, vUsername);
+        }
+        bookDao.deleteBook(isbn);
+    }
+
     public void updateBook(final Book book) throws ValidationException {
-        if (!bookDao.getBook(book.getIsbn()).isPresent()) {
+        final Optional<Book> bookOptional = bookDao.getBook(book.getIsbn());
+        if (!bookOptional.isPresent()) {
             throw new ValidationException("Book with isbn <%s> does not exist", book.getIsbn());
         }
+        final Book retrievedBook = bookOptional.get();
+        if (book.getDatePublished() == null) {
+            book.setDatePublished(retrievedBook.getDatePublished());
+        }
+        if (book.getPages() == null) {
+            book.setPages(retrievedBook.getPages());
+        }
+        if (book.getRating() == null) {
+            book.setRating(retrievedBook.getRating());
+        }
+        if (book.getTotalInventory() == null) {
+            book.setTotalInventory(retrievedBook.getTotalInventory());
+        }
+        if (book.getVUsername() == null) {
+            book.setVUsername(retrievedBook.getVUsername());
+        }
+
         bookDao.updateBook(book);
     }
 

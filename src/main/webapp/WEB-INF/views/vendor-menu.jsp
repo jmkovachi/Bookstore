@@ -4,36 +4,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags/"%>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-
-        <title>Bookstore</title>
-
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-        <!-- Bootstrap core CSS -->
-        <link href="/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Material Design Bootstrap -->
-        <link href="/css/catalogmdb.css" rel="stylesheet">
-
-
+        <tags:dependency />
         <style type="text/css">
             .multiple-select-dropdown li [type=checkbox]+label {
                 height: 1rem;
             }
         </style>
-
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-        <!------ Include the above in your HEAD tag ---------->
+        <script src="/js/common.js"></script>
+        <script src="/js/vendor.js"></script>
     </head>
 
     <body class="category-v1 hidden-sn white-skin animated">
 
-    <tags:nav />
+    <tags:nav username="${vendor.username}"/>
 
     <br/>
     <br/>
@@ -42,7 +25,7 @@
 
         <section class="section pt-4">
             <center>
-                <h1>Vendor</h1>
+                <h1>${vendor.company}</h1>
             </center>
     <!-- Grid 2ND ROW (BOOKS) -->
     <h2>Manage Books</h2>
@@ -64,7 +47,7 @@
 
                     <!-- New Book Modal -->
                     <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <form name="addBook">
+                        <form id="addBook" name="addBook">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -126,7 +109,7 @@
                                         <!-- Book description -->
                                         <div class="form-group">
                                             <label for="descripxn">Book Description:</label>
-                                            <textarea class="form-control" rows="5" id="descripxn"></textarea>
+                                            <textarea name="summary" class="form-control" rows="5" id="descripxn"></textarea>
                                         </div>
 
                                     </div> <!-- end of modal body -->
@@ -148,13 +131,15 @@
         <!--Grid 2nd column-->
         <div class="col-lg-4 col-md-12 mb-4">
             <center>
-                <div class="md-form">
-                    <input type="text" class="form-control" placeholder="Enter ISBN of Book to Delete">
-                </div>
-                <button class="btn btn-danger" type="button">
-                    Delete Book
-                </button>
-
+                <form id="deleteBook">
+                    <div class="md-form">
+                        <input name="isbn" type="text" class="form-control" placeholder="Enter ISBN of Book to Delete">
+                        <input class="username" name="username" type="hidden" value="${vendor.username}">
+                    </div>
+                    <button class="btn btn-danger" type="submit">
+                        Delete Book
+                    </button>
+                </form>
             </center>
         </div>  <!-- 2nd col-->
 
@@ -162,19 +147,19 @@
         <!--Grid 3rd column-->
         <div class="col-lg-4 col-md-12 mb-4">
             <div class="md-form">
-                <input type="text" class="form-control" placeholder="Enter ISBN of Book to Edit">
+                <input type="text" id="editBookInput" class="form-control" placeholder="Enter ISBN of Book to Edit">
             </div>
             <center>
 
                 <!-- Button trigger modal -->
-                <a href="#myModalEditBook" role="button" class="btn btn-info" data-toggle="modal">Edit Book Info</a>
+                <a href="#myModalEditBook" role="button" id="editBookModalLink" class="btn btn-info" data-toggle="modal">Edit Book Info</a>
 
 
                 <!-- modal-->
 
                 <!-- Edit Book Modal -->
                 <div id="myModalEditBook" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <form name="editBook">
+                    <form id="editBook" name="editBook">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -186,57 +171,54 @@
 
                                 <div class="modal-body">
 
-                                    <!-- Title -->
-                                    <div class="md-form mb-5">
-                                        <input type="text" name="title" id="orangeForm-editTitle" class="form-control validate">
-                                        <label data-error="" data-success="" for="orangeForm-editTitle">Title</label>
-                                    </div>
-
-                                    <!-- Author -->
-                                    <div class="md-form mb-5">
-                                        <input type="text" name="author" id="orangeForm-editAuthor" class="form-control validate">
-                                        <label data-error="" data-success="" for="orangeForm-editAuthor">Author</label>
+                                    <!-- ISBN -->
+                                    <div class="md-form mb-4">
+                                        <input id="editIsbn" type="hidden" name="isbn">
+                                        <div class="text-left" id="isbnValue"></div>
                                     </div>
 
                                     <!-- Vendor -->
                                     <div class="md-form mb-5">
-                                        <input type="text" name="vUsername" id="orangeForm-editVendor" class="form-control validate">
-                                        <label data-error="" data-success="" for="orangeForm-editVendor">Vendor</label>
+                                        <div class="text-left" data-error="" data-success="" for="orangeForm-editVendor">Vendor: ${vendor.company}</div>
                                     </div>
 
-                                    <!-- ISBN -->
-                                    <div class="md-form mb-4">
-                                        <input type="text" name="isbn" id="orangeForm-editISBN" class="form-control validate">
-                                        <label data-error="" data-success="" for="orangeForm-editISBN">ISBN</label>
+                                    <!-- Title -->
+                                    <div class="md-form mb-5">
+                                        <input type="text" name="title" id="orangeForm-editTitle" class="title form-control validate">
+                                        <label class="active" data-error="" data-success="" for="orangeForm-editTitle">Title</label>
+                                    </div>
+
+                                    <!-- Author -->
+                                    <div class="md-form mb-5">
+                                        <input type="text" name="author" id="orangeForm-editAuthor" class="author form-control validate">
+                                        <label class="active" data-error="" data-success="" for="orangeForm-editAuthor">Author</label>
                                     </div>
 
                                     <!-- Genre -->
                                     <div class="md-form mb-5">
-                                        <input type="text" name="category" id="orangeForm-editGenre" class="form-control validate">
-                                        <label data-error="" data-success="" for="orangeForm-editGenre">Enter genre</label>
+                                        <input type="text" name="category" id="orangeForm-editGenre" class="genre form-control validate">
+                                        <label class="active" data-error="" data-success="" for="orangeForm-editGenre">Enter genre</label>
                                     </div>
 
                                     <!-- Image addr -->
                                     <div class="md-form mb-5">
-                                        <input type="text" name="imageUrl" id="orangeForm-editImg" class="form-control validate">
-                                        <label data-error="" data-success="" for="orangeForm-editImg">Enter image url</label>
+                                        <input type="text" name="imageUrl" id="orangeForm-editImg" class="imageUrl form-control validate">
+                                        <label class="active" data-error="" data-success="" for="orangeForm-editImg">Enter image url</label>
                                     </div>
 
                                     <!-- Price -->
                                     <div class="md-form input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text md-addon">$</span>
-                                            <input type="text" name="price" id="orangeForm-editPrice" class="form-control validate" placeholder="0.00">
-                                            <label data-error="" data-success="" for="orangeForm-editPrice">Price</label>
+                                            <input type="text" name="price" id="orangeForm-editPrice" class="price form-control validate" placeholder="0.00">
+                                            <label class="active" data-error="" data-success="" for="orangeForm-editPrice">Price</label>
                                         </div>
                                     </div>
 
-
-
                                     <!-- Book description -->
                                     <div class="form-group">
-                                        <label for="editDescription">Book Description:</label>
-                                        <textarea class="form-control" rows="5" id="editDescription"></textarea>
+                                        <label class="active" for="editDescription">Book Description:</label>
+                                        <textarea name="summary" class="summary form-control" rows="5" id="editDescription"></textarea>
                                     </div>
 
                                 </div> <!-- end of modal body -->
@@ -338,67 +320,6 @@
         // Tooltips Initialization
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
-        })
-    </script>
-    <script>
-        var slider = $("#calculatorSlider");
-        var developerBtn = $("#developerBtn");
-        var corporateBtn = $("#corporateBtn");
-        var privateBtn = $("#privateBtn");
-        var reseller = $("#resellerEarnings");
-        var client = $("#clientPrice");
-        // var percentageBonus = 30; // = 30%
-        var license = {
-            corpo: {
-                active: true,
-                price: 319,
-            },
-            dev: {
-                active: false,
-                price: 149,
-            },
-            priv: {
-                active: false,
-                price: 79,
-            }
-        }
-
-        function calculate(price, value) {
-            client.text((Math.round((price - (value / 100 * price)))) + '$');
-            reseller.text((Math.round(((percentageBonus - value) / 100 * price))) + '$')
-        }
-
-        function reset(price) {
-            slider.val(0);
-            client.text(price + '$');
-            reseller.text((Math.round((percentageBonus / 100 * price))) + '$');
-        }
-        developerBtn.on('click', function (e) {
-            license.dev.active = true;
-            license.corpo.active = false;
-            license.priv.active = false;
-            reset(license.dev.price)
-        });
-        privateBtn.on('click', function (e) {
-            license.dev.active = false;
-            license.corpo.active = false;
-            license.priv.active = true;
-            reset(license.priv.price);
-        });
-        corporateBtn.on('click', function (e) {
-            license.dev.active = false;
-            license.corpo.active = true;
-            license.priv.active = false;
-            reset(license.corpo.price);
-        });
-        slider.on("input change", function (e) {
-            if (license.priv.active) {
-                calculate(license.priv.price, $(this).val());
-            } else if (license.corpo.active) {
-                calculate(license.corpo.price, $(this).val());
-            } else if (license.dev.active) {
-                calculate(license.dev.price, $(this).val());
-            }
         })
     </script>
     <script>

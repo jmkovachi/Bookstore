@@ -18,7 +18,7 @@
         <link href="/css/style.min.css" rel="stylesheet">
     </head>
     <body>
-        <tags:nav username="${username}"/>
+        <tags:nav username="${customer.username}"/>
         <br/>
         <br/>
         <br/>
