@@ -25,6 +25,10 @@ public class UserService {
         }
     }
 
+    public void deleteUser(final String username) {
+        userDao.deleteUser(username);
+    }
+
     public Optional<User> getUser(final String username) {
         return userDao.getUser(username);
     }

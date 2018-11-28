@@ -36,7 +36,7 @@ $(document).ready(function() {
             orderItems: list
         };
         console.log(JSON.stringify(postData));
-        postAjax("/order",JSON.stringify(postData));
+        postOrderAjax("/order",JSON.stringify(postData));
     });
 
     $("#promo").on("submit", function (event) {
@@ -68,19 +68,21 @@ function toJson(formSerializeArr){
  return jsonObj;
 }
 
-function postAjax(url, data) {
+function postOrderAjax(url, data) {
     $.ajax({
         type: "POST",
         url: url,
-        dataType: "json",
         contentType: "application/json",
+        dataType: "json",
         data: data,
         success: function(res) {
+            console.log(res);
             alert("Successfully ordered.");
             window.location.href = "/order/confirm/" + res.orderId;
         },
         error: function(res) {
-            alert(res.message);
+            console.log(res);
+            alert(JSON.parse(res).message);
         }
     });
 }

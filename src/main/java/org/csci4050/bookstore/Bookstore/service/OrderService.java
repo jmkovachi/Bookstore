@@ -63,10 +63,22 @@ public class OrderService {
             order.setPaymentId(paymentId);
         }
 
-        // create shipping address
-        int shippingAddressId = shippingAddressService.createShippingAddress(shippingAddress);
+        if (!order.getPaymentType().equals("CASH")) {
+            // create shipping address
+            int shippingAddressId = shippingAddressService.createShippingAddress(shippingAddress);
+            order.setAddressId(shippingAddressId);
+        }
 
-        order.setAddressId(shippingAddressId);
+        for (final OrderItem item : orderItems) {
+            // hacky, but we'll use this for now
+            final Optional<Book> bookOptional = bookService.getBook(item.getIsbn());
+            if (!bookOptional.isPresent()) {
+                throw new ValidationException("Book with isbn <%s> and title <%s> does not exist", item.getIsbn());
+            }
+            if (item.getFinalPrice() == null) {
+                item.setFinalPrice(bookOptional.get().getPrice());
+            }
+        }
 
         // use java streams to calculate total price of all items
         final Double totalAmount = orderItems.stream()

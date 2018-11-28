@@ -6,6 +6,7 @@ import org.csci4050.bookstore.Bookstore.exceptions.ValidationException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -35,7 +36,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .message(e.getMessage())
                 .status(HttpStatus.NOT_FOUND)
                 .build();
-        return new ResponseEntity<>(exceptionModel, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(exceptionModel, new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
 
     @Data

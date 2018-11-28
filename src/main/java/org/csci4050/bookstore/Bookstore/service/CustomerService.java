@@ -41,4 +41,8 @@ public class CustomerService extends UserService {
             throw new ValidationException("Customer could not be updated");
         }
     }
+
+    public void deleteCustome(final String username) {
+        customerDao.deleteCustomer(username);
+    }
 }

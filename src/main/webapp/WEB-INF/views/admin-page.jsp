@@ -4,33 +4,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags/"%>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-
-    <title>Bookstore</title>
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Material Design Bootstrap -->
-    <link href="/css/catalogmdb.css" rel="stylesheet">
-
-
+    <tags:dependency />
     <style type="text/css">
         .multiple-select-dropdown li [type=checkbox]+label {
             height: 1rem;
         }
     </style>
-
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <!------ Include the above in your HEAD tag ---------->
     <script src="/js/common.js"></script>
     <script src="/js/admin.js"></script>
+    <script type="text/javascript" src="/js/checkout.js"></script>
 </head>
 
 <body class="category-v1 hidden-sn white-skin animated">
@@ -482,163 +464,8 @@
                 <center>
                     <br/>
                     <br/><!-- Button trigger modal -->
-                    <a href="#myModal3" role="button" class="btn btn-success" data-toggle="modal">Add New Order</a>
+                    <a href="#myModalOrder" role="button" id="addOrder" class="btn btn-success" data-toggle="modal">Add New Order</a>
 
-                    <!-- Modal -->
-                    <div id="myModal3" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <form id="addOrder">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5>New Order</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="md-form mb-5">
-                                        <input type="text" name="c_username" id="orangeForm-orderCust" class="form-control validate">
-                                        <label data-error="" data-success="" for="orangeForm-orderCust">Customer Username</label>
-                                    </div>
-
-
-                                    <!-- Editable list of Book ISBN's -->
-
-                                    <div class="container">
-
-
-                                        <form>
-
-                                            <div class="form-group" >
-
-                                                <h5>Enter Books to add to Order:</h5>
-                                                <br/>
-                                                <input type="text" name="item" id="add" placeholder="Enter ISBN of Book">
-                                                <input type="text" name="quantity" id="quantity" placeholder="Enter quantity">
-                                                <br/>
-                                                <button id="addbtn" name="addbtn" class="btn btn-primary">Add to List</button>
-
-                                            </div>
-
-
-                                            <div class="form-group">
-
-
-
-                                                <ul id="list" class="list-group">
-                                                </ul>
-                                            </div>
-                                        </form>
-
-
-                                        <hr>
-                                        <h3>Total: $ </h3>
-                                        <hr>
-
-                                        <div class="d-block my-3">
-                                            <div class="custom-control custom-radio">
-                                                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-                                                <label class="custom-control-label" for="credit">Credit card</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input id="check" name="paymentMethod" type="radio" class="custom-control-input" required>
-                                                <label class="custom-control-label" for="check">Check</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input id="cash" name="paymentMethod" type="radio" class="custom-control-input" required>
-                                                <label class="custom-control-label" for="cash">Cash</label>
-                                            </div>
-                                        </div>
-
-                                        <div id = "showCreditFields">
-                                        <div class="row">
-                                            <div class="col-md-6 mb-3">
-                                                <label for="cc-name">Name on card</label>
-                                                <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                                                <small class="text-muted">Full name as displayed on card</small>
-                                                <div class="invalid-feedback">
-                                                    Name on card is required
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label for="cc-number">Credit card number</label>
-                                                <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                                                <div class="invalid-feedback">
-                                                    Credit card number is required
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-3 mb-3">
-                                                <label for="cc-expiration">Expiration</label>
-                                                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                                                <div class="invalid-feedback">
-                                                    Expiration date required
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3 mb-3">
-                                                <label for="cc-expiration">CVV</label>
-                                                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                                                <div class="invalid-feedback">
-                                                    Security code required
-                                                </div>
-                                            </div>
-                                        </div>
-                                        </div> <!-- id: showCreditFields (for Javascript) -->
-
-
-                                        <div id = "showCheckFields" style="display:none">
-                                            <div class="row">
-                                                <div class="col-md-6 mb-3">
-                                                    <label for="cc-name">Bank Name</label>
-                                                    <input type="text" class="form-control" id="cc-bankname" placeholder="" required>
-                                                    <div class="invalid-feedback">
-                                                        Bank name is required
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 mb-3">
-                                                    <label for="cc-number">Routing #</label>
-                                                    <input type="text" class="form-control" id="cc-banknumber" placeholder="" required>
-                                                    <div class="invalid-feedback">
-                                                        Routing # is required
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6 mb-3">
-                                                    <label for="cc-expiration">Bank Account #</label>
-                                                    <input type="text" class="form-control" id="cc-bankAccountNum" placeholder="" required>
-                                                    <div class="invalid-feedback">
-                                                        Bank Account # is required
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 mb-3">
-                                                    <label for="cc-expiration">Enter 'Checking' or 'Savings'</label>
-                                                    <input type="text" class="form-control" id="cc-accountType" placeholder="" required>
-                                                    <div class="invalid-feedback">
-                                                        Account type is required
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> <!-- id: showCheckFields (for Javascript) -->
-
-
-                                        <div id="showCashMsg" style="display:none">
-                                            <h3>In-store only</h3>
-                                        </div>
-
-                                    </div> <!-- container -->
-
-                                </div> <!-- modal body -->
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                        </form>
-                    </div>
                     <br/>
                     <div>
 
@@ -668,70 +495,7 @@
                 </div>
                 <center>
                     <!-- Button trigger modal -->
-                    <a href="#myModalEditOrder" role="button" class="btn btn-info" data-toggle="modal">Edit Order Info</a>
-
-                    <!-- Modal -->
-                    <div id="myModalEditOrder" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <form id="editOrder">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5>Edit Order</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="md-form mb-5">
-                                        <input type="text" name="c_username" id="orangeForm-editOrderCust" class="form-control validate">
-                                        <label data-error="" data-success="" for="orangeForm-editOrderCust">Customer Username</label>
-                                    </div>
-
-                                    <!-- Editable list of Book ISBN's -->
-
-                                    <div class="container">
-
-
-                                        <form>
-
-                                            <div class="form-group" >
-
-                                                <h5>Enter Books to add to Order:</h5>
-                                                <br/>
-                                                <input type="text" name="item" id="addEditOrder" placeholder="Enter ISBN of Book">
-                                                <input type="text" name="quantity" id="quantityEditOrder" placeholder="Enter quantity">
-                                                <br/>
-                                                <button id="addbtnEditOrder" name="addbtn" class="btn btn-primary">Add to List</button>
-
-                                            </div>
-
-
-                                            <div class="form-group">
-
-
-                                                <ul id="listEditOrder" class="list-group">
-                                                </ul>
-                                            </div>
-                                        </form>
-
-                                        <hr>
-
-                                        <hr>
-                                        <h3>Total: $</h3>
-                                        <hr>
-
-
-                                    </div> <!-- container -->
-                                </div> <!-- modal body -->
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                        </form>
-                    </div>
+                    <a href="#myModalOrder" id="editOrder" role="button" class="btn btn-info" data-toggle="modal">Edit Order Info</a>
                 </center>
 
             </div>  <!-- 3rd col -->
@@ -876,6 +640,7 @@
 <tags:footer />
 <!--/.Footer-->
 
+<tags:orderDetailsModal />
 
 
 

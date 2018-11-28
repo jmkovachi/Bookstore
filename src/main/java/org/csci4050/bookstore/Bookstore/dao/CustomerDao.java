@@ -34,6 +34,11 @@ public class CustomerDao extends UserDao {
                 customer.getBirthDate(), customer.getVerified(), customer.getNewsletter(), customer.getUsername());
     }
 
+    public void deleteCustomer(final String username) {
+        this.deleteUser(username);
+        jdbcTemplate.update("delete from customer where c_username=?", username);
+    }
+
     public Optional<Customer> getCustomer(final String username) {
         final List<Customer> customer = this.jdbcTemplate.query("select * from customer,user where c_username=? and c_username=username", new Object[] {username}, new CustomerMapper());
         return customer.stream().findAny();

@@ -19,6 +19,41 @@ $(document).ready(function () {
         console.log(data);
         deleteAjax("/promotion/delete", data.promoId);
     });
+
+    $('.btnOrder').click(function() {
+        var isbn = $('#isbnOrder').val();
+        var quantity = $('#quantityOrder').val();
+        var uniqid = Math.round(new Date().getTime() + (Math.random() * 100));
+        $('#listOrder').append('<li id="'+uniqid+'" class="list-group-item">' +
+            '   <div class="cartItem row"> ' +
+            '       <div class="col-4"> ISBN: '+isbn+' </div> ' +
+            '       <div class="col-4"> Quantity: '+quantity+' </div> ' +
+            '       <div class="col-4"> <input type="button" data-isbn="'+isbn+'" data-quantity="'+quantity+'" + ' +
+            '          data-id="'+uniqid+'" class="cartData listelement" value="X"/></div> ' +
+            '   </div> ' +
+            '<input type="hidden" name="listed[]" value="'+isbn+'"></li>');
+
+
+        $('.addOrder').val(''); // resets the field after submitting (i.e. clicking the "Add to List" button)
+        $('.quantityOrder').val('');
+        return false;
+    });
+    $('#listOrder').delegate(".listelement", "click", function() {
+        var elemid = $(this).attr('data-id');
+        $("#"+elemid).remove();
+    });
+
+    $("#addOrder").click(function () {
+        console.log("hi");
+        $("#editOrderTitle").addClass("hide");
+        $("#addOrderTitle").removeClass("hide");
+    });
+
+    $("#editOrder").click(function () {
+        $("#editOrderTitle").removeClass("hide");
+        $("#addOrderTitle").addClass("hide");
+    });
+
 });
 
 function postAjax(url, data) {

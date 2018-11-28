@@ -70,55 +70,58 @@
                 </div>
               </div>
 
-              <!--address-->
-              <div class="md-form mb-5">
-                <input type="text" name="address" id="address" class="form-control" placeholder="1234 Main St">
-                <label for="address" class="">Billing Address</label>
-              </div>
+              <div class="shippingInfo">
 
-              <!--Grid row-->
-              <div class="row">
+                <!--address-->
+                <div class="md-form mb-5">
+                  <input type="text" name="address" id="address" class="form-control" placeholder="1234 Main St">
+                  <label for="address" class="">Billing Address</label>
+                </div>
 
-                <!--Grid column-->
-                <div class="col-lg-4 col-md-12 mb-4">
+                <!--Grid row-->
+                <div class="row">
+
+                  <!--Grid column-->
+                  <div class="col-lg-4 col-md-12 mb-4">
 
 
-                    <input type="text" name="city" id="city" class="form-control" placeholder="Athens">
-                    <label for="city" class="">City</label>
+                      <input type="text" name="city" id="city" class="form-control" placeholder="Athens">
+                      <label for="city" class="">City</label>
+                      <div class="invalid-feedback">
+                          Please provide a city name.
+                        </div>
+
+                  </div>
+                  <!--Grid column-->
+
+                  <!--Grid column-->
+                  <div class="col-lg-4 col-md-6 mb-4">
+
+                    <input type="text" name="state" id="state" class="form-control" placeholder="Georgia">
+                    <label for="state" class="">State</label>
                     <div class="invalid-feedback">
-                        Please provide a city name.
-                      </div>
+                      Please provide a valid state.
+                    </div>
 
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4">
-
-                  <input type="text" name="state" id="state" class="form-control" placeholder="Georgia">
-                  <label for="state" class="">State</label>
-                  <div class="invalid-feedback">
-                    Please provide a valid state.
                   </div>
+                  <!--Grid column-->
 
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4">
+                  <!--Grid column-->
+                  <div class="col-lg-4 col-md-6 mb-4">
 
 
-                  <input type="text" name="zip" class="form-control" id="zip" placeholder="-----" required>
-                  <label for="zip">Zip</label>
-                  <div class="invalid-feedback">
-                    Zip code required.
+                    <input type="text" name="zip" class="form-control" id="zip" placeholder="-----" required>
+                    <label for="zip">Zip</label>
+                    <div class="invalid-feedback">
+                      Zip code required.
+                    </div>
+
                   </div>
+                  <!--Grid column-->
 
                 </div>
-                <!--Grid column-->
-
+                <!--Grid row-->
               </div>
-              <!--Grid row-->
 
               <hr>
 
