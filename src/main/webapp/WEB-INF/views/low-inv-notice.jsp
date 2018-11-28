@@ -108,7 +108,7 @@
         <br />
 
         <!--Footer-->
-        <tags:footer />
+        <tags:footer2 />
         <!--/.Footer-->
 
 
