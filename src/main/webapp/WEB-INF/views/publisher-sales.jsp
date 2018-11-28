@@ -44,16 +44,20 @@
         <section class="section pt-4">
             <center>
                 <h1>Publisher Sales Report</h1>
+                <hr style="width:50%;">
                 <p>Publisher: ${pubSales.publisher}</p>
                 <p>Total Sales: $${pubSales.totalSales}</p>
                 <p>Average Sales: $${pubSales.averageSales} per book</p>
                 <p>Total Sales: $${pubSales.totalSales}</p>
-                <p>Best Selling Book: <a href="/details/book/${pubSales.bestSellingBook.isbn}">$${pubSales.bestSellingBook}</a></p>
+                <p>Best Selling Book: <a href="/details/book/${pubSales.bestSellingBook.isbn}">${pubSales.bestSellingBook}</a></p>
                 <p>This Week&#39;s Sales: $${pubSales.thisWeekSales}</p>
             </center>
         </section>
     </div>
 
+<br />
+<br />
+<br />
 
 <!--Footer-->
 <tags:footer />

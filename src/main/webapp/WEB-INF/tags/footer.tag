@@ -1,5 +1,5 @@
 <!--Footer-->
-<footer class="page-footer text-center text-md-left stylish-color-dark pt-0">
+<footer style="position:fixed;width:100%" class="page-footer text-center text-md-left stylish-color-dark pt-0">
 
     <div class="text-center" style="background-color: #4285f4;">
         <div class="container-fluid">

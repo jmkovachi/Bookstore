@@ -35,6 +35,11 @@
     <c:if test="${not empty username}">
         <center><a href="/reserve/view" class = "btn btn-primary">Reserve Book</a><button type="button" class="btn btn-primary cart" data-username="${username}" data-isbn="${book.isbn}">Add to Cart</button></center>
     </c:if>
+
+    <br />
+    <br />
+    <br />
+
     <!--Footer-->
     <tags:footer />
     <!--/.Footer-->

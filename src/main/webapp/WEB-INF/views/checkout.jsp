@@ -224,6 +224,11 @@
   </main>
   <!--Main layout-->
 
+  <br />
+  <br />
+  <br />
+
+
   <!--Footer-->
   <tags:footer />
   <!--/.Footer-->

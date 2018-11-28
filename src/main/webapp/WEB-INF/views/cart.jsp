@@ -331,6 +331,10 @@ tr:nth-child(4) td:nth-of-type(4) {
 
   <!-- /.Cart Modal -->
 
+    <br />
+    <br />
+    <br />
+
   <!--Footer-->
   <tags:footer />
   <!--/.Footer-->

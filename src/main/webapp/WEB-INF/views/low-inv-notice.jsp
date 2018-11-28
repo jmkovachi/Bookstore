@@ -43,8 +43,9 @@
 
             <div class="row">
                 <div class="col-md-12 center-block text-center">
-                    <h5 class="card-title">Books with Low Inventory<br />
-                    </h5>
+                    <h1 class="card-title">Books with Low Inventory
+                    </h1>
+                    <hr style="width:50%;">
 
                     <!-- Low Inventory table -->
                     <div class="table-responsive">
@@ -88,7 +89,6 @@
                                 </td>
                               </tr>
                               <!-- /.First row -->
-                            </c:if>
                           </c:forEach>
                         </tbody>
                         <!-- /.Table body -->
@@ -99,6 +99,11 @@
                 </div>
             </div>
         </div>
+
+        <br />
+        <br />
+        <br />
+
         <!--Footer-->
         <tags:footer />
         <!--/.Footer-->

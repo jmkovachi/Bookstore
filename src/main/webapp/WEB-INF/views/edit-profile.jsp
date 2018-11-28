@@ -48,6 +48,10 @@
     <center><a id="confirm" class="btn btn-primary" data-customer="${customer.username}">Confirm</a></center>
 </div>
 
+<br />
+<br />
+<br />
+
 <!--Footer-->
 <tags:footer />
 <!--/.Footer-->

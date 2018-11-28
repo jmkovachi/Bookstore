@@ -41,32 +41,37 @@
     <br/>
     <div class="container">
 
-        <section class="section pt-4">
-            <center>
-                <h1>End of Day Sales</h1>
-            </center>
-        </section>
-    </div>
+            <section class="section pt-4">
+                <center>
+                    <h1>End of the Day Sales Report</h1>
+                    <hr style="width:50%;">
+                    <p>Total Orders Placed: ${eodsales.orders}</p>
+                    <p>Total Sales: $${eodsales.totalSales}</p>
+                    <p>Best Selling Book: <a href="/details/book/${eodsales.bestSellingBook.isbn}">${eodsales.bestSellingBook}</a></p>
+                    <p>Best Selling Publisher: ${eodsales.bestSellingPublisher}</p>
+                </center>
+            </section>
+        </div>
+
+    <br />
+    <br />
+    <br />
 
 
+    <!--Footer-->
+    <tags:footer />
+    <!--/.Footer-->
 
+    <!-- JQuery -->
+    <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
 
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="/js/popper.min.js"></script>
 
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 
-<!--Footer-->
-<tags:footer />
-<!--/.Footer-->
-
-<!-- JQuery -->
-<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
-
-<!-- Bootstrap tooltips -->
-<script type="text/javascript" src="/js/popper.min.js"></script>
-
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-
-<!-- MDB core JavaScript -->
-<script type="text/javascript" src="/js/mdb.min.js"></script>
-</body>
-</html>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="/js/mdb.min.js"></script>
+  </body>
+</html>>
