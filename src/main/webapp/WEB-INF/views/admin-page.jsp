@@ -263,7 +263,7 @@
 
                         <!-- New Book Modal -->
                         <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <form name="addBook">
+                            <form id="addBook" name="addBook">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -325,7 +325,7 @@
                                         <!-- Book description -->
                                         <div class="form-group">
                                             <label for="descripxn">Book Description:</label>
-                                            <textarea class="form-control" rows="5" id="descripxn"></textarea>
+                                            <textarea name="summary" class="form-control" rows="5" id="descripxn"></textarea>
                                         </div>
 
                                     </div> <!-- end of modal body -->

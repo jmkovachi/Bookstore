@@ -54,6 +54,12 @@ $(document).ready(function () {
         $("#addOrderTitle").addClass("hide");
     });
 
+    $("#addBook").on("submit", function (event) {
+        event.preventDefault();
+        const data = toJson($(this).serializeArray());
+        console.log(data);
+        postAjax("/book/insert", data);
+    })
 });
 
 function postAjax(url, data) {
