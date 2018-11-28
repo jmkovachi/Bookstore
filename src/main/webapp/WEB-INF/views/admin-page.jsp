@@ -4,12 +4,31 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags/"%>
 <head>
-    <tags:dependency />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Bookstore</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <link href="/css/catalogmdb.css" rel="stylesheet">
+
+
     <style type="text/css">
         .multiple-select-dropdown li [type=checkbox]+label {
             height: 1rem;
         }
     </style>
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
     <script src="/js/common.js"></script>
     <script src="/js/admin.js"></script>
     <script type="text/javascript" src="/js/checkout.js"></script>
@@ -76,6 +95,12 @@
                                         <label data-error="" data-success="" for="orangeForm-passCust">Password</label>
                                     </div>
 
+                                    <!-- Email -->
+                                    <div class="md-form mb-5">
+                                        <input type="text" name="email" id="orangeForm-emailCust" class="form-control validate">
+                                        <label data-error="" data-success="" for="orangeForm-emailCust">Email</label>
+                                    </div>
+
                                     <!-- First name-->
                                     <div class="md-form mb-5">
                                         <input type="text" name="firstName" id="orangeForm-firstName" class="form-control validate">
@@ -118,6 +143,7 @@
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary">Save changes</button>
                                 </div>
+                                <input type="hidden" name="role" value="ROLE_CUSTOMER">
                             </div>
                         </div>
                         </form>
@@ -142,6 +168,14 @@
                                             <label data-error="" data-success="" for="orangeForm-usernameVendor">Username</label>
                                         </div>
                                         <div class="md-form mb-5">
+                                            <input type="text" name="password" id="orangeForm-passVendor" class="form-control validate">
+                                            <label data-error="" data-success="" for="orangeForm-passVendor">Password</label>
+                                        </div>
+                                        <div class="md-form mb-5">
+                                            <input type="text" name="email" id="orangeForm-emailVendor" class="form-control validate">
+                                            <label data-error="" data-success="" for="orangeForm-passVendor">Email</label>
+                                        </div>
+                                        <div class="md-form mb-5">
                                             <input type="text" name="company" id="orangeForm-companyVendor" class="form-control validate">
                                             <label data-error="" data-success="" for="orangeForm-companyVendor">Company</label>
                                         </div>
@@ -149,18 +183,13 @@
                                             <input type="text" name="address" id="orangeForm-addrVendor" class="form-control validate">
                                             <label data-error="" data-success="" for="orangeForm-addrVendor">Address</label>
                                         </div>
-                                        <div class="md-form mb-5">
-                                            <input type="text" name="password" id="orangeForm-passVendor" class="form-control validate">
-                                            <label data-error="" data-success="" for="orangeForm-passVendor">Password</label>
-                                        </div>
-
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary">Save changes</button>
                                 </div>
-
+                                <input type="hidden" name="role" value="ROLE_VENDOR">
                             </div>
                         </div>
                         </form>
@@ -169,101 +198,101 @@
                     <!-- New Client Modal -->
                     <div id="myModalClient" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <form id="addClient">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5>New Client</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body mx-3">
-                                    <!-- Modal fields -->
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>New Client</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body mx-3">
+                                        <!-- Modal fields -->
+                                        <div class="md-form mb-5">
+                                            <input name="username" type="text" id="orangeForm-username" class="form-control validate">
+                                            <label data-error="" data-success="" for="orangeForm-username">Username</label>
+                                        </div>
+                                        <div class="md-form mb-5">
+                                            <input name="password" type="text" id="orangeForm-passClient" class="form-control validate">
+                                            <label data-error="" data-success="" for="orangeForm-passClient">Password</label>
+                                        </div>
+                                        <div class="md-form mb-5">
+                                            <input type="text" name="email" id="orangeForm-emailClient" class="form-control validate">
+                                            <label data-error="" data-success="" for="orangeForm-passVendor">Email</label>
+                                        </div>
+                                        <div class="md-form mb-5">
+                                            <input name="name" type="text" id="orangeForm-name" class="form-control validate">
+                                            <label data-error="" data-success="" for="orangeForm-name">Name</label>
+                                        </div>
+                                        <div class="md-form mb-5">
+                                            <input name="company" type="text" id="orangeForm-company" class="form-control validate">
+                                            <label data-error="" data-success="" for="orangeForm-company">Company Name</label>
+                                        </div>
+                                        <div class="md-form mb-4">
+                                            <input name="address" type="text" id="orangeForm-addr" class="form-control validate">
+                                            <label data-error="" data-success="" for="orangeForm-addr">Address</label>
+                                        </div>
+                                    </div>
 
-                                    <div class="md-form mb-5">
-                                        <input name="username" type="text" id="orangeForm-username" class="form-control validate">
-                                        <label data-error="" data-success="" for="orangeForm-username">Username</label>
+                                    <input type="hidden" name="role" value="ROLE_CLIENT">
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
                                     </div>
-                                    <div class="md-form mb-5">
-                                        <input name="name" type="text" id="orangeForm-name" class="form-control validate">
-                                        <label data-error="" data-success="" for="orangeForm-name">Name</label>
-                                    </div>
-                                    <div class="md-form mb-5">
-                                        <input name="company" type="text" id="orangeForm-company" class="form-control validate">
-                                        <label data-error="" data-success="" for="orangeForm-company">Company Name</label>
-                                    </div>
-
-                                    <div class="md-form mb-4">
-                                        <input name="address" type="text" id="orangeForm-addr" class="form-control validate">
-                                        <label data-error="" data-success="" for="orangeForm-addr">Address</label>
-                                    </div>
-                                    <div class="md-form mb-5">
-                                        <input name="password" type="text" id="orangeForm-passClient" class="form-control validate">
-                                        <label data-error="" data-success="" for="orangeForm-passClient">Password</label>
-                                    </div>
-
-                                </div>
-
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
                                 </div>
                             </div>
-                        </div>
                         </form>
                     </div> <!-- Client Modal -->
-
-
                 </div>
-                </center>
-            </div>  <!-- first col of Admin Menu grid (still on first row)-->
+            </center>
+        </div> <!-- first col of Admin Menu grid (still on first row)-->
 
-            <!--Grid 2nd column-->
-            <div class="col-lg-4 col-md-12 mb-4">
-                <center>
-                    <div class="md-form">
-                        <input type="text" class="form-control" placeholder="Enter Username to Delete">
-                    </div>
-                    <button class="btn btn-danger" type="button">
-                        Delete User
-                    </button>
-
-                </center>
-            </div>  <!-- 2nd col-->
-
-            <!--Grid 3rd column-->
-            <div class="col-lg-4 col-md-12 mb-4">
+        <!--Grid 2nd column-->
+        <div class="col-lg-4 col-md-12 mb-4">
+            <center>
                 <div class="md-form">
-                    <input type="text" class="form-control" placeholder="Enter Username to Edit">
+                    <input type="text" class="form-control" placeholder="Enter Username to Delete">
                 </div>
-                <center>
-                        <a href="/edit/profile" class = "btn btn-info">Edit User Info</a>
-                </center>
+                <button class="btn btn-danger" type="button">
+                    Delete User
+                </button>
 
-            </div>  <!-- 3rd col -->
-        </div> <!-- first row-->
+            </center>
+        </div>  <!-- 2nd col-->
 
-        <hr>
+        <!--Grid 3rd column-->
+        <div class="col-lg-4 col-md-12 mb-4">
+            <div class="md-form">
+                <input type="text" class="form-control" placeholder="Enter Username to Edit">
+            </div>
+            <center>
+                    <a href="/edit/profile" class = "btn btn-info">Edit User Info</a>
+            </center>
 
-        <!-- Grid 2ND ROW (BOOKS) -->
-        <h2>Books</h2>
-        <div class="row">
+        </div>  <!-- 3rd col -->
+    </div> <!-- first row-->
 
-            <!--Grid 1st column-->
-            <div class="col-lg-4 col-md-12 mb-4">
-                <center>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <div>
+    <hr>
 
-                        <!-- Button trigger modal -->
-                        <a href="#myModal2" role="button" class="btn btn-success" data-toggle="modal">Add New Book</a>
+    <!-- Grid 2ND ROW (BOOKS) -->
+    <h2>Books</h2>
+    <div class="row">
 
-                        <!-- New Book Modal -->
-                        <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <form id="addBook" name="addBook">
+        <!--Grid 1st column-->
+        <div class="col-lg-4 col-md-12 mb-4">
+            <center>
+                <br/>
+                <br/>
+                <br/>
+                <div>
+
+                    <!-- Button trigger modal -->
+                    <a href="#myModal2" role="button" class="btn btn-success" data-toggle="modal">Add New Book</a>
+
+                    <!-- New Book Modal -->
+                    <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <form id="addBook" name="addBook">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -337,22 +366,25 @@
                                     </div>
                                 </div>
                             </div>
-                            </form>
-                        </div>
+                        </form>
+                    </div>
 
-                    </div> <!-- modal-->
-                </center>
-            </div>  <!-- first col (ADD NEW BOOK button of grid)-->
+                </div> <!-- modal-->
+            </center>
+        </div>  <!-- first col (ADD NEW BOOK button of grid)-->
 
             <!--Grid 2nd column-->
             <div class="col-lg-4 col-md-12 mb-4">
                 <center>
-                    <div class="md-form">
-                        <input type="text" class="form-control" placeholder="Enter ISBN of Book to Delete">
-                    </div>
-                    <button class="btn btn-danger" type="button">
-                        Delete Book
-                    </button>
+                    <form id="deleteBook">
+                        <div class="md-form">
+                            <input name="isbn" type="text" class="form-control" placeholder="Enter ISBN of Book to Delete">
+                            <input class="username" name="username" type="hidden" value="${vendor.username}">
+                        </div>
+                        <button class="btn btn-danger" type="submit">
+                            Delete Book
+                        </button>
+                    </form>
 
                 </center>
             </div>  <!-- 2nd col-->
@@ -361,19 +393,20 @@
             <!--Grid 3rd column-->
             <div class="col-lg-4 col-md-12 mb-4">
                 <div class="md-form">
-                    <input type="text" class="form-control" placeholder="Enter ISBN of Book to Edit">
+                    <input id="editBookInput" type="text" class="form-control" placeholder="Enter ISBN of Book to Edit">
                 </div>
                 <center>
 
+
                     <!-- Button trigger modal -->
-                    <a href="#myModalEditBook" role="button" class="btn btn-info" data-toggle="modal">Edit Book Info</a>
+                    <a href="#myModalEditBook" role="button" id="editBookModalLink" class="btn btn-info" data-toggle="modal">Edit Book Info</a>
 
 
                     <!-- modal-->
 
                     <!-- Edit Book Modal -->
                     <div id="myModalEditBook" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <form name="editBook">
+                        <form id="editBook" name="editBook">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -385,57 +418,55 @@
 
                                     <div class="modal-body">
 
-                                        <!-- Title -->
-                                        <div class="md-form mb-5">
-                                            <input type="text" name="title" id="orangeForm-editTitle" class="form-control validate">
-                                            <label data-error="" data-success="" for="orangeForm-editTitle">Title</label>
-                                        </div>
-
-                                        <!-- Author -->
-                                        <div class="md-form mb-5">
-                                            <input type="text" name="author" id="orangeForm-editAuthor" class="form-control validate">
-                                            <label data-error="" data-success="" for="orangeForm-editAuthor">Author</label>
+                                        <!-- ISBN -->
+                                        <div class="md-form mb-4">
+                                            <input name="isbn" class="editIsbn" type="hidden">
+                                            <div class="text-left" id="isbnValue"></div>
                                         </div>
 
                                         <!-- Vendor -->
                                         <div class="md-form mb-5">
-                                            <input type="text" name="vUsername" id="orangeForm-editVendor" class="form-control validate">
-                                            <label data-error="" data-success="" for="orangeForm-editVendor">Vendor</label>
+                                            <input type="text" name="vUsername" id="orangeForm-editVendor" class="username form-control validate">
+                                            <label class="active" data-error="" data-success="" for="orangeForm-editTitle">Vendor</label>
                                         </div>
 
-                                        <!-- ISBN -->
-                                        <div class="md-form mb-4">
-                                            <input type="text" name="isbn" id="orangeForm-editISBN" class="form-control validate">
-                                            <label data-error="" data-success="" for="orangeForm-editISBN">ISBN</label>
+                                        <!-- Title -->
+                                        <div class="md-form mb-5">
+                                            <input type="text" name="title" id="orangeForm-editTitle" class="title form-control validate">
+                                            <label class="active" data-error="" data-success="" for="orangeForm-editTitle">Title</label>
+                                        </div>
+
+                                        <!-- Author -->
+                                        <div class="md-form mb-5">
+                                            <input type="text" name="author" id="orangeForm-editAuthor" class="author form-control validate">
+                                            <label class="active" data-error="" data-success="" for="orangeForm-editAuthor">Author</label>
                                         </div>
 
                                         <!-- Genre -->
                                         <div class="md-form mb-5">
-                                            <input type="text" name="category" id="orangeForm-editGenre" class="form-control validate">
-                                            <label data-error="" data-success="" for="orangeForm-editGenre">Enter genre</label>
+                                            <input type="text" name="category" id="orangeForm-editGenre" class="genre form-control validate">
+                                            <label class="active" data-error="" data-success="" for="orangeForm-editGenre">Enter genre</label>
                                         </div>
 
                                         <!-- Image addr -->
                                         <div class="md-form mb-5">
-                                            <input type="text" name="imageUrl" id="orangeForm-editImg" class="form-control validate">
-                                            <label data-error="" data-success="" for="orangeForm-editImg">Enter image url</label>
+                                            <input type="text" name="imageUrl" id="orangeForm-editImg" class="imageUrl form-control validate">
+                                            <label class="active" data-error="" data-success="" for="orangeForm-editImg">Enter image url</label>
                                         </div>
 
                                         <!-- Price -->
                                         <div class="md-form input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text md-addon">$</span>
-                                                <input type="text" name="price" id="orangeForm-editPrice" class="form-control validate" placeholder="0.00">
-                                                <label data-error="" data-success="" for="orangeForm-editPrice">Price</label>
+                                                <input type="text" name="price" id="orangeForm-editPrice" class="price form-control validate" placeholder="0.00">
+                                                <label class="active" data-error="" data-success="" for="orangeForm-editPrice">Price</label>
                                             </div>
                                         </div>
 
-
-
                                         <!-- Book description -->
                                         <div class="form-group">
-                                            <label for="editDescription">Book Description:</label>
-                                            <textarea class="form-control" rows="5" id="editDescription"></textarea>
+                                            <label class="active" for="editDescription">Book Description:</label>
+                                            <textarea name="summary" class="summary form-control" rows="5" id="editDescription"></textarea>
                                         </div>
 
                                     </div> <!-- end of modal body -->
@@ -449,7 +480,6 @@
                             </div>
                         </form>
                     </div>
-
                 </center>
             </div>
         </div>

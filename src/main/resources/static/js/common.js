@@ -39,8 +39,8 @@ function postAjax(url, data) {
             alert("Successfully updated.");
         },
         error: function(xhr, status, message) {
-            const res = JSON.parse(xhr.responseText);
-            alert(res.message);
+            console.log(xhr);
+            alert(xhr.responseJSON.message);
         }
     });
 }
@@ -54,9 +54,9 @@ function deleteAjax(url, data) {
         success: function(res) {
             alert("Successfully deleted.");
         },
-        error: function(res) {
-            console.log(res);
-            alert(JSON.parse(res).message);
+        error: function(xhr) {
+            console.log(xhr);
+            alert(xhr.responseJSON.message);
         }
     })
 }

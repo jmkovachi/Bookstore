@@ -80,9 +80,9 @@ function postOrderAjax(url, data) {
             alert("Successfully ordered.");
             window.location.href = "/order/confirm/" + res.orderId;
         },
-        error: function(res) {
-            console.log(res);
-            alert(JSON.parse(res).message);
+        error: function(xhr) {
+            console.log(xhr);
+            alert(xhr.responseJSON.message);
         }
     });
 }

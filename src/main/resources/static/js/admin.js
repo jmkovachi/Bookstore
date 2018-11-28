@@ -1,4 +1,25 @@
 $(document).ready(function () {
+    $("#addCustomer").on("submit", function (event) {
+        event.preventDefault();
+        const data = toJson($(this).serializeArray());
+        console.log(data);
+        postAjax("/register/customer", data);
+    });
+
+    $("#addVendor").on("submit", function (event) {
+        event.preventDefault();
+        const data = toJson($(this).serializeArray());
+        console.log(data);
+        postAjax("/register/vendor", data);
+    });
+
+    $("#addClient").on("submit", function (event) {
+        event.preventDefault();
+        const data = toJson($(this).serializeArray());
+        console.log(data);
+        postAjax("/register/client", data);
+    });
+
     $("#addPromotion").on("submit", function (event) {
         event.preventDefault();
         const data = toJson($(this).serializeArray());
@@ -71,11 +92,12 @@ $(document).ready(function () {
             success: function (res) {
                 console.log(res);
                 $(".author").val(res.author);
+                $(".username").val(res.vusername);
                 $(".title").val(res.title);
                 $(".summary").val(res.summary);
                 $(".price").val(Number(res.price).toFixed(2));
+                $(".editIsbn").val(res.isbn);
                 $("#isbnValue").html("Isbn: " + res.isbn);
-                $("#editIsbn").val(res.isbn);
                 $(".genre").val(res.category);
                 $(".imageUrl").val(res.imageUrl);
             },
@@ -87,22 +109,6 @@ $(document).ready(function () {
     });
 });
 
-function postAjax(url, data) {
-    $.ajax({
-        type: "POST",
-        url: url,
-        contentType: "application/json",
-        data: JSON.stringify(data),
-        success: function(res) {
-            alert("Successfully updated.");
-        },
-        error: function(res) {
-            console.log(res);
-            alert(JSON.parse(res).message);
-        }
-    });
-}
-
 function deleteAjax(url, data) {
     $.ajax({
         type: "DELETE",
@@ -112,9 +118,15 @@ function deleteAjax(url, data) {
         success: function(res) {
             alert("Successfully deleted.");
         },
-        error: function(res) {
-            console.log(res);
-            alert(JSON.parse(res).message);
+        error: function(xhr) {
+            console.log(xhr);
+            alert(xhr.responseJSON.message);
         }
     })
+}
+
+function submitForm(event, url, form) {
+    const data = toJson(form.serializeArray());
+    console.log(data);
+    postAjax(url, data);
 }

@@ -19,6 +19,12 @@ public class CustomerService extends UserService {
     }
 
     public Customer registerCustomer(final Customer customer) throws ValidationException {
+        if (customer.getVerified() == null) {
+            customer.setVerified(false);
+        }
+        if (customer.getNewsletter() == null) {
+            customer.setNewsletter(false);
+        }
         customerDao.createCustomer(customer);
         final Optional<Customer> retrieveCustomer = customerDao.getCustomer(customer.getUsername());
         if (retrieveCustomer.isPresent() && retrieveCustomer.get().equals(customer)) {
