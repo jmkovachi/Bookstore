@@ -62,4 +62,8 @@ public class BookService {
             throw new ValidationException("Vendor with username <%s> does not exist", vUsername);
         }
     }
+
+    public List<Book> getLowInventoryBooks(){
+        return null;
+    }
 }

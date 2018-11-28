@@ -33,28 +33,75 @@
 
 <body class="category-v1 hidden-sn white-skin animated">
 
-<tags:nav />
+<div class="container">
+            <div class="row">
+                <tags:nav username="${confirm.order.username}"/>
+            </div>
+            <br />
+            <br />
+            <br />
 
+            <div class="row">
+                <div class="col-md-12 center-block text-center">
+                    <h5 class="card-title">Books with Low Inventory<br />
+                    </h5>
 
-    <br/>
-    <br/>
-    <br/>
-    <div class="container">
+                    <!-- Low Inventory table -->
+                    <div class="table-responsive">
 
-        <section class="section pt-4">
-            <center>
-                <h1>Low Inventory Items</h1>
-            </center>
-        </section>
-    </div>
+                      <table class="table product-table">
 
-<!--Footer-->
-<tags:footer />
-<!--/.Footer-->
+                        <!-- Table head -->
+                        <thead>
+                          <tr>
+                            <th class="font-weight-bold">
+                              <strong>Book</strong>
+                            </th>
+                            <th class="font-weight-bold">
+                                <strong>ISBN</strong>
+                            </th>
+                            <th class="text-center font-weight-bold">
+                              <strong>Total Inventory</strong>
+                            </th>
 
+                          </tr>
+                        </thead>
+                        <!-- /.Table head -->
 
+                        <!-- Table body -->
+                        <tbody>
+                          <c:forEach items="${lowinv.books}" var="book">
+                              <!-- First row -->
+                              <tr>
+                                <th scope="row">
+                                  <!-- TODO: update books with SMALL image url (zoom=2) instead of THUMBNAIL (zoom=1) url -->
+                                  <img src="${book.imageUrl}" width="150" height="225" alt="" class="img-fluid z-depth-0">
+                                </th>
+                                <td>
+                                  <h5 class="mt-3">
+                                    <strong>${book.title}</strong>
+                                  </h5>
+                                </td>
+                                <td>${book.isbn}</td>
+                                <td class="text-center text-md-left">
+                                  <span class="qty"> ${book.totalInventory} </span>
+                                </td>
+                              </tr>
+                              <!-- /.First row -->
+                            </c:if>
+                          </c:forEach>
+                        </tbody>
+                        <!-- /.Table body -->
 
+                      </table>
+                    </div>
 
+                </div>
+            </div>
+        </div>
+        <!--Footer-->
+        <tags:footer />
+        <!--/.Footer-->
 
 
 <!-- JQuery -->

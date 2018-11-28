@@ -48,7 +48,7 @@
                 <p>Total Sales: $${pubSales.totalSales}</p>
                 <p>Average Sales: $${pubSales.averageSales} per book</p>
                 <p>Total Sales: $${pubSales.totalSales}</p>
-                <p>Best Selling Book: $${pubSales.bestSellingBook}</p>
+                <p>Best Selling Book: <a href="/details/book/${pubSales.bestSellingBook.isbn}">$${pubSales.bestSellingBook}</a></p>
                 <p>This Week&#39;s Sales: $${pubSales.thisWeekSales}</p>
             </center>
         </section>
