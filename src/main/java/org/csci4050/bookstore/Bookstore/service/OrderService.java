@@ -172,6 +172,22 @@ public class OrderService {
         return orderDao.getOrdersFromLastDay();
     }
 
+    public List<Order> getOrdersFromLastYear() {
+        return orderDao.getOrdersFromLastYear();
+    }
+
+    public List<Order> getOrdersFromLastYearForBook(final String isbn) {
+        return orderDao.getOrdersFromLastYearForBook(isbn);
+    }
+
+    public List<Order> getOrdersFromLastMonthForBook(final String isbn) {
+        return orderDao.getOrdersFromLastMonthForBook(isbn);
+    }
+
+    public List<Order> getOrdersFromLastMonth() {
+        return orderDao.getOrdersFromLastMonth();
+    }
+
     private String createConfirmationHtml(final Order order, final List<OrderItem> orderItems,
                                           final Customer customer, final ShippingAddress shippingAddress) {
         final StringBuilder str = new StringBuilder();

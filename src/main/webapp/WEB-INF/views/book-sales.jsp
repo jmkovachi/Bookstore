@@ -24,11 +24,17 @@
         .multiple-select-dropdown li [type=checkbox]+label {
             height: 1rem;
         }
+
+        .hide {
+            display: none;
+        }
     </style>
 
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <!------ Include the above in your HEAD tag ---------->
+    <script src="/js/common.js"></script>
+    <script src="/js/book-sales.js"></script>
 </head>
 
 <body class="category-v1 hidden-sn white-skin animated">
@@ -47,24 +53,33 @@
             <hr style="width:50%;">
 
                     <h3>All Books</h3>
-                    <p>This year's total sales: $ </p>
-                    <p>This month's total sales: $ </p>
+                    <p>This year's total number of sales: ${sales.totalYearSales}" </p>
+                    <p>This year's total amount: $<tags:doubleFormat  num="${sales.totalYearAmount}"/></p>
+                    <p>This month's total number of sales: ${sales.totalMonthSales}</p>
+                    <p>This month's total amount: $<tags:doubleFormat num="${sales.totalMonthAmount}"/> </p>
 
                 <br>
                 <br>
+
+                <center>
                     <h3>Sales of a Specific Book</h3>
-                <div class="col-6">
-                    <div class="input-group mb-3">
-
-                        <input type="text" class="form-control" placeholder="Enter Book ISBN" aria-label="bookISBN" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <a class="btn btn-primary" type="button">Generate Sales</a>
+                    <div class="col-6 center-block">
+                        <div class="input-group mb-3">
+                            <form id="bookSales">
+                                <input name="isbn" type="text" class="form-control" placeholder="Enter Book ISBN" aria-label="bookISBN" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">Generate Sales</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="hide" id="bookContent">
+                            <p>This year's number of sales: $<p style="display: inline;" id="bookYearSales"></p></p>
+                            <p>This year's total amount: $<p style="display: inline;" id="bookYearTotal"></p></p>
+                            <p>This month's sales: $ <p style="display: inline;" id="bookMonthSales"></p></p>
+                            <p>This month's total amount : $<p style="display: inline;" id="bookMonthTotal"></p></p>
                         </div>
                     </div>
-                    <p>This year's sales: $ (% of all book sales for this year)</p>
-                    <p>This month's sales: $ (% of all book sales for this month)</p>
-
-                </div>
+                </center>
 
 </center>
     </section>

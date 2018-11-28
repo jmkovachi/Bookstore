@@ -3,6 +3,7 @@ package org.csci4050.bookstore.Bookstore.controllers;
 import org.csci4050.bookstore.Bookstore.exceptions.ValidationException;
 import org.csci4050.bookstore.Bookstore.model.Book;
 import org.csci4050.bookstore.Bookstore.service.BookService;
+import org.csci4050.bookstore.Bookstore.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,9 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
+
+    @Autowired
+    private OrderService orderService;
 
     @RequestMapping(value = "/book/insert", method = RequestMethod.POST)
     public ResponseEntity<Object> insertBook(@RequestBody final Book book) throws ValidationException {
@@ -44,6 +48,17 @@ public class BookController {
         if (!bookOptional.isPresent()) {
             throw new ValidationException("Book with isbn <%s> does not exist", isbn);
         }
+
+        return new ResponseEntity<>(bookOptional.get(), new HttpHeaders(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/book/metadata/sales/{isbn}", method = RequestMethod.GET)
+    public ResponseEntity<Object> getBookSales(@PathVariable final String isbn) throws ValidationException {
+        final Optional<Book> bookOptional = bookService.getBook(isbn);
+        if (!bookOptional.isPresent()) {
+            throw new ValidationException("Book with isbn <%s> does not exist", isbn);
+        }
+
 
         return new ResponseEntity<>(bookOptional.get(), new HttpHeaders(), HttpStatus.OK);
     }

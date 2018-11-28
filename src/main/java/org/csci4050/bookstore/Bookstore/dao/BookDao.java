@@ -75,8 +75,8 @@ public class BookDao {
                 " GROUP BY `isbn` ORDER BY isbncount DESC LIMIT    1;";
         return this.jdbcTemplate.query(sql, (rs, rn) -> {
             return IsbnWithCount.builder()
-                    .isbn(rs.getString(0))
-                    .count(rs.getInt(1))
+                    .isbn(rs.getString("isbn"))
+                    .count(rs.getInt("isbncount"))
                     .build();
         });
     }

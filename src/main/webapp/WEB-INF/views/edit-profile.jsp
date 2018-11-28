@@ -49,9 +49,9 @@
     <br>
     <br>
     <hr>
-    <form>
-        <input id="deleteCustomer" type="hidden" value="${customer.username}">
-        <center><a id="delete" class="btn btn-danger" data-customer="${customer.username}">Delete Registration</a></center>
+    <form id="deleteCustomer">
+        <input  name="username" type="hidden" value="${customer.username}">
+        <center><button type="submit" id="delete" class="btn btn-danger" data-customer="${customer.username}">Delete Registration</button></center>
     </form>
 </div>
 

@@ -34,9 +34,9 @@
 <br>
 <br>
 <hr>
-<form>
-    <input id="deleteVendor" type="hidden" value="${vendor.username}">
-    <center><a id="delete" class="btn btn-danger" data-vendor="${vendor.username}">Delete Registration</a></center>
+<form id="deleteVendor">
+    <input type="hidden" name="username" value="${vendor.username}">
+    <center><button type="submit" id="delete" class="btn btn-danger" data-vendor="${vendor.username}">Delete Registration</button></center>
 </form>
 </div>
 <br />

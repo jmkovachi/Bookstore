@@ -87,7 +87,11 @@ $(document).ready(function () {
         const data = toJson($(this).serializeArray());
         console.log(data);
         postAjax("/book/insert", data);
-    })
+    });
+
+    $("#editUserModalLink").click(function () {
+
+    });
 
     $("#editBookModalLink").click(function () {
         const isbn = $("#editBookInput").val();

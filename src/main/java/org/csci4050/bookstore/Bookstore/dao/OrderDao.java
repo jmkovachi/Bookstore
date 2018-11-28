@@ -49,4 +49,26 @@ public class OrderDao {
         final String sql = "select * from `order` where `order`.date between date_sub(now(),INTERVAL 1 DAY) and now()";
         return this.jdbcTemplate.query(sql, new OrderMapper());
     }
+
+    public List<Order> getOrdersFromLastMonth() {
+        final String sql = "select * from `order` where `order`.date between date_sub(now(),INTERVAL 1 MONTH) and now()";
+        return this.jdbcTemplate.query(sql, new OrderMapper());
+    }
+
+    public List<Order> getOrdersFromLastYear() {
+        final String sql = "select * from `order` where `order`.date between date_sub(now(),INTERVAL 1 YEAR) and now()";
+        return this.jdbcTemplate.query(sql, new OrderMapper());
+    }
+
+    public List<Order> getOrdersFromLastYearForBook(final String isbn) {
+        final String sql = "select `order`.* from `order`,`orderitem` where `order`.order_id=`orderitem`.order_id " +
+                "and `orderitem`.isbn=? and `order`.date between date_sub(now(),INTERVAL 1 YEAR) and now()";
+        return this.jdbcTemplate.query(sql, new Object[] {isbn}, new OrderMapper());
+    }
+
+    public List<Order> getOrdersFromLastMonthForBook(final String isbn) {
+        final String sql = "select `order`.* from `order`,`orderitem` where `order`.order_id=`orderitem`.order_id " +
+                "and `orderitem`.isbn=? and `order`.date between date_sub(now(),INTERVAL 1 MONTH) and now()";
+        return this.jdbcTemplate.query(sql, new Object[] {isbn}, new OrderMapper());
+    }
 }
