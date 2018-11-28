@@ -3,8 +3,34 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags/"%>
+<c:set var="books" value="${vendor.books}"/>
+<c:set var="vendor" value="${vendor.vendor}"/>
     <head>
-        <tags:dependency />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+        <title>Bookstore</title>
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- Bootstrap core CSS -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Material Design Bootstrap -->
+        <link href="/css/catalogmdb.css" rel="stylesheet">
+
+
+        <style type="text/css">
+            .multiple-select-dropdown li [type=checkbox]+label {
+                height: 1rem;
+            }
+        </style>
+
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <!------ Include the above in your HEAD tag ---------->
         <style type="text/css">
             .multiple-select-dropdown li [type=checkbox]+label {
                 height: 1rem;
@@ -16,7 +42,7 @@
 
     <body class="category-v1 hidden-sn white-skin animated">
 
-    <tags:nav username="${vendor.username}"/>
+    <tags:nav vendor="true" username="${vendor.username}"/>
 
     <br/>
     <br/>
@@ -243,40 +269,71 @@
         <!-- row 2 -->
             <h3>My Published Books:</h3>
             <hr>
-            <div class="row">
-                <div class="col-lg-4 col-md-12 mb-4">
-                    <!--Card-->
-                    <div class="card card-ecommerce">
-                        <!--Card image-->
-                        <div class="view overlay">
-                            <img height="225" width="225" src="#" class="text-center" alt="">
-                            <a>
-                                <div class="mask rgba-white-slight"></div>
-                            </a>
-                        </div>
-
-
-                        <!--Card content-->
-                        <div class="card-body">
-
-                            <!--Title-->
-                            <h5 class="card-title mb-1"><strong><a href="#" class="dark-grey-text">Title</a></strong></h5>
-                            by Author
-
-                            <!--Card footer-->
-                            <div class="card-footer pb-0">
-                                <div class="row mb-0">
-                                    <span class="float-left"><strong>Price</strong></span>
+            <c:choose>
+                <c:when test="${books.size() > 0}">
+                    <c:forEach var="i" begin="0" step="3" end="${books.size()-1}">
+                    <!-- Grid FIRST ROW -->
+                    <div class="row">
+                        <c:forEach var="j" begin="${i}" end="${i+2 > books.size()-1 ? books.size()-1 : i+2}">
+                            <!--Grid 1st column-->
+                            <div class="col-lg-4 col-md-12 mb-4">
+                                <c:set var="book" value="${books.get(j)}" />
+                                <!--Card-->
+                                <div id="${book.isbn}" data-isbn="${book.isbn}" class="card card-ecommerce">
+                                    <!--Card image-->
+                                    <div class="view overlay">
+                                        <img height="225" width="225" src="${book.imageUrl}" class="text-center" alt="">
+                                        <a>
+                                            <div class="mask rgba-white-slight"></div>
+                                        </a>
+                                    </div>
+                                    <!--Card image-->
+        
+                                    <!--Card content-->
+                                    <div class="card-body">
+                                        <!--Category & Title-->
+        
+                                        <h5 class="card-title mb-1"><strong><a href="/details/book/${book.isbn}" class="dark-grey-text">${book.title}</a></strong></h5>
+                                        by ${book.author}
+        
+                                        <!--Card footer-->
+                                        <div class="card-footer pb-0">
+                                            <div class="row mb-0">
+                                                <span class="float-left"><strong>${book.isbn}</strong></span>
+                                                <c:if test="${not empty username}">
+                                                                    <span class="float-right">
+                                                                        <a class="cart" data-username="${username}" data-isbn="${book.isbn}" data-toggle="tooltip" data-placement="top" title="Add to Cart"><i class="fa fa-shopping-cart ml-3"></i></a>
+                                                                    </span>
+                                                </c:if>
+                                            </div>
+                                        </div>
+        
+                                    </div>
+                                    <!--Card content-->
+        
                                 </div>
+                                <!--Card-->
+        
                             </div>
-
+                            <!--Grid column (first column) of first row-->
+                        </c:forEach>
+        
+                        <!--Grid column (2nd column) of first row-->
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <!-- insert code here just like 1st column-->
                         </div>
-                        <!--Card content-->
-
-                    </div>
-                    <!--Card-->
-
-            </div>
+        
+                        <!--Grid column (3rd column)-->
+                        <div class="col-lg-4 col-md-6 mb-4">
+                        </div>
+        
+                    </div> <!-- END OF FIRST ROW -->
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                <h2> Vendor has no published books </h2>
+            </c:otherwise>
+            </c:choose>
             </div>
         </section>
     </div>

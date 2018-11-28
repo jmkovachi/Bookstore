@@ -1,4 +1,6 @@
 <%@ attribute name="username" required="false" %>
+<%@ attribute name="vendor" required="false" %>
+<%@ attribute name="client" required="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!--Navigation-->
 <header>
@@ -17,7 +19,7 @@
             <li class="nav-item">
                 <a class="nav-link waves-effect waves-light dark-grey-text font-weight-bold" href="/home"> Home <span class="sr-only">(current)</span></a>
             </li>
-          <c:if test="${not empty username}">
+          <c:if test="${not empty username and (empty vendor and empty client)}">
               <li class="nav-item">
                 <a class="nav-link waves-effect waves-light dark-grey-text font-weight-bold" href="/cart/view"><i class="fa fa-shopping-cart blue-text"></i> View Cart <span class="sr-only">(current)</span></a>
               </li>

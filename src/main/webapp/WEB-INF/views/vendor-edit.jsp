@@ -9,6 +9,7 @@
 </head>
 <body>
 
+<tags:nav vendor="true" username="${vendor.username}"/>
 <div class="container">
     <div class="card">
         <div class="card-body">

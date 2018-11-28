@@ -18,7 +18,7 @@
     <link href="/css/style.min.css" rel="stylesheet">
 </head>
 <body>
-    <tags:nav username="${vendor.username}"/>
+<tags:nav vendor="true" username="${vendor.username}"/>
     <br/>
     <br/>
     <br/>

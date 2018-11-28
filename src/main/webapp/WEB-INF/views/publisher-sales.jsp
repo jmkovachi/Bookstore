@@ -33,8 +33,6 @@
 
 <body class="category-v1 hidden-sn white-skin animated">
 
-<tags:nav />
-
 
     <br/>
     <br/>
@@ -60,7 +58,7 @@
 <br />
 
 <!--Footer-->
-<tags:footer2 />
+<tags:footer />
 <!--/.Footer-->
 
 <!-- JQuery -->

@@ -49,6 +49,6 @@
     <br />
 
     <!--Footer-->
-    <tags:footer2 />
+    <tags:footer />
     <!--/.Footer-->
 </html>

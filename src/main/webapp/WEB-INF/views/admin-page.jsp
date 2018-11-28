@@ -36,7 +36,7 @@
 
 <body class="category-v1 hidden-sn white-skin animated">
 
-<tags:nav />
+<tags:nav username="admin" vendor="true"/>
 
 <br/>
 <br/>
