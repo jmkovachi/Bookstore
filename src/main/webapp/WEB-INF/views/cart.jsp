@@ -232,7 +232,9 @@ tr:nth-child(4) td:nth-of-type(4) {
             <!-- /.Table body -->
 
           </table>
-        <h1 style="text-align:center"><a href="/checkout" class="checkout btn btn-primary btn-lg" type="submit">Proceed to checkout</a></h1>
+          <c:if test="${cart.cartItems.size() > 0}">
+            <h1 style="text-align:center"><a href="/checkout" class="checkout btn btn-primary btn-lg" type="submit">Proceed to checkout</a></h1>
+          </c:if>
         </div>
         <!-- Shopping Cart table -->
 
