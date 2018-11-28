@@ -55,12 +55,15 @@
                         <!-- Table head -->
                         <thead>
                           <tr>
-                            <th class="font-weight-bold">
+                            <th class="font-weight-bold"><a href="/book-details"></a>
                               <strong>Book</strong>
                             </th>
                             <th class="font-weight-bold">
-                                <strong>ISBN</strong>
+                                <strong>Title</strong>
                             </th>
+                              <th class="font-weight-bold">
+                                  <strong>ISBN</strong>
+                              </th>
                             <th class="text-center font-weight-bold">
                               <strong>Total Inventory</strong>
                             </th>
