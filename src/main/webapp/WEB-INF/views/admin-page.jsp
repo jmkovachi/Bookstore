@@ -251,12 +251,14 @@
         <!--Grid 2nd column-->
         <div class="col-lg-4 col-md-12 mb-4">
             <center>
-                <div class="md-form">
-                    <input type="text" class="form-control" placeholder="Enter Username to Delete">
-                </div>
-                <button class="btn btn-danger" type="button">
-                    Delete User
-                </button>
+                <form id="deleteUser">
+                    <div class="md-form">
+                        <input name="username" type="text" class="form-control" placeholder="Enter Username to Delete">
+                    </div>
+                    <button class="btn btn-danger" type="submit">
+                        Delete User
+                    </button>
+                </form>
 
             </center>
         </div>  <!-- 2nd col-->

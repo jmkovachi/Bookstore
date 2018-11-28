@@ -45,10 +45,9 @@
                 <center>
                     <h1>End of the Day Sales Report</h1>
                     <hr style="width:50%;">
-                    <p>Total Orders Placed: ${eodsales.orders}</p>
-                    <p>Total Sales: $${eodsales.totalSales}</p>
-                    <p>Best Selling Book: <a href="/details/book/${eodsales.bestSellingBook.isbn}">${eodsales.bestSellingBook}</a></p>
-                    <p>Best Selling Publisher: ${eodsales.bestSellingPublisher}</p>
+                    <p>Total Orders Placed: ${eod.totalOrders}</p>
+                    <p>Total Sales: $$<tags:doubleFormat num="${eod.total}"/></p>
+                    <p>Best Selling Book: <a href="/details/book/${eod.bestSellingBook.isbn}">${eodbestSellingBook.title}</a> | Number sold: ${eod.isbnWithCount.count}</p>
                 </center>
             </section>
         </div>

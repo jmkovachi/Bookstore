@@ -18,6 +18,24 @@ $(document).ready(() => {
         const data = toJson($(this).serializeArray());
         postAjax("/book/update", data);
     });
+
+    $("#deleteCustomer").on("submit", function (event) {
+        event.preventDefault();
+        const data = toJson($(this).serializeArray());
+        deleteAjaxRedirect("/customer/delete/" + data.username, "", "/logout");
+    });
+
+    $("#deleteClient").on("submit", function (event) {
+        event.preventDefault();
+        const data = toJson($(this).serializeArray());
+        deleteAjaxRedirect("/client/delete/" + data.username, "", "/logout");
+    });
+
+    $("#deleteVendor").on("submit", function (event) {
+        event.preventDefault();
+        const data = toJson($(this).serializeArray());
+        deleteAjaxRedirect("/vendor/delete/" + data.username, "", "/logout");
+    });
 });
 
 function toJson(formSerializeArr){
@@ -53,6 +71,25 @@ function deleteAjax(url, data) {
         data: "",
         success: function(res) {
             alert("Successfully deleted.");
+        },
+        error: function(xhr) {
+            console.log(xhr);
+            alert(xhr.responseJSON.message);
+        }
+    })
+}
+
+function deleteAjaxRedirect(url, data, redirecturl) {
+    $.ajax({
+        type: "DELETE",
+        url: url,
+        contentType: "application/json",
+        data: data,
+        success: function(res) {
+            alert("Successfully deleted.");
+            if (redirecturl !== "") {
+                window.location.href = redirecturl;
+            }
         },
         error: function(xhr) {
             console.log(xhr);

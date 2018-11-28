@@ -40,7 +40,7 @@ public class UserDao {
     }
 
     public void deleteUser(final String username) {
-        this.jdbcTemplate.query("delete from user where username=?", new Object[] {username}, new UserMapper());
+        this.jdbcTemplate.update("delete from user where username=?", username);
     }
 
 }

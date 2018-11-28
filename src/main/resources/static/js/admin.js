@@ -20,6 +20,13 @@ $(document).ready(function () {
         postAjax("/register/client", data);
     });
 
+    $("#deleteUser").on("submit", function(event) {
+        event.preventDefault();
+        const data = toJson($(this).serializeArray());
+        console.log(data);
+        deleteAjax("/user/delete/" + data.username, "");
+    });
+
     $("#addPromotion").on("submit", function (event) {
         event.preventDefault();
         const data = toJson($(this).serializeArray());
@@ -118,7 +125,7 @@ function deleteAjax(url, data) {
         success: function(res) {
             alert("Successfully deleted.");
         },
-        error: function(xhr) {
+        error: function(xhr, status, message) {
             console.log(xhr);
             alert(xhr.responseJSON.message);
         }

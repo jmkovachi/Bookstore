@@ -86,10 +86,6 @@ public class BookService {
         return bookDao.queryBooks(column, value);
     }
 
-    public List<Book> queryBooksInventory(final int intventoryValue) throws ValidationException {
-        return bookDao.getBooksWithInventoryLessThanNum(intventoryValue);
-    }
-
     public List<Book> getBooksByColumns(final String column, final String value) {
         return bookDao.queryBooks(column, value);
     }
@@ -104,7 +100,11 @@ public class BookService {
         }
     }
 
-    public List<Book> getLowInventoryBooks(){
-        return null;
+    public List<Book> getLowInventoryBooks(final int inventoryValue){
+        return bookDao.getBooksWithInventoryLessThanNum(inventoryValue);
+    }
+
+    public List<BookDao.IsbnWithCount> getBestSellingBookFromLastDay() {
+        return bookDao.getBestSellingBookFromLastDay();
     }
 }

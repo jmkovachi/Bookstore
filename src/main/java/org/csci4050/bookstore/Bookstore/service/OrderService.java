@@ -168,6 +168,10 @@ public class OrderService {
         return orderItemDao.getOrderItemsForOrderId(orderId);
     }
 
+    public List<Order> getOrdersFromLastDay() {
+        return orderDao.getOrdersFromLastDay();
+    }
+
     private String createConfirmationHtml(final Order order, final List<OrderItem> orderItems,
                                           final Customer customer, final ShippingAddress shippingAddress) {
         final StringBuilder str = new StringBuilder();

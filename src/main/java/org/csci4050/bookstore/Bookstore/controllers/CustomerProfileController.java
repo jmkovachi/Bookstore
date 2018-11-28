@@ -1,24 +1,17 @@
 package org.csci4050.bookstore.Bookstore.controllers;
 
 import com.google.gson.Gson;
-import lombok.Builder;
-import lombok.Data;
 import org.csci4050.bookstore.Bookstore.exceptions.ValidationException;
 import org.csci4050.bookstore.Bookstore.model.Customer;
 import org.csci4050.bookstore.Bookstore.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/customer")
@@ -52,6 +45,12 @@ public class CustomerProfileController {
         customerNew.setRole(customer.getRole());
 
         return gson.toJson(customerService.updateCustomer(customerNew));
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public String deleteCustomer(@RequestParam final String username) {
+        customerService.deleteCustome(username);
+        return "redirect:/logout";
     }
 
 }

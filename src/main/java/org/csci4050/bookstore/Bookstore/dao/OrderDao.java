@@ -9,6 +9,7 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Optional;
 
 public class OrderDao {
@@ -43,4 +44,9 @@ public class OrderDao {
     /*public Double queryOrderByIsbn(final String isbn) {
         final String sql = "select SUM("
     }*/
+
+    public List<Order> getOrdersFromLastDay() {
+        final String sql = "select * from `order` where `order`.date between date_sub(now(),INTERVAL 1 DAY) and now()";
+        return this.jdbcTemplate.query(sql, new OrderMapper());
+    }
 }

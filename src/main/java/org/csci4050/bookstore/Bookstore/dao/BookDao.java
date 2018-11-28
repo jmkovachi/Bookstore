@@ -1,13 +1,12 @@
 package org.csci4050.bookstore.Bookstore.dao;
 
+import lombok.Builder;
+import lombok.Data;
 import org.csci4050.bookstore.Bookstore.mappers.BookMapper;
 import org.csci4050.bookstore.Bookstore.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,11 +65,26 @@ public class BookDao {
     }
 
     public List<String> getValuesByColumn(final String column) {
-        return this.jdbcTemplate.query("select distinct " + column + " from book", new RowMapper<>() {
-            @Override
-            public String mapRow(final ResultSet rs, final int rownumber) throws SQLException {
-                return rs.getString(column);
-            }
+        return this.jdbcTemplate.query("select distinct " + column + " from book", (rs, rownumber) -> rs.getString(column));
+    }
+
+    public List<IsbnWithCount> getBestSellingBookFromLastDay() {
+        final String sql =
+                "SELECT isbn, COUNT(isbn) as isbncount FROM `orderitem`,`order` " +
+                "where `order`.order_id=`orderitem`.order_id and `order`.date between date_sub(now(),INTERVAL 1 DAY) and now()" +
+                " GROUP BY `isbn` ORDER BY isbncount DESC LIMIT    1;";
+        return this.jdbcTemplate.query(sql, (rs, rn) -> {
+            return IsbnWithCount.builder()
+                    .isbn(rs.getString(0))
+                    .count(rs.getInt(1))
+                    .build();
         });
+    }
+
+    @Data
+    @Builder
+    public static class IsbnWithCount {
+        private String isbn;
+        private int count;
     }
 }

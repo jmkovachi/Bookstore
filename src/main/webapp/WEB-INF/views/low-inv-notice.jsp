@@ -35,7 +35,7 @@
 
 <div class="container">
             <div class="row">
-                <tags:nav username="${confirm.order.username}"/>
+                <!--<tags:nav username="${confirm.order.username}"/>-->
             </div>
             <br />
             <br />
@@ -74,7 +74,7 @@
 
                         <!-- Table body -->
                         <tbody>
-                          <c:forEach items="${lowinv.books}" var="book">
+                          <c:forEach items="${lowinv}" var="book">
                               <!-- First row -->
                               <tr>
                                 <th scope="row">
