@@ -33,7 +33,7 @@
 
 <body class="category-v1 hidden-sn white-skin animated">
 
-<tags:nav />
+<tags:nav username="client" client="true"/>
 
 <br/>
 <br/>

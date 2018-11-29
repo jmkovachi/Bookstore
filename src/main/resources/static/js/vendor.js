@@ -8,7 +8,8 @@ $(document).ready(function () {
             contentType: "application/json",
             success: function (res) {
                 console.log(res);
-                if (res.vUsername !== $(".username").val()) {
+                if (res.vusername !== $(".username").val()) {
+                    console.log(res.v)
                     $("#isbnValue").html("Cannot edit isbn " + res.isbn + " because it does not belong to " + res.vusername);
                 } else {
                     $(".author").val(res.author);

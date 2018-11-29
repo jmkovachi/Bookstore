@@ -10,6 +10,9 @@ public class GsonConfig {
 
     @Bean
     public Gson gson() {
+        /**
+         * TODO: Configuring MM-yyyy date format breaks yyyy-MM-dd format. Need to configure different gson beans for different date formats
+         */
         return new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd")
                 .setDateFormat("MM/yyyy")

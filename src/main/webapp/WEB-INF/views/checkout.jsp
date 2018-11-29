@@ -252,6 +252,16 @@
     // Animations initialization
     new WOW().init();
   </script>
+  <script>
+      // Material Select Initialization
+      $(document).ready(function () {
+          $('.mdb-select').material_select();
+      });
+  </script>
+  <script>
+      // SideNav Initialization
+      $(".button-collapse").sideNav();
+  </script>
 </body>
 
 </html>
